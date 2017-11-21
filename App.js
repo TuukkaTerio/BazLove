@@ -8,7 +8,8 @@ export default class App extends React.Component {
     };
     return (
       <View style={styles.container}>
-        <Text>Bazooka</Text>
+        <Text>Baz</Text>
+        <Text>Love</Text>
         <Image source={pic} style={{width: 193, height: 110}}/>
         <Button
           onPress={() => this._handlePress()}
@@ -25,7 +26,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffd92a',
-    color: #fff;
     alignItems: 'center',
     justifyContent: 'center',
   },
