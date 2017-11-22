@@ -8,7 +8,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      content : 'send'
+      view : 'startpage',
     };
   }
   render() {
@@ -16,8 +16,8 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Logo/>
         <MessageInput/>
-        <CustomButton content={this.state.content}/>
-        <CustomButton content={this.state.content}/>
+        <CustomButton btnContent='Send'/>
+        <CustomButton btnContent='Download'/>
       </View>
     );
   }

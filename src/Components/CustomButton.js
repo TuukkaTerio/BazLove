@@ -7,7 +7,9 @@ export default class CustomButton extends Component {
       <View>
         <Button
           onPress={() => { Alert.alert('hej!')}}
-          title={this.props.content}
+          title={this.props.btnContent}
+          accessibilityLabel="Learn more about this purple button"
+          color="#841584"
         />
       </View>
     );
