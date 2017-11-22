@@ -2,21 +2,22 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, Button, View, AppRegistry, Image } from 'react-native';
 import Logo from './src/Components/Logo';
 import MessageInput from './src/Components/MessageInput';
+import CustomButton from './src/Components/CustomButton';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      content : 'send'
+    };
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text>Baz</Text>
-        <Text>Love</Text>
         <Logo/>
         <MessageInput/>
-        <Button
-          onPress={() => this._handlePress()}
-          title="Send"
-        >
-          Send
-        </Button>
+        <CustomButton content={this.state.content}/>
+        <CustomButton content={this.state.content}/>
       </View>
     );
   }
