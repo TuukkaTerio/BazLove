@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, Button, View, AppRegistry, Image } from 'react-native';
+import Logo from './src/Components/Logo';
+import MessageInput from './src/Components/MessageInput';
 
 export default class App extends React.Component {
   render() {
-    let pic = {
-      uri: 'https://pbs.twimg.com/profile_images/790944603373461504/VGq52TJ6_400x400.jpg'
-    };
     return (
       <View style={styles.container}>
         <Text>Baz</Text>
         <Text>Love</Text>
-        <Image source={pic} style={{width: 193, height: 110}}/>
+        <Logo/>
+        <MessageInput/>
         <Button
           onPress={() => this._handlePress()}
           title="Send"
