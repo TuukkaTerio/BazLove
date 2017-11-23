@@ -4,13 +4,14 @@ import Logo from './src/Components/Logo';
 import CustomButton from './src/Components/CustomButton';
 import MessageInput from './src/Components/MessageInput';
 import Confirmation from './src/Components/Confirmation';
+import ShowLove from './src/Components/ShowLove';
 
 export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
       // Controls which page view is displayed
-      view : 'startpage',
+      view : '',
     };
   }
   render() {
@@ -30,6 +31,12 @@ export default class App extends React.Component {
         <View>
           <Confirmation/>
           <CustomButton btnContent='Send more'/>
+          <CustomButton btnContent='Close'/>
+        </View>;
+    } else if (view === 'showLoveView') {
+      pageContent =
+        <View>
+          <ShowLove/>
           <CustomButton btnContent='Close'/>
         </View>;
     } else {
