@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, AppRegistry } from 'react-native';
-import Logo from './src/Components/Logo';
-import CustomButton from './src/Components/CustomButton';
-import MessageInput from './src/Components/MessageInput';
-import Confirmation from './src/Components/Confirmation';
-import ShowLove from './src/Components/ShowLove';
+import Logo from './src/components/Logo';
+import CustomButton from './src/components/CustomButton';
+import MessageInput from './src/components/MessageInput';
+import Confirmation from './src/components/Confirmation';
+import ShowLove from './src/components/ShowLove';
 
 export default class App extends React.Component {
   constructor() {
