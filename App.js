@@ -1,30 +1,55 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, Button, View, AppRegistry, Image } from 'react-native';
+import { StyleSheet, View, AppRegistry } from 'react-native';
 import Logo from './src/Components/Logo';
-import MessageInput from './src/Components/MessageInput';
 import CustomButton from './src/Components/CustomButton';
+import MessageInput from './src/Components/MessageInput';
+import Confirmation from './src/Components/Confirmation';
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
+      // Controls which page view is displayed
       view : 'startpage',
     };
   }
   render() {
+
+    const view = this.state.view;
+    let pageContent = null;
+
+    if (view === 'messageView') {
+      pageContent =
+        <View>
+          <MessageInput/>
+          <CustomButton btnContent='Send'/>
+          <CustomButton btnContent='Close'/>
+        </View>;
+    } else if (view === 'confirmationView') {
+      pageContent =
+        <View>
+          <Confirmation/>
+          <CustomButton btnContent='Send more'/>
+          <CustomButton btnContent='Close'/>
+        </View>;
+    } else {
+      pageContent =
+        <View>
+          <Logo/>
+          <CustomButton btnContent='Send love'/>
+          <CustomButton btnContent='Show love'/>
+        </View>;
+    }
     return (
-      <View style={styles.container}>
-        <Logo/>
-        <MessageInput/>
-        <CustomButton btnContent='Send'/>
-        <CustomButton btnContent='Download'/>
+      <View style={styles.mainContainer}>
+        {pageContent}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     flex: 1,
     backgroundColor: '#ffd92a',
     alignItems: 'center',
