@@ -7,7 +7,7 @@ export default class Logo extends Component {
       <View>
         <Image
           source={require('../img/baz.png')}
-          style={{width: 90, height: 90}}
+          style={{width: 150, height: 150}}
         />
       </View>
     );
