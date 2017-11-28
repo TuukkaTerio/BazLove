@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => (
       title='Show love'>
       <ButtonContent
         btnContent = {'Show love'}
-        btnColor = {'#331c48'}
+        btnColor = {'#ffd92a'}
       />
     </TouchableOpacity>
   </View>
@@ -32,7 +32,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   HomeScreen: {
     flex: 1,
-    backgroundColor: '#ffd92a',
+    backgroundColor: '#331c48',
     alignItems: 'center',
     justifyContent: 'center',
   },
