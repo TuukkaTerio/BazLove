@@ -7,7 +7,7 @@ export default class MessageScreen extends React.Component {
 
   // Sends the message to the database
   _onPressSendLove() {
-    Database.ref('messages/').set({
+    Database.ref('messages/').push({
       message: 'Jag älskar alla!'
     });
   }

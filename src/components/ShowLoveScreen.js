@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
+import Database from '../firebaseConfig';
 import { View, StyleSheet, Text } from 'react-native';
 
-const ShowLoveScreen = ({ navigation }) => (
-  <View style={styles.ShowLoveScreen}>
-    <Text>Show Love</Text>
-  </View>
-);
+export default class ShowLoveScreen extends React.Component {
 
-export default ShowLoveScreen;
+  constructor(props) {
+    super(props);
+    this.itemsRef = Database.ref('messages');
+    this.state = {
+      messageSource: '',
+    };
+  }
+
+  render() {
+    return (
+      <View style={styles.ShowLoveScreen}>
+        <Text>Show Love Here</Text>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   ShowLoveScreen: {
