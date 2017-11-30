@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
 import { StyleSheet, TouchableOpacity, View, TextInput } from 'react-native';
 import ButtonContent from './ButtonContent';
@@ -8,7 +9,8 @@ export default class MessageScreen extends React.Component {
   // Sends the message to the database
   _onPressSendLove() {
     Database.ref('messages/').push({
-      message: 'Jag älskar alla!'
+      message: 'Jag älskar alla!',
+      timestamp: firebase.database.ServerValue.TIMESTAMP,
     });
   }
 
