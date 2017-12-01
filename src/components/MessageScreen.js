@@ -1,17 +1,41 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
-import { StyleSheet, TouchableOpacity, View, TextInput } from 'react-native';
+import { Alert, StyleSheet, TouchableOpacity, View, TextInput } from 'react-native';
 import ButtonContent from './ButtonContent';
 
 export default class MessageScreen extends React.Component {
 
-  // Sends the message to the database
-  _onPressSendLove() {
+  constructor(props) {
+    super(props);
+    this.state = { messageText: '' };
+  }
+
+  // Sends the message to the database and clears the input field
+  sendMessage(messageText) {
     Database.ref('messages/').push({
-      message: 'Jag älskar alla!',
+      message: messageText,
       timestamp: firebase.database.ServerValue.TIMESTAMP,
     });
+    this.setState({messageText: ''})
+    this.textInput.clear()
+  }
+
+  // Handles the message alerts & validation
+  handleMessage(messageText) {
+    if (messageText !== '') {
+      Alert.alert(
+        'Send the message?',
+        '',
+        [
+          {text: 'Nope', style: 'cancel'},
+          {text: 'Yes', onPress: () => {this.sendMessage(messageText)}},
+        ],
+        { cancelable: false }
+      )
+    } else {
+      Alert.alert('Your message is empty!')
+    }
   }
 
   render() {
@@ -19,10 +43,17 @@ export default class MessageScreen extends React.Component {
       <View style={styles.MessageScreen}>
         <TextInput
           style={{height: 100, fontSize: 42}}
+          ref={input => { this.textInput = input }}
           placeholder="Spread the love!"
+          onChangeText={(messageText) => this.setState({messageText})}
+          multiline = {true}
+          numberOfLines = {1}
+          autoFocus = {true}
+          // Limits the maximum number of characters that can be entered.
+          maxLength = {1000}
         />
         <TouchableOpacity
-          onPress={this._onPressSendLove}
+          onPress={() => {this.handleMessage(this.state.messageText)}}
           title='Send message'>
           <ButtonContent
             btnContent = {'Send message'}
@@ -39,6 +70,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffd92a',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
 });
