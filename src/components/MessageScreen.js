@@ -8,7 +8,10 @@ export default class MessageScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { messageText: '' };
+    this.state = {
+      messageText: '',
+      navigation: this.props.navigation,
+    };
   }
 
   // Sends the message to the database and clears the input field
@@ -19,6 +22,7 @@ export default class MessageScreen extends React.Component {
     });
     this.setState({messageText: ''})
     this.textInput.clear()
+    this.state.navigation.navigate('Confirmation')
   }
 
   // Handles the message alerts & validation
@@ -56,8 +60,16 @@ export default class MessageScreen extends React.Component {
           onPress={() => {this.handleMessage(this.state.messageText)}}
           title='Send message'>
           <ButtonContent
-            btnContent = {'Send message'}
+            btnContent = {'Send'}
             btnColor = {'#49a38b'}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {this.state.navigation.navigate('Home')}}
+          title='Close'>
+          <ButtonContent
+            btnContent = {'Close'}
+            btnColor = {'#331c48'}
           />
         </TouchableOpacity>
       </View>
