@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, StyleSheet, View, Image } from 'react-native';
+import { TouchableOpacity, StyleSheet, View, Image, Text } from 'react-native';
 import ButtonContent from './ButtonContent';
 
 const HomeScreen = ({ navigation }) => (
@@ -24,6 +24,7 @@ const HomeScreen = ({ navigation }) => (
         btnColor = {'#ffd92a'}
       />
     </TouchableOpacity>
+    <Text>Messages are deleted on Mondays at 11 a.m.</Text>
   </View>
 );
 

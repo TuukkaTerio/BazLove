@@ -26,13 +26,6 @@ export default class ShowLoveScreen extends React.Component {
       if (this.refs.flatListView) {
         this.setState((prevState) => ({ messageList: [...prevState.messageList, newChild] }));
       }
-      // Removes all messages every monday at 11am.
-      const date = new Date();
-      const day = date.getDay();
-      const time = date.getHours();
-      if (day === 1 && time === 11) {
-        keyParent.remove()
-      }
     });
   };
 
