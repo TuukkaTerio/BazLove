@@ -40,14 +40,27 @@ export default class HomeScreen extends React.Component {
     });
   }
 
-  // Handles the log out
-  handleLogout() {
+  // Signs the user out from Firebase
+  firebaseLogout() {
     firebase.auth().signOut().then(function() {
       // Log out successful.
     }).catch(function(error) {
       // An error happened.
       Alert.alert("Couldn't log out");
     });
+  }
+
+  // Handles the log out request
+  handleLogout() {
+    Alert.alert(
+      'Log out?',
+      '',
+      [
+        {text: 'Yes', onPress: () => {this.firebaseLogout()}},
+        {text: 'Nope', style: 'cancel'},
+      ],
+      { cancelable: false }
+    )
   }
 
   render() {
