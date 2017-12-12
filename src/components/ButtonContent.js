@@ -9,10 +9,10 @@ export default class ButtonContent extends Component {
       padding: 20,
       color: '#fff',
       marginTop: 15,
-      width: 200,
+      width: 100,
       textAlign: 'center',
-      fontFamily: 'HelveticaNeue-CondensedBlack',
-      fontSize: 20,
+      fontFamily: 'HelveticaNeue-CondensedBold',
+      fontSize: 16,
     }
     return (
       <Text style={btnStyle}>{btnContent}</Text>

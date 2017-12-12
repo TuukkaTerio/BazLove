@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { Alert, TouchableOpacity, StyleSheet, View, Image, Text, TextInput } from 'react-native';
+import { Alert, TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native';
 import RenderIf from './RenderIf';
 import ButtonContent from './ButtonContent';
+import Logo from './Logo';
 
 export default class HomeScreen extends React.Component {
 
@@ -68,34 +69,33 @@ export default class HomeScreen extends React.Component {
       <View style={styles.HomeScreen}>
         {RenderIf(this.state.screenContent === 'home',
           <View style={styles.HomeScreen}>
-            <Image
-              source={require('../img/baz.png')}
-              style={{width: 200, height: 200}}
-            />
+            <Logo/>
+            <View style={styles.ButtonContainer}>
+              <TouchableOpacity
+                style={styles.Buttons}
+                onPress={() => this.state.navigation.navigate('Message')}
+                title='SEND'>
+                <ButtonContent
+                  btnContent = {'SEND'}
+                  btnColor = {'#49a38b'}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.Buttons}
+                onPress={() => this.state.navigation.navigate('ShowLove')}
+                title='SHOW'>
+                <ButtonContent
+                  btnContent = {'SHOW'}
+                  btnColor = {'#331c48'}
+                />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.infoText}>Messages are deleted on Mondays at 11 a.m. (UTC +1)</Text>
             <TouchableOpacity
-              onPress={() => this.state.navigation.navigate('Message')}
-              title='Send'>
-              <ButtonContent
-                btnContent = {'Send'}
-                btnColor = {'#49a38b'}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.state.navigation.navigate('ShowLove')}
-              title='Show'>
-              <ButtonContent
-                btnContent = {'Show'}
-                btnColor = {'#ffd92a'}
-              />
-            </TouchableOpacity>
-            <Text>Messages are deleted on Mondays at 11 a.m.</Text>
-            <TouchableOpacity
+              style={styles.Logout}
               onPress={() => {this.handleLogout()}}
               title='Logout'>
-              <ButtonContent
-                btnContent = {'Logout'}
-                btnColor = {'#49a38b'}
-              />
+              <Text>Logout</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -146,9 +146,9 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   HomeScreen: {
     flex: 1,
-    backgroundColor: '#331c48',
+    backgroundColor: '#ffd92a',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   LoginScreen: {
     flex: 1,
@@ -158,5 +158,27 @@ const styles = StyleSheet.create({
   LoginInput: {
     height: 50,
     fontSize: 20,
+  },
+  ButtonContainer: {
+    marginTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 215,
+  },
+  Buttons: {
+
+  },
+  infoText: {
+    width: 200,
+    marginTop: 30,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  Logout: {
+    marginBottom: 40,
+    paddingBottom: 3,
+    borderStyle: 'solid',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000',
   },
 });
