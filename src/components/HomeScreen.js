@@ -53,12 +53,15 @@ export default class HomeScreen extends React.Component {
 
   // Handles the log out request
   handleLogout() {
+    const EmojiBye = String.fromCodePoint(0x1F44B);
+    const EmojiNo = String.fromCodePoint(0x274C);
+    const EmojiYes = String.fromCodePoint(0x2705);
     Alert.alert(
-      'Log out?',
+      'Log out?  ' + EmojiBye,
       '',
       [
-        {text: 'Yes', onPress: () => {this.firebaseLogout()}},
-        {text: 'Nope', style: 'cancel'},
+        {text: 'Yes  ' + EmojiYes, onPress: () => {this.firebaseLogout()}},
+        {text: 'No  ' + EmojiNo},
       ],
       { cancelable: false }
     )
@@ -68,7 +71,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.HomeScreen}>
         {RenderIf(this.state.screenContent === 'home',
-          <View style={styles.HomeScreen}>
+          <View>
             <Logo/>
             <View style={styles.ButtonContainer}>
               <TouchableOpacity
@@ -95,47 +98,49 @@ export default class HomeScreen extends React.Component {
               style={styles.Logout}
               onPress={() => {this.handleLogout()}}
               title='Logout'>
-              <Text>Logout</Text>
+              <Text style={styles.LogoutText}>Logout</Text>
             </TouchableOpacity>
           </View>
         )}
         {RenderIf(this.state.screenContent === 'login',
           <View style={styles.LoginScreen}>
-            <TextInput
-              style={styles.LoginInput}
-              ref={input => { this.emailInput = input }}
-              placeholder="Email"
-              onChangeText={(userEmail) => this.setState({userEmail})}
-              autoFocus = {true}
-              keyboardType = {'email-address'}
-              // Limits the maximum number of characters that can be entered.
-              maxLength = {300}
-              autoCapitalize = {'none'}
-              autoCorrect = {false}
-            />
-            <TextInput
-              style={styles.LoginInput}
-              ref={input => { this.passwordInput = input }}
-              placeholder="Password"
-              onChangeText={(userPassword) => this.setState({userPassword})}
-              // Limits the maximum number of characters that can be entered.
-              maxLength = {300}
-              autoCapitalize = {'none'}
-              autoCorrect = {false}
-              secureTextEntry = {true}
-            />
-            <TouchableOpacity
-              onPress={() => {this.handleLogin(this.state.userEmail, this.state.userPassword)}}
-              title='OK'>
-              <ButtonContent
-                btnContent = {'OK'}
-                btnColor = {'#49a38b'}
+            <View style={styles.LoginContainer}>
+              <TextInput
+                style={styles.LoginInput}
+                ref={input => { this.emailInput = input }}
+                placeholder="Email"
+                onChangeText={(userEmail) => this.setState({userEmail})}
+                autoFocus = {true}
+                keyboardType = {'email-address'}
+                // Limits the maximum number of characters that can be entered.
+                maxLength = {300}
+                autoCapitalize = {'none'}
+                autoCorrect = {false}
               />
-            </TouchableOpacity>
+              <TextInput
+                style={styles.LoginInput}
+                ref={input => { this.passwordInput = input }}
+                placeholder="Password"
+                onChangeText={(userPassword) => this.setState({userPassword})}
+                // Limits the maximum number of characters that can be entered.
+                maxLength = {300}
+                autoCapitalize = {'none'}
+                autoCorrect = {false}
+                secureTextEntry = {true}
+              />
+              <TouchableOpacity
+                onPress={() => {this.handleLogin(this.state.userEmail, this.state.userPassword)}}
+                title='LOGIN'>
+                <ButtonContent
+                  btnContent = {'LOGIN'}
+                  btnColor = {'#49a38b'}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         )}
         {RenderIf(this.state.screenContent === 'loading',
-          <View style={styles.HomeScreen}>
+          <View>
           </View>
         )}
       </View>
@@ -150,23 +155,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  LoginScreen: {
+  LoginContainer: {
+    marginTop: 25,
+    width: 280,
     flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   LoginInput: {
-    height: 50,
-    fontSize: 20,
+    backgroundColor: '#fff',
+    height: 65,
+    fontSize: 16,
+    padding: 20,
+    paddingTop: 20,
+    width: 280,
+    lineHeight: 1.5,
+    marginTop: 15,
   },
   ButtonContainer: {
     marginTop: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: 215,
-  },
-  Buttons: {
-
   },
   infoText: {
     width: 200,
@@ -176,9 +185,9 @@ const styles = StyleSheet.create({
   },
   Logout: {
     marginBottom: 40,
-    paddingBottom: 3,
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-    borderBottomColor: '#000',
+  },
+  LogoutText: {
+    textAlign: 'center',
+    textDecorationLine: 'underline',
   },
 });

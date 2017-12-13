@@ -37,14 +37,19 @@ export default class ShowLoveScreen extends React.Component {
     return (
       <View style={styles.ShowLoveScreen} ref="flatListView">
         <FlatList
+          style={styles.LoveList}
           data={this.state.messageList}
-          renderItem={({item}) => <Text>{item.message}</Text>}
+          renderItem={({item}) =>
+            <View style={styles.LoveListItem}>
+              <Text style={styles.LoveListItemText}>{item.message}</Text>
+            </View>
+          }
         />
         <TouchableOpacity
           onPress={() => {this.state.navigation.navigate('Home')}}
-          title='Close'>
+          title='CLOSE'>
           <ButtonContent
-            btnContent = {'Close'}
+            btnContent = {'CLOSE'}
             btnColor = {'#331c48'}
           />
         </TouchableOpacity>
@@ -58,6 +63,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffd92a',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+  },
+  LoveList: {
+    width: 280,
+    marginTop: 40,
+    height: 420,
+    maxHeight: 420,
+  },
+  LoveListItem: {
+    marginBottom: 10,
+    padding: 20,
+    backgroundColor: '#fff',
+    width: 280,
+    borderRadius: 10,
+  },
+  LoveListItemText: {
+    fontSize: 16,
   },
 });

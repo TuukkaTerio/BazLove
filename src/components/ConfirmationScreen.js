@@ -40,23 +40,25 @@ export default class ConfirmationScreen extends React.Component {
             source={{uri: this.state.gifUrl}}
           />
         )}
-        <Text>TACK!</Text>
-        <TouchableOpacity
-          onPress={() => this.state.navigation.navigate('Message')}
-          title='Send more'>
-          <ButtonContent
-            btnContent = {'Send more'}
-            btnColor = {'#49a38b'}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {this.state.navigation.navigate('Home')}}
-          title='Close'>
-          <ButtonContent
-            btnContent = {'Close'}
-            btnColor = {'#331c48'}
-          />
-        </TouchableOpacity>
+        <Text>THANKS!</Text>
+        <View style={styles.ButtonContainer}>
+          <TouchableOpacity
+            onPress={() => this.state.navigation.navigate('Message')}
+            title='SEND MORE'>
+            <ButtonContent
+              btnContent = {'SEND MORE'}
+              btnColor = {'#49a38b'}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {this.state.navigation.navigate('Home')}}
+            title='CLOSE'>
+            <ButtonContent
+              btnContent = {'CLOSE'}
+              btnColor = {'#331c48'}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -68,5 +70,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffd92a',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  ButtonContainer: {
+    marginTop: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 230,
   },
 });

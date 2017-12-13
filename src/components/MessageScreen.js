@@ -28,17 +28,22 @@ export default class MessageScreen extends React.Component {
   // Handles the message alerts & validation
   handleMessage(messageText) {
     if (messageText !== '') {
+      const EmojiHeart1 = String.fromCodePoint(0x1F495);
+      const EmojiHeart2 = String.fromCodePoint(0x1F496);
+      const EmojiNo = String.fromCodePoint(0x274C);
+      const EmojiYes = String.fromCodePoint(0x1F389);
       Alert.alert(
-        'Send the message?',
+        EmojiHeart1 + '  Send the message?  ' + EmojiHeart2,
         '',
         [
-          {text: 'Nope', style: 'cancel'},
-          {text: 'Yes', onPress: () => {this.sendMessage(messageText)}},
+          {text: 'No  ' + EmojiNo, style: 'cancel'},
+          {text: 'Yes  ' + EmojiYes, onPress: () => {this.sendMessage(messageText)}},
         ],
         { cancelable: false }
       )
     } else {
-      Alert.alert('Your message is empty!')
+      const EmojiPen = String.fromCodePoint(0x270F);
+      Alert.alert('Message is empty  ' + EmojiPen)
     }
   }
 
@@ -46,32 +51,34 @@ export default class MessageScreen extends React.Component {
     return (
       <View style={styles.MessageScreen}>
         <TextInput
-          style={{height: 100, fontSize: 42}}
+          style={styles.TextInput}
           ref={input => { this.textInput = input }}
           placeholder="Spread the love!"
           onChangeText={(messageText) => this.setState({messageText})}
           multiline = {true}
-          numberOfLines = {1}
+          numberOfLines = {10}
           autoFocus = {true}
           // Limits the maximum number of characters that can be entered.
           maxLength = {1000}
         />
-        <TouchableOpacity
-          onPress={() => {this.handleMessage(this.state.messageText)}}
-          title='Send message'>
-          <ButtonContent
-            btnContent = {'Send'}
-            btnColor = {'#49a38b'}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {this.state.navigation.navigate('Home')}}
-          title='Close'>
-          <ButtonContent
-            btnContent = {'Close'}
-            btnColor = {'#331c48'}
-          />
-        </TouchableOpacity>
+        <View style={styles.ButtonContainer}>
+          <TouchableOpacity
+            onPress={() => {this.state.navigation.navigate('Home')}}
+            title='CLOSE'>
+            <ButtonContent
+              btnContent = {'CLOSE'}
+              btnColor = {'#331c48'}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {this.handleMessage(this.state.messageText)}}
+            title='SEND'>
+            <ButtonContent
+              btnContent = {'SEND'}
+              btnColor = {'#49a38b'}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -83,5 +90,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffd92a',
     alignItems: 'center',
     justifyContent: 'flex-start',
+  },
+  TextInput: {
+    backgroundColor: '#fff',
+    fontSize: 16,
+    padding: 20,
+    paddingTop: 20,
+    width: 280,
+    marginTop: 40,
+    height: 180,
+    maxHeight: 180,
+    lineHeight: 1.5,
+  },
+  ButtonContainer: {
+    marginTop: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 215,
   },
 });

@@ -9,7 +9,7 @@ export default class ButtonContent extends Component {
       padding: 20,
       color: '#fff',
       marginTop: 15,
-      width: 100,
+      minWidth: 100,
       textAlign: 'center',
       fontFamily: 'HelveticaNeue-CondensedBold',
       fontSize: 16,
