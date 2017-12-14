@@ -28,12 +28,11 @@ export default class MessageScreen extends React.Component {
   // Handles the message alerts & validation
   handleMessage(messageText) {
     if (messageText !== '') {
-      const EmojiHeart1 = String.fromCodePoint(0x1F495);
-      const EmojiHeart2 = String.fromCodePoint(0x1F496);
+      const EmojiHeart = String.fromCodePoint(0x1F495);
       const EmojiNo = String.fromCodePoint(0x274C);
       const EmojiYes = String.fromCodePoint(0x1F389);
       Alert.alert(
-        EmojiHeart1 + '  Send the message?  ' + EmojiHeart2,
+        'Send it?  ' + EmojiHeart,
         '',
         [
           {text: 'No  ' + EmojiNo, style: 'cancel'},

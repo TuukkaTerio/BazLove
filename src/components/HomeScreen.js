@@ -4,7 +4,6 @@ import { Alert, TouchableOpacity, StyleSheet, View, Text, TextInput } from 'reac
 import RenderIf from './RenderIf';
 import ButtonContent from './ButtonContent';
 import Logo from './Logo';
-import Svg, { Line, Path } from 'react-native-svg';
 
 export default class HomeScreen extends React.Component {
 
@@ -15,16 +14,6 @@ export default class HomeScreen extends React.Component {
       userPassword: '',
       screenContent: 'loading',
       navigation: this.props.navigation,
-      numPoints: 10,
-      duration: 900,
-      delayPointsArray: [],
-      delayPointsMax: 300,
-      delayPerPath: 250,
-      timeStart: Date.now(),
-      isOpened: false,
-      isAnimating: false,
-      pathLength: 1,
-      pathD: 'V 100 H 0',
     };
   }
 
@@ -78,88 +67,6 @@ export default class HomeScreen extends React.Component {
     )
   }
 
-  /**
-   *
-   * This code is based on shape-overlays by ykob.
-   * https://github.com/ykob/shape-overlays
-   *
-   * The easing cubicInOut is based on the code of glsl-easing module.
-   * https://github.com/glslify/glsl-easings
-   *
-   */
-
-  cubicInOut(t) {
-    return t < 0.5
-      ? 4.0 * t * t * t
-      : 0.5 * Math.pow(2.0 * t - 2.0, 3.0) + 1.0;
-  }
-
-  updatePath(time) {
-    const points = [];
-    let str = '';
-    for (i = 0; i < 10; i++) {
-      points.push((1 - this.cubicInOut(Math.min(Math.max(time - this.state.delayPointsArray[i], 0) / this.state.duration, 1))) * 100);
-    }
-    str += (this.state.isOpened) ? 'M 0 0 V ' + points.join(' ') : 'M 0 ' + points.join(' ');
-    for (i = 0; i < 9; i++) {
-      const p = (i + 1) / (this.state.numPoints - 1) * 100;
-      const cp = p - (1 / (this.state.numPoints - 1) * 100) / 2;
-      str += 'C ' + cp + ' ' + points.join(' ') + cp + ' ' + points.join(' ') + p + ' ' + points.join(' ');
-    }
-    str += (this.state.isOpened) ? 'V 100 H 0' : 'V 0 H 0';
-    this.setState({ pathD: str });
-    console.log('STR är:' + str);
-    console.log('pathD är:' + this.state.pathD);
-  }
-
-  renderLoop() {
-    if (this.state.isOpened) {
-      this.updatePath(Date.now() - (this.state.timeStart + this.state.delayPerPath * 1))
-    } else {
-      this.updatePath(Date.now() - (this.state.timeStart + this.state.delayPerPath * (this.state.pathLength - 1)))
-    }
-    if (Date.now() - this.state.timeStart < this.state.duration + this.state.delayPerPath * (this.state.pathLength - 1) + this.state.delayPointsMax) {
-      requestAnimationFrame(() => {
-        this.renderLoop();
-      });
-    }
-    else {
-      this.setState({ isAnimating: false});
-    }
-  }
-
-  toggle() {
-    this.setState({ isAnimating: true});
-    for (i = 0; i < 10; i++) {
-      this.state.delayPointsArray.push(Math.random() * this.state.delayPointsMax);
-    }
-    if (this.state.isOpened === false) {
-      this.setState({ isOpened: true});
-      this.setState({ timeStart: Date.now()});
-      this.renderLoop();
-    } else {
-      this.setState({ isOpened: false});
-      this.setState({ timeStart: Date.now()});
-      this.renderLoop();
-    }
-  }
-
-  handleShapeOverlays(isAnimating, isOpened) {
-    if (isAnimating === true) {
-      return false;
-    }
-    this.toggle();
-    if (isOpened === true) {
-      this.toggle();
-    }
-  }
-
-  // Handles the SVG ShapeOverlays & Navigation to next screen
-  handleClick(destination) {
-    this.handleShapeOverlays();
-    this.state.navigation.navigate(destination);
-  }
-
   render() {
     return (
       <View style={styles.HomeScreen}>
@@ -169,7 +76,7 @@ export default class HomeScreen extends React.Component {
             <View style={styles.ButtonContainer}>
               <TouchableOpacity
                 style={styles.Buttons}
-                onPress={() => {this.handleClick('Message')}}
+                onPress={() => {this.state.navigation.navigate('Message')}}
                 title='SEND'>
                 <ButtonContent
                   btnContent = {'SEND'}
@@ -178,7 +85,7 @@ export default class HomeScreen extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.Buttons}
-                onPress={() => {this.handleClick('ShowLove')}}
+                onPress={() => {this.state.navigation.navigate('ShowLove')}}
                 title='SHOW'>
                 <ButtonContent
                   btnContent = {'SHOW'}
@@ -193,12 +100,6 @@ export default class HomeScreen extends React.Component {
               title='Logout'>
               <Text style={styles.LogoutText}>Logout</Text>
             </TouchableOpacity>
-            <Svg
-              style={styles.ShapeOverlay}
-              viewBox={'0 0 100 100'}
-            >
-              <Path d={this.state.pathD} fill='#000'/>
-            </Svg>
           </View>
         )}
         {RenderIf(this.state.screenContent === 'login',
@@ -288,13 +189,5 @@ const styles = StyleSheet.create({
   LogoutText: {
     textAlign: 'center',
     textDecorationLine: 'underline',
-  },
-  ShapeOverlay: {
-    width: 400,
-  	height: 400,
-  	position: 'absolute',
-  	top: 0,
-  	left: 0,
-    zIndex: 3,
   },
 });
