@@ -14,15 +14,30 @@ export default class MessageScreen extends React.Component {
     };
   }
 
-  // Sends the message to the database and clears the input field
+  // Gets the gif url and navigates to ConfirmationScreen
+  getGif() {
+    const nav = this.state.navigation;
+    const apiUrl = 'http://api.giphy.com/v1/stickers/random?api_key=PZf7lIja3FGSHRiQZlhFBCbT3JGWeK1K&limit=1&tag=happy';
+    fetch(apiUrl)
+    .then((resp) => resp.json())
+    .then(function(jsonResp) {
+      nav.navigate('Confirmation', { gifUrl: jsonResp.data.image_original_url });
+      console.log(jsonResp.data.image_original_url);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+  }
+
+  // Sends the message to Firebase, clears the input field & calls getGif()
   sendMessage(messageText) {
     Database.ref('messages/').push({
       message: messageText,
       timestamp: firebase.database.ServerValue.TIMESTAMP,
     });
-    this.setState({messageText: ''})
-    this.textInput.clear()
-    this.state.navigation.navigate('Confirmation')
+    this.setState({messageText: ''});
+    this.textInput.clear();
+    this.getGif();
   }
 
   // Handles the message alerts & validation

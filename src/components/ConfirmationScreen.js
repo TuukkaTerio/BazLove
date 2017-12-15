@@ -8,27 +8,9 @@ export default class ConfirmationScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      gifUrl: this.props.navigation.state.params.gifUrl,
       navigation: this.props.navigation,
-      gifUrl: '',
     };
-  }
-
-  componentWillMount() {
-    const apiUrl = 'http://api.giphy.com/v1/stickers/random?api_key=PZf7lIja3FGSHRiQZlhFBCbT3JGWeK1K&limit=1&tag=happy';
-    const request = new XMLHttpRequest();
-    request.open('GET', apiUrl, true);
-    request.onload = () => {
-      if (request.status >= 200 && request.status < 400) {
-        const parsedData = JSON.parse(request.responseText);
-        this.setState({gifUrl: parsedData.data.image_original_url});
-      } else {
-        console.log('We reached our target server, but it returned an error');
-      }
-    };
-    request.onerror = () => {
-      console.log('There was a connection error of some sort');
-    };
-    request.send();
   }
 
   render() {
@@ -40,10 +22,10 @@ export default class ConfirmationScreen extends React.Component {
             source={{uri: this.state.gifUrl}}
           />
         )}
-        <Text>THANKS!</Text>
+        <Text style={styles.TextThanks}>THANKS!</Text>
         <View style={styles.ButtonContainer}>
           <TouchableOpacity
-            onPress={() => this.state.navigation.navigate('Message')}
+            onPress={() => {this.state.navigation.navigate('Message')}}
             title='SEND MORE'>
             <ButtonContent
               btnContent = {'SEND MORE'}
@@ -70,6 +52,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffd92a',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  TextThanks: {
+    paddingTop: 10,
+    textAlign: 'center',
+    fontFamily: 'HelveticaNeue-CondensedBold',
+    fontSize: 22,
   },
   ButtonContainer: {
     marginTop: 5,
