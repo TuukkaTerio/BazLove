@@ -18,7 +18,7 @@ export default class ConfirmationScreen extends React.Component {
       <View style={styles.ConfirmationScreen}>
         {RenderIf(this.state.gifUrl,
           <Image
-            style={{width: 250, height: 250}}
+            style={styles.Gif}
             source={{uri: this.state.gifUrl}}
           />
         )}
@@ -53,11 +53,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  Gif: {
+    height: 230,
+    width: 230,
+  },
   TextThanks: {
     paddingTop: 10,
     textAlign: 'center',
     fontFamily: 'HelveticaNeue-CondensedBold',
-    fontSize: 22,
+    fontSize: 34,
   },
   ButtonContainer: {
     marginTop: 5,
