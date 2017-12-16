@@ -11,33 +11,11 @@ export default class MessageScreen extends React.Component {
     this.state = {
       messageText: '',
       navigation: this.props.navigation,
-      apiUrl: '',
+      gifArray: this.props.navigation.state.params.gifArray,
     };
   }
 
-  // Changes the tag that is used to get a random gif
-  getNewTag() {
-    const url = 'http://api.giphy.com/v1/gifs/random?api_key=PZf7lIja3FGSHRiQZlhFBCbT3JGWeK1K&tag=';
-    const tagArray = ['cat', 'cute-cat', 'funny-cat'];
-    let tag = tagArray[Math.floor(Math.random() * tagArray.length)];
-    this.setState({apiUrl: url + tag});
-  }
-
-  // Gets the gif url and navigates to ConfirmationScreen
-  getGif() {
-    const nav = this.state.navigation;
-    const apiUrl = this.state.apiUrl;
-    fetch(apiUrl)
-    .then((resp) => resp.json())
-    .then(function(jsonResp) {
-      nav.navigate('Confirmation', { gifUrl: jsonResp.data.fixed_height_downsampled_url });
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  }
-
-  // Sends the message to Firebase, clears the input field & calls getGif()
+  // Sends the message to Firebase, clears the input field and navigates to ConfirmationScreen
   sendMessage(messageText) {
     Database.ref('messages/').push({
       message: messageText,
@@ -45,8 +23,7 @@ export default class MessageScreen extends React.Component {
     });
     this.setState({messageText: ''});
     this.textInput.clear();
-    this.getNewTag();
-    this.getGif();
+    this.state.navigation.navigate('Confirmation', { gifArray: this.state.gifArray });
   }
 
   // Handles the message alerts & validation

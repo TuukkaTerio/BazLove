@@ -8,24 +8,27 @@ export default class ConfirmationScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gifUrl: this.props.navigation.state.params.gifUrl,
       navigation: this.props.navigation,
+      gifArray: this.props.navigation.state.params.gifArray,
     };
   }
 
   render() {
+    // Gets a random gif from the array of gifs
+    const randomGif = this.state.gifArray[Math.floor(Math.random() * this.state.gifArray.length)];
+    const gifUrl = randomGif.images.fixed_height_downsampled.url;
     return (
       <View style={styles.ConfirmationScreen}>
-        {RenderIf(this.state.gifUrl,
+        {RenderIf(gifUrl,
           <Image
             style={styles.Gif}
-            source={{uri: this.state.gifUrl}}
+            source={{uri: gifUrl}}
           />
         )}
         <Text style={styles.TextThanks}>THANKS!</Text>
         <View style={styles.ButtonContainer}>
           <TouchableOpacity
-            onPress={() => {this.state.navigation.navigate('Message')}}
+            onPress={() => {this.state.navigation.navigate('Message', { gifArray: this.state.gifArray })}}
             title='SEND MORE'>
             <ButtonContent
               btnContent = {'SEND MORE'}
@@ -56,6 +59,7 @@ const styles = StyleSheet.create({
   Gif: {
     height: 230,
     width: 230,
+    resizeMode: 'contain',
   },
   TextThanks: {
     paddingTop: 10,
