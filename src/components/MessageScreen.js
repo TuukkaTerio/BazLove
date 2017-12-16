@@ -47,6 +47,26 @@ export default class MessageScreen extends React.Component {
     }
   }
 
+  // Handles the close request
+  handleClose(){
+    if (this.state.messageText !== '') {
+      const EmojiTrash = String.fromCodePoint(0x1F5D1);
+      const EmojiNo = String.fromCodePoint(0x274C);
+      const EmojiYes = String.fromCodePoint(0x2705);
+      Alert.alert(
+        'Discard?  ' + EmojiTrash,
+        '',
+        [
+          {text: 'No  ' + EmojiNo},
+          {text: 'Yes  ' + EmojiYes, onPress: () => {this.state.navigation.navigate('Home')}},
+        ],
+        { cancelable: false }
+      )
+    } else {
+      this.state.navigation.navigate('Home');
+    }
+  }
+
   render() {
     return (
       <View style={styles.MessageScreen}>
@@ -63,7 +83,7 @@ export default class MessageScreen extends React.Component {
         />
         <View style={styles.ButtonContainer}>
           <TouchableOpacity
-            onPress={() => {this.state.navigation.navigate('Home')}}
+            onPress={() => {this.handleClose()}}
             title='CLOSE'>
             <ButtonContent
               btnContent = {'CLOSE'}
