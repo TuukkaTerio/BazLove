@@ -90,7 +90,8 @@ export default class HomeScreen extends React.Component {
         <BackgroundGradient/>
         {RenderIf(this.state.screenContent === 'home',
           <View>
-            <SvgCircles/>
+            <SvgCircles circleSize={300} circleColor={'#331c48'}/>
+            <SvgCircles circleSize={250} circleColor={'#D04CC0'}/>
             <Logo/>
             <View style={styles.ButtonContainer}>
               <TouchableOpacity
@@ -174,6 +175,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ffd92a',
   },
   LoginContainer: {
     marginTop: 25,
