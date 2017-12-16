@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import Database from '../firebaseConfig';
+import Database from '../../firebaseConfig';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import ButtonContent from './ButtonContent';
+import ButtonContent from '../ButtonContent';
+import BackgroundGradient from '../BackgroundGradient';
 
 export default class ShowLoveScreen extends React.Component {
 
@@ -36,6 +37,7 @@ export default class ShowLoveScreen extends React.Component {
   render() {
     return (
       <View style={styles.ShowLoveScreen} ref="flatListView">
+        <BackgroundGradient/>
         <FlatList
           style={styles.LoveList}
           data={this.state.messageList}
@@ -50,7 +52,8 @@ export default class ShowLoveScreen extends React.Component {
           title='CLOSE'>
           <ButtonContent
             btnContent = {'CLOSE'}
-            btnColor = {'#331c48'}
+            btnColor = {'#fff'}
+            btnTextColor = {'#ffd92a'}
           />
         </TouchableOpacity>
       </View>
@@ -61,7 +64,6 @@ export default class ShowLoveScreen extends React.Component {
 const styles = StyleSheet.create({
   ShowLoveScreen: {
     flex: 1,
-    backgroundColor: '#ffd92a',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native';
-import ButtonContent from './ButtonContent';
-import RenderIf from './RenderIf';
+import ButtonContent from '../ButtonContent';
+import RenderIf from '../RenderIf';
+import BackgroundGradient from '../BackgroundGradient';
 
 export default class ConfirmationScreen extends React.Component {
 
@@ -19,6 +20,7 @@ export default class ConfirmationScreen extends React.Component {
     const gifUrl = randomGif.images.fixed_height_downsampled.url;
     return (
       <View style={styles.ConfirmationScreen}>
+        <BackgroundGradient/>
         {RenderIf(gifUrl,
           <Image
             style={styles.Gif}
@@ -28,19 +30,21 @@ export default class ConfirmationScreen extends React.Component {
         <Text style={styles.TextThanks}>THANKS!</Text>
         <View style={styles.ButtonContainer}>
           <TouchableOpacity
-            onPress={() => {this.state.navigation.navigate('Message', { gifArray: this.state.gifArray })}}
-            title='SEND MORE'>
-            <ButtonContent
-              btnContent = {'SEND MORE'}
-              btnColor = {'#49a38b'}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
             onPress={() => {this.state.navigation.navigate('Home')}}
             title='CLOSE'>
             <ButtonContent
               btnContent = {'CLOSE'}
-              btnColor = {'#331c48'}
+              btnColor = {'transparent'}
+              btnTextColor = {'#fff'}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {this.state.navigation.navigate('Message', { gifArray: this.state.gifArray })}}
+            title='SEND MORE'>
+            <ButtonContent
+              btnContent = {'SEND MORE'}
+              btnColor = {'#fff'}
+              btnTextColor = {'#ffd92a'}
             />
           </TouchableOpacity>
         </View>
@@ -52,7 +56,6 @@ export default class ConfirmationScreen extends React.Component {
 const styles = StyleSheet.create({
   ConfirmationScreen: {
     flex: 1,
-    backgroundColor: '#ffd92a',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -62,10 +65,12 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   TextThanks: {
+    backgroundColor: 'transparent',
     paddingTop: 10,
     textAlign: 'center',
     fontFamily: 'HelveticaNeue-CondensedBold',
     fontSize: 34,
+    color: '#fff',
   },
   ButtonContainer: {
     marginTop: 5,

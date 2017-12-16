@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { Alert, TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native';
-import RenderIf from './RenderIf';
-import ButtonContent from './ButtonContent';
-import Logo from './Logo';
+import RenderIf from '../RenderIf';
+import ButtonContent from '../ButtonContent';
+import Logo from '../Logo';
+import SvgCircles from '../SvgCircles';
+import BackgroundGradient from '../BackgroundGradient';
 
 export default class HomeScreen extends React.Component {
 
@@ -85,26 +87,30 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.HomeScreen}>
+        <BackgroundGradient/>
         {RenderIf(this.state.screenContent === 'home',
           <View>
+            <SvgCircles/>
             <Logo/>
             <View style={styles.ButtonContainer}>
-              <TouchableOpacity
-                style={styles.Buttons}
-                onPress={() => {this.getGif();}}
-                title='SEND'>
-                <ButtonContent
-                  btnContent = {'SEND'}
-                  btnColor = {'#49a38b'}
-                />
-              </TouchableOpacity>
               <TouchableOpacity
                 style={styles.Buttons}
                 onPress={() => {this.state.navigation.navigate('ShowLove')}}
                 title='SHOW'>
                 <ButtonContent
                   btnContent = {'SHOW'}
-                  btnColor = {'#331c48'}
+                  btnColor = {'transparent'}
+                  btnTextColor = {'#fff'}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.Buttons}
+                onPress={() => {this.getGif();}}
+                title='SEND'>
+                <ButtonContent
+                  btnContent = {'SEND'}
+                  btnColor = {'#fff'}
+                  btnTextColor = {'#ffd92a'}
                 />
               </TouchableOpacity>
             </View>
@@ -166,9 +172,8 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   HomeScreen: {
     flex: 1,
-    backgroundColor: '#ffd92a',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   LoginContainer: {
     marginTop: 25,
@@ -197,12 +202,16 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 20,
     textAlign: 'center',
+    backgroundColor: 'transparent',
+    color: '#331c48',
   },
   Logout: {
     marginBottom: 40,
+    backgroundColor: 'transparent',
   },
   LogoutText: {
     textAlign: 'center',
     textDecorationLine: 'underline',
+    color: '#331c48',
   },
 });

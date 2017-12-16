@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import Database from '../firebaseConfig';
+import Database from '../../firebaseConfig';
 import { Alert, StyleSheet, TouchableOpacity, View, TextInput } from 'react-native';
-import ButtonContent from './ButtonContent';
+import ButtonContent from '../ButtonContent';
+import BackgroundGradient from '../BackgroundGradient';
 
 export default class MessageScreen extends React.Component {
 
@@ -70,6 +71,7 @@ export default class MessageScreen extends React.Component {
   render() {
     return (
       <View style={styles.MessageScreen}>
+        <BackgroundGradient/>
         <TextInput
           style={styles.TextInput}
           ref={input => { this.textInput = input }}
@@ -87,7 +89,8 @@ export default class MessageScreen extends React.Component {
             title='CLOSE'>
             <ButtonContent
               btnContent = {'CLOSE'}
-              btnColor = {'#331c48'}
+              btnColor = {'transparent'}
+              btnTextColor = {'#fff'}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -95,7 +98,8 @@ export default class MessageScreen extends React.Component {
             title='SEND'>
             <ButtonContent
               btnContent = {'SEND'}
-              btnColor = {'#49a38b'}
+              btnColor = {'#fff'}
+              btnTextColor = {'#ffd92a'}
             />
           </TouchableOpacity>
         </View>
@@ -107,7 +111,6 @@ export default class MessageScreen extends React.Component {
 const styles = StyleSheet.create({
   MessageScreen: {
     flex: 1,
-    backgroundColor: '#ffd92a',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
