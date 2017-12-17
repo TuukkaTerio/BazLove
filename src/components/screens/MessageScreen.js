@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import Database from '../../firebaseConfig';
 import { Alert, StyleSheet, TouchableOpacity, View, TextInput } from 'react-native';
 import ButtonContent from '../ButtonContent';
+import SvgCircles from '../SvgCircles';
 import BackgroundGradient from '../BackgroundGradient';
 
 export default class MessageScreen extends React.Component {
@@ -72,6 +73,8 @@ export default class MessageScreen extends React.Component {
     return (
       <View style={styles.MessageScreen}>
         <BackgroundGradient/>
+        <SvgCircles circleSize={500} circleColor={'#331c48'} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={500}/>
+        <SvgCircles circleSize={400} circleColor={'#D04CC0'} outputRange={['0deg', '360deg']} circleTop={200} circleRight={330}/>
         <TextInput
           style={styles.TextInput}
           ref={input => { this.textInput = input }}
@@ -99,7 +102,7 @@ export default class MessageScreen extends React.Component {
             <ButtonContent
               btnContent = {'SEND'}
               btnColor = {'#fff'}
-              btnTextColor = {'#ffd92a'}
+              btnTextColor = {'#D04CC0'}
             />
           </TouchableOpacity>
         </View>
@@ -113,6 +116,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
+    backgroundColor: '#ffd92a',
   },
   TextInput: {
     backgroundColor: '#fff',

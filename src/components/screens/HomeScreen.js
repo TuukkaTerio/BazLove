@@ -90,8 +90,9 @@ export default class HomeScreen extends React.Component {
         <BackgroundGradient/>
         {RenderIf(this.state.screenContent === 'home',
           <View>
-            <SvgCircles circleSize={300} circleColor={'#331c48'}/>
-            <SvgCircles circleSize={250} circleColor={'#D04CC0'}/>
+            <SvgCircles circleSize={300} circleColor={'#331c48'} outputRange={['0deg', '360deg']} circleTop={0} circleRight={215}/>
+            <SvgCircles circleSize={260} circleColor={'#D04CC0'} outputRange={['360deg', '0deg']} circleTop={50} circleRight={220}/>
+            <SvgCircles circleSize={160} circleColor={'#FF62CA'} outputRange={['360deg', '0deg']} circleTop={300} circleRight={250}/>
             <Logo/>
             <View style={styles.ButtonContainer}>
               <TouchableOpacity
@@ -155,7 +156,8 @@ export default class HomeScreen extends React.Component {
                 title='LOGIN'>
                 <ButtonContent
                   btnContent = {'LOGIN'}
-                  btnColor = {'#49a38b'}
+                  btnColor = {'transparent'}
+                  btnTextColor = {'#fff'}
                 />
               </TouchableOpacity>
             </View>

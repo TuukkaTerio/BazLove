@@ -25,30 +25,35 @@ import Svg, { Circle,
 
 export default class SvgCircles extends React.Component {
 
-  constructor () {
-    super()
+  constructor(props) {
+    super(props)
     this.spinValue = new Animated.Value(0)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.spin()
   }
-  spin () {
+
+  spin() {
     this.spinValue.setValue(0)
     Animated.timing(
       this.spinValue,
       {
         toValue: 1,
-        duration: 3000,
+        duration: 4000,
         easing: Easing.linear
       }
     ).start(() => this.spin())
   }
 
   render(props) {
-    const spin = this.spinValue.interpolate({
+    const clockwise = this.spinValue.interpolate({
       inputRange: [0, 1],
-      outputRange: ['0deg', '360deg']
+      outputRange: this.props.outputRange
+    });
+    const counterclockwise = this.spinValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: this.props.outputRange
     });
     const circleSize = this.props.circleSize;
     const circleColor = this.props.circleColor;
@@ -57,30 +62,29 @@ export default class SvgCircles extends React.Component {
       width: circleSize,
     }
     const circlesContainer = {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
       position: 'absolute',
       zIndex: -1,
+      top: this.props.circleTop,
+      right: this.props.circleRight,
     }
     const rotatingContainer = {
-      transform: [{rotate: spin}],
+      transform: [{rotate: clockwise}],
+      position: 'absolute',
     }
     return (
       <View style={circlesContainer}>
         <Animated.View style={rotatingContainer}>
           <Svg viewBox={'0 0 300 300'} style={circleStyle}>
             <Circle
-              cx="150"
+              cx="145"
               cy="145"
               r="100"
               fill={circleColor}
-              // transform-origin: 145px 150px;
             />
           </Svg>
         </Animated.View>
-        <Animated.View style={circleStyle}>
-          <Svg viewBox={'0 0 300 300'}>
+        <Animated.View style={rotatingContainer}>
+          <Svg viewBox={'0 0 300 300'} style={circleStyle}>
             <Circle
               cx="150"
               cy="155"
@@ -90,8 +94,8 @@ export default class SvgCircles extends React.Component {
             />
           </Svg>
         </Animated.View>
-        <Animated.View style={circleStyle}>
-          <Svg viewBox={'0 0 300 300'}>
+        <Animated.View style={rotatingContainer}>
+          <Svg viewBox={'0 0 300 300'} style={circleStyle}>
             <Circle
               cx="145"
               cy="150"
@@ -101,8 +105,8 @@ export default class SvgCircles extends React.Component {
             />
           </Svg>
         </Animated.View>
-        <Animated.View style={circleStyle}>
-          <Svg viewBox={'0 0 300 300'}>
+        <Animated.View style={rotatingContainer}>
+          <Svg viewBox={'0 0 300 300'} style={circleStyle}>
             <Circle
               cx="155"
               cy="150"
