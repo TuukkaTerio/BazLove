@@ -5,6 +5,7 @@ import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native
 import ButtonContent from '../ButtonContent';
 import BackgroundGradient from '../BackgroundGradient';
 import SvgCircles from '../SvgCircles';
+import { Colors } from '../Colors';
 
 export default class ShowLoveScreen extends React.Component {
 
@@ -39,8 +40,8 @@ export default class ShowLoveScreen extends React.Component {
     return (
       <View style={styles.ShowLoveScreen} ref="flatListView">
         <BackgroundGradient/>
-        <SvgCircles circleSize={500} circleColor={'#D04CC0'} outputRange={['0deg', '360deg']} circleTop={-50} circleRight={300}/>
-        <SvgCircles circleSize={300} circleColor={'#FF62CA'} outputRange={['360deg', '0deg']} circleTop={300} circleRight={350}/>
+        <SvgCircles circleSize={500} circleColor={Colors['pinkDark']} outputRange={['0deg', '360deg']} circleTop={-50} circleRight={300}/>
+        <SvgCircles circleSize={300} circleColor={Colors['pinkLight']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={350}/>
         <FlatList
           style={styles.LoveList}
           data={this.state.messageList}
@@ -55,8 +56,8 @@ export default class ShowLoveScreen extends React.Component {
           title='CLOSE'>
           <ButtonContent
             btnContent = {'CLOSE'}
-            btnColor = {'#fff'}
-            btnTextColor = {'#FF62CA'}
+            btnColor = {Colors['white']}
+            btnTextColor = {Colors['pinkLight']}
           />
         </TouchableOpacity>
       </View>
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#ffd92a',
+    backgroundColor: Colors['yellow'],
   },
   LoveList: {
     width: 280,
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
   LoveListItem: {
     marginBottom: 10,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: Colors['white'],
     width: 280,
     borderRadius: 10,
   },

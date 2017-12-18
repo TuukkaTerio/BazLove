@@ -6,6 +6,7 @@ import ButtonContent from '../ButtonContent';
 import Logo from '../Logo';
 import SvgCircles from '../SvgCircles';
 import BackgroundGradient from '../BackgroundGradient';
+import { Colors } from '../Colors';
 
 export default class HomeScreen extends React.Component {
 
@@ -90,9 +91,9 @@ export default class HomeScreen extends React.Component {
         <BackgroundGradient/>
         {RenderIf(this.state.screenContent === 'home',
           <View>
-            <SvgCircles circleSize={300} circleColor={'#331c48'} outputRange={['0deg', '360deg']} circleTop={0} circleRight={215}/>
-            <SvgCircles circleSize={260} circleColor={'#D04CC0'} outputRange={['360deg', '0deg']} circleTop={50} circleRight={220}/>
-            <SvgCircles circleSize={160} circleColor={'#FF62CA'} outputRange={['360deg', '0deg']} circleTop={300} circleRight={250}/>
+            <SvgCircles circleSize={300} circleColor={Colors['purple']} outputRange={['0deg', '360deg']} circleTop={0} circleRight={215}/>
+            <SvgCircles circleSize={260} circleColor={Colors['pinkDark']} outputRange={['360deg', '0deg']} circleTop={50} circleRight={220}/>
+            <SvgCircles circleSize={160} circleColor={Colors['pinkLight']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={250}/>
             <Logo/>
             <View style={styles.ButtonContainer}>
               <TouchableOpacity
@@ -102,7 +103,7 @@ export default class HomeScreen extends React.Component {
                 <ButtonContent
                   btnContent = {'SHOW'}
                   btnColor = {'transparent'}
-                  btnTextColor = {'#fff'}
+                  btnTextColor = {Colors['white']}
                 />
               </TouchableOpacity>
               <TouchableOpacity
@@ -111,8 +112,8 @@ export default class HomeScreen extends React.Component {
                 title='SEND'>
                 <ButtonContent
                   btnContent = {'SEND'}
-                  btnColor = {'#fff'}
-                  btnTextColor = {'#ffd92a'}
+                  btnColor = {Colors['white']}
+                  btnTextColor = {Colors['yellow']}
                 />
               </TouchableOpacity>
             </View>
@@ -157,7 +158,7 @@ export default class HomeScreen extends React.Component {
                 <ButtonContent
                   btnContent = {'LOGIN'}
                   btnColor = {'transparent'}
-                  btnTextColor = {'#fff'}
+                  btnTextColor = {Colors['white']}
                 />
               </TouchableOpacity>
             </View>
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffd92a',
+    backgroundColor: Colors['yellow'],
   },
   LoginContainer: {
     marginTop: 25,
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   LoginInput: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors['white'],
     height: 65,
     fontSize: 16,
     padding: 20,
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
     backgroundColor: 'transparent',
-    color: '#331c48',
+    color: Colors['purple'],
   },
   Logout: {
     marginBottom: 40,
@@ -216,6 +217,6 @@ const styles = StyleSheet.create({
   LogoutText: {
     textAlign: 'center',
     textDecorationLine: 'underline',
-    color: '#331c48',
+    color: Colors['purple'],
   },
 });

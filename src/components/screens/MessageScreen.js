@@ -5,6 +5,7 @@ import { Alert, StyleSheet, TouchableOpacity, View, TextInput } from 'react-nati
 import ButtonContent from '../ButtonContent';
 import SvgCircles from '../SvgCircles';
 import BackgroundGradient from '../BackgroundGradient';
+import { Colors } from '../Colors';
 
 export default class MessageScreen extends React.Component {
 
@@ -73,8 +74,8 @@ export default class MessageScreen extends React.Component {
     return (
       <View style={styles.MessageScreen}>
         <BackgroundGradient/>
-        <SvgCircles circleSize={500} circleColor={'#331c48'} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={500}/>
-        <SvgCircles circleSize={400} circleColor={'#D04CC0'} outputRange={['0deg', '360deg']} circleTop={200} circleRight={330}/>
+        <SvgCircles circleSize={500} circleColor={Colors['purple']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={500}/>
+        <SvgCircles circleSize={400} circleColor={Colors['pinkDark']} outputRange={['0deg', '360deg']} circleTop={200} circleRight={330}/>
         <TextInput
           style={styles.TextInput}
           ref={input => { this.textInput = input }}
@@ -93,7 +94,8 @@ export default class MessageScreen extends React.Component {
             <ButtonContent
               btnContent = {'CLOSE'}
               btnColor = {'transparent'}
-              btnTextColor = {'#fff'}
+              btnTextColor = {Colors['white']}
+              btnCustomWidth = {132}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -101,8 +103,9 @@ export default class MessageScreen extends React.Component {
             title='SEND'>
             <ButtonContent
               btnContent = {'SEND'}
-              btnColor = {'#fff'}
-              btnTextColor = {'#D04CC0'}
+              btnColor = {Colors['white']}
+              btnTextColor = {Colors['pinkDark']}
+              btnCustomWidth = {132}
             />
           </TouchableOpacity>
         </View>
@@ -116,10 +119,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#ffd92a',
+    backgroundColor: Colors['yellow'],
   },
   TextInput: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors['white'],
     fontSize: 16,
     padding: 20,
     paddingTop: 20,
@@ -133,6 +136,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 215,
+    width: 280,
   },
 });

@@ -4,6 +4,7 @@ import ButtonContent from '../ButtonContent';
 import RenderIf from '../RenderIf';
 import BackgroundGradient from '../BackgroundGradient';
 import SvgCircles from '../SvgCircles';
+import { Colors } from '../Colors';
 
 export default class ConfirmationScreen extends React.Component {
 
@@ -22,9 +23,9 @@ export default class ConfirmationScreen extends React.Component {
     return (
       <View style={styles.ConfirmationScreen}>
         <BackgroundGradient/>
-        <SvgCircles circleSize={200} circleColor={'#331c48'} outputRange={['360deg', '0deg']} circleTop={0} circleRight={300}/>
-        <SvgCircles circleSize={500} circleColor={'#FF62CA'} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={300}/>
-        <SvgCircles circleSize={450} circleColor={'#D04CC0'} outputRange={['0deg', '360deg']} circleTop={150} circleRight={430}/>
+        <SvgCircles circleSize={200} circleColor={Colors['purple']} outputRange={['360deg', '0deg']} circleTop={0} circleRight={300}/>
+        <SvgCircles circleSize={500} circleColor={Colors['pinkLight']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={300}/>
+        <SvgCircles circleSize={450} circleColor={Colors['pinkDark']} outputRange={['0deg', '360deg']} circleTop={150} circleRight={430}/>
         {RenderIf(gifUrl,
           <Image
             style={styles.Gif}
@@ -39,7 +40,7 @@ export default class ConfirmationScreen extends React.Component {
             <ButtonContent
               btnContent = {'CLOSE'}
               btnColor = {'transparent'}
-              btnTextColor = {'#fff'}
+              btnTextColor = {Colors['white']}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -47,8 +48,8 @@ export default class ConfirmationScreen extends React.Component {
             title='SEND MORE'>
             <ButtonContent
               btnContent = {'SEND MORE'}
-              btnColor = {'#fff'}
-              btnTextColor = {'#D04CC0'}
+              btnColor = {Colors['white']}
+              btnTextColor = {Colors['pinkDark']}
             />
           </TouchableOpacity>
         </View>
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffd92a',
+    backgroundColor: Colors['yellow'],
   },
   Gif: {
     height: 230,
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'HelveticaNeue-CondensedBold',
     fontSize: 34,
-    color: '#fff',
+    color: Colors['white'],
   },
   ButtonContainer: {
     marginTop: 5,

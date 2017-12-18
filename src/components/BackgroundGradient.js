@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
+import { Colors } from './Colors';
 import Svg, { Circle,
     Ellipse,
     G,
@@ -24,8 +25,8 @@ export default class BackgroundGradient extends React.Component {
       <Svg height={ScreenHeight} width={ScreenWidth} position="absolute" zIndex="-1">
         <Defs>
           <LinearGradient id="bcGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <Stop offset="70%" stopColor="#ffd92a" stopOpacity="1" />
-              <Stop offset="100%" stopColor="#fff" stopOpacity="1" />
+              <Stop offset="70%" stopColor={Colors['yellow']} stopOpacity="1" />
+              <Stop offset="100%" stopColor={Colors['white']} stopOpacity="1" />
           </LinearGradient>
         </Defs>
         <Rect
