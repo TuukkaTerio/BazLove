@@ -63,7 +63,7 @@ export default class SvgCircles extends React.Component {
     }
     const circlesContainer = {
       position: 'absolute',
-      zIndex: -1,
+      zIndex: -2,
       top: this.props.circleTop,
       right: this.props.circleRight,
     }

@@ -6,6 +6,8 @@ import ButtonContent from '../ButtonContent';
 import BackgroundGradient from '../BackgroundGradient';
 import SvgCircles from '../SvgCircles';
 import { Colors } from '../Colors';
+import RenderIf from '../RenderIf';
+import Loader from '../Loader';
 
 export default class ShowLoveScreen extends React.Component {
 
@@ -14,6 +16,7 @@ export default class ShowLoveScreen extends React.Component {
     this.state = {
       messageList: '',
       navigation: this.props.navigation,
+      loading: false,
     };
   }
 
@@ -42,6 +45,9 @@ export default class ShowLoveScreen extends React.Component {
         <BackgroundGradient/>
         <SvgCircles circleSize={500} circleColor={Colors['pinkDark']} outputRange={['0deg', '360deg']} circleTop={-50} circleRight={300}/>
         <SvgCircles circleSize={300} circleColor={Colors['pinkLight']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={350}/>
+        {RenderIf(this.state.messageList === '',
+          <Loader/>
+        )}
         <FlatList
           style={styles.LoveList}
           data={this.state.messageList}
@@ -52,7 +58,14 @@ export default class ShowLoveScreen extends React.Component {
           }
         />
         <TouchableOpacity
-          onPress={() => {this.state.navigation.navigate('Home')}}
+          onPress={() => {
+            if(this.state.loading) {
+              return;
+            } else {
+              this.setState({ loading: true });
+              this.state.navigation.navigate('Home');
+            }
+          }}
           title='CLOSE'>
           <ButtonContent
             btnContent = {'CLOSE'}
@@ -69,8 +82,9 @@ const styles = StyleSheet.create({
   ShowLoveScreen: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
     backgroundColor: Colors['yellow'],
+    paddingBottom: 30,
   },
   LoveList: {
     width: 280,
@@ -83,7 +97,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: Colors['white'],
     width: 280,
-    borderRadius: 10,
+    borderRadius: 5,
   },
   LoveListItemText: {
     fontSize: 16,

@@ -17,22 +17,28 @@ export default class HomeScreen extends React.Component {
       userPassword: '',
       screenContent: 'loading',
       navigation: this.props.navigation,
+      loading: false,
     };
   }
 
   // Gets an array of gifs and navigates to MessageScreen
   getGif() {
-    const that = this;
-    const apiUrl = 'http://api.giphy.com/v1/stickers/search?api_key=PZf7lIja3FGSHRiQZlhFBCbT3JGWeK1K&q=happy&limit=25';
-    fetch(apiUrl)
-    .then((resp) => resp.json())
-    .then(function(jsonResp) {
-      var respArray = jsonResp.data;
-      that.state.navigation.navigate('Message', { gifArray: respArray });
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+    if(this.state.loading) {
+      return;
+    } else {
+      this.setState({ loading: true });
+      const that = this;
+      const apiUrl = 'http://api.giphy.com/v1/stickers/search?api_key=PZf7lIja3FGSHRiQZlhFBCbT3JGWeK1K&q=happy&limit=25';
+      fetch(apiUrl)
+      .then((resp) => resp.json())
+      .then(function(jsonResp) {
+        var respArray = jsonResp.data;
+        that.state.navigation.navigate('Message', { gifArray: respArray });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    }
   }
 
   componentDidMount() {
@@ -65,24 +71,29 @@ export default class HomeScreen extends React.Component {
       // Log out successful.
     }).catch(function(error) {
       // An error happened.
-      Alert.alert("Couldn't log out");
+      Alert.alert("Could not log out");
     });
   }
 
   // Handles the log out request
   handleLogout() {
-    const EmojiBye = String.fromCodePoint(0x1F44B);
-    const EmojiNo = String.fromCodePoint(0x274C);
-    const EmojiYes = String.fromCodePoint(0x2705);
-    Alert.alert(
-      'Log out?  ' + EmojiBye,
-      '',
-      [
-        {text: 'Yes  ' + EmojiYes, onPress: () => {this.firebaseLogout()}},
-        {text: 'No  ' + EmojiNo},
-      ],
-      { cancelable: false }
-    )
+    if(this.state.loading) {
+      return;
+    } else {
+      this.setState({ loading: true });
+      const EmojiBye = String.fromCodePoint(0x1F44B);
+      const EmojiNo = String.fromCodePoint(0x274C);
+      const EmojiYes = String.fromCodePoint(0x2705);
+      Alert.alert(
+        'Log out?  ' + EmojiBye,
+        '',
+        [
+          {text: 'Yes  ' + EmojiYes, onPress: () => {this.firebaseLogout(); this.setState({ loading: false });}},
+          {text: 'No  ' + EmojiNo, onPress: () => {this.setState({ loading: false });}},
+        ],
+        { cancelable: false }
+      )
+    }
   }
 
   render() {
@@ -98,7 +109,14 @@ export default class HomeScreen extends React.Component {
             <View style={styles.ButtonContainer}>
               <TouchableOpacity
                 style={styles.Buttons}
-                onPress={() => {this.state.navigation.navigate('ShowLove')}}
+                onPress={() => {
+                  if(this.state.loading) {
+                    return;
+                  } else {
+                    this.setState({ loading: true });
+                    this.state.navigation.navigate('ShowLove');
+                  }
+                }}
                 title='SHOW'>
                 <ButtonContent
                   btnContent = {'SHOW'}
@@ -113,7 +131,7 @@ export default class HomeScreen extends React.Component {
                 <ButtonContent
                   btnContent = {'SEND'}
                   btnColor = {Colors['white']}
-                  btnTextColor = {Colors['yellow']}
+                  btnTextColor = {Colors['pinkLight']}
                 />
               </TouchableOpacity>
             </View>
@@ -203,6 +221,7 @@ const styles = StyleSheet.create({
     width: 215,
   },
   infoText: {
+    fontSize: 13,
     width: 200,
     marginTop: 30,
     marginBottom: 20,
@@ -218,5 +237,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textDecorationLine: 'underline',
     color: Colors['purple'],
+    fontSize: 13,
   },
 });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../../firebaseConfig';
-import { Alert, StyleSheet, TouchableOpacity, View, TextInput } from 'react-native';
+import { Alert, StyleSheet, TouchableOpacity, View, TextInput, Keyboard } from 'react-native';
 import ButtonContent from '../ButtonContent';
 import SvgCircles from '../SvgCircles';
 import BackgroundGradient from '../BackgroundGradient';
@@ -15,6 +15,7 @@ export default class MessageScreen extends React.Component {
       messageText: '',
       navigation: this.props.navigation,
       gifArray: this.props.navigation.state.params.gifArray,
+      loading: false,
     };
   }
 
@@ -27,46 +28,61 @@ export default class MessageScreen extends React.Component {
     this.setState({messageText: ''});
     this.textInput.clear();
     this.state.navigation.navigate('Confirmation', { gifArray: this.state.gifArray });
+    Keyboard.dismiss;
+    this.setState({ loading: false });
   }
 
   // Handles the message alerts & validation
   handleMessage(messageText) {
-    if (messageText !== '') {
-      const EmojiHeart = String.fromCodePoint(0x1F495);
-      const EmojiNo = String.fromCodePoint(0x274C);
-      const EmojiYes = String.fromCodePoint(0x1F389);
-      Alert.alert(
-        'Send it?  ' + EmojiHeart,
-        '',
-        [
-          {text: 'No  ' + EmojiNo, style: 'cancel'},
-          {text: 'Yes  ' + EmojiYes, onPress: () => {this.sendMessage(messageText)}},
-        ],
-        { cancelable: false }
-      )
+    if(this.state.loading) {
+      return;
     } else {
-      const EmojiPen = String.fromCodePoint(0x270F);
-      Alert.alert('Message is empty  ' + EmojiPen)
+      this.setState({ loading: true });
+      if (messageText !== '') {
+        const EmojiHeart = String.fromCodePoint(0x1F495);
+        const EmojiNo = String.fromCodePoint(0x274C);
+        const EmojiYes = String.fromCodePoint(0x1F389);
+        Alert.alert(
+          'Send it?  ' + EmojiHeart,
+          '',
+          [
+            {text: 'No  ' + EmojiNo, onPress: () => {this.setState({ loading: false });}},
+            {text: 'Yes  ' + EmojiYes, onPress: () => {this.sendMessage(messageText); this.setState({ loading: false });}},
+          ],
+          { cancelable: false }
+        )
+      } else {
+        const EmojiPen = String.fromCodePoint(0x270F);
+        Alert.alert('Message is empty  ' + EmojiPen);
+        this.setState({ loading: false });
+      }
     }
   }
 
   // Handles the close request
   handleClose(){
-    if (this.state.messageText !== '') {
-      const EmojiTrash = String.fromCodePoint(0x1F5D1);
-      const EmojiNo = String.fromCodePoint(0x274C);
-      const EmojiYes = String.fromCodePoint(0x2705);
-      Alert.alert(
-        'Discard?  ' + EmojiTrash,
-        '',
-        [
-          {text: 'No  ' + EmojiNo},
-          {text: 'Yes  ' + EmojiYes, onPress: () => {this.state.navigation.navigate('Home')}},
-        ],
-        { cancelable: false }
-      )
+    if(this.state.loading) {
+      return;
     } else {
-      this.state.navigation.navigate('Home');
+      this.setState({ loading: true });
+      if (this.state.messageText !== '') {
+        const EmojiTrash = String.fromCodePoint(0x1F5D1);
+        const EmojiNo = String.fromCodePoint(0x274C);
+        const EmojiYes = String.fromCodePoint(0x2705);
+        Alert.alert(
+          'Discard?  ' + EmojiTrash,
+          '',
+          [
+            {text: 'No  ' + EmojiNo, onPress: () => {this.setState({ loading: false })}},
+            {text: 'Yes  ' + EmojiYes, onPress: () => {this.state.navigation.navigate('Home'); this.setState({ loading: false });}},
+          ],
+          { cancelable: false }
+        )
+      } else {
+        this.setState({ loading: true });
+        this.state.navigation.navigate('Home');
+        Keyboard.dismiss;
+      }
     }
   }
 

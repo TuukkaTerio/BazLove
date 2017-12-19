@@ -13,6 +13,7 @@ export default class ConfirmationScreen extends React.Component {
     this.state = {
       navigation: this.props.navigation,
       gifArray: this.props.navigation.state.params.gifArray,
+      loading: false,
     };
   }
 
@@ -35,7 +36,14 @@ export default class ConfirmationScreen extends React.Component {
         <Text style={styles.TextThanks}>THANKS!</Text>
         <View style={styles.ButtonContainer}>
           <TouchableOpacity
-            onPress={() => {this.state.navigation.navigate('Home')}}
+            onPress={() => {
+              if(this.state.loading) {
+                return;
+              } else {
+                this.setState({ loading: true });
+                this.state.navigation.navigate('Home');
+              }
+            }}
             title='CLOSE'>
             <ButtonContent
               btnContent = {'CLOSE'}
@@ -44,7 +52,14 @@ export default class ConfirmationScreen extends React.Component {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {this.state.navigation.navigate('Message', { gifArray: this.state.gifArray })}}
+            onPress={() => {
+              if(this.state.loading) {
+                return;
+              } else {
+                this.setState({ loading: true });
+                this.state.navigation.navigate('Message', { gifArray: this.state.gifArray });
+              }
+            }}
             title='SEND MORE'>
             <ButtonContent
               btnContent = {'SEND MORE'}
@@ -53,6 +68,7 @@ export default class ConfirmationScreen extends React.Component {
             />
           </TouchableOpacity>
         </View>
+        <Text style={styles.TextGiphy}>Powered By GIPHY</Text>
       </View>
     );
   }
@@ -62,7 +78,7 @@ const styles = StyleSheet.create({
   ConfirmationScreen: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     backgroundColor: Colors['yellow'],
   },
   Gif: {
@@ -77,6 +93,15 @@ const styles = StyleSheet.create({
     fontFamily: 'HelveticaNeue-CondensedBold',
     fontSize: 34,
     color: Colors['white'],
+  },
+  TextGiphy: {
+    fontSize: 13,
+    width: 200,
+    marginTop: 50,
+    marginBottom: 30,
+    textAlign: 'center',
+    backgroundColor: 'transparent',
+    color: Colors['purple'],
   },
   ButtonContainer: {
     marginTop: 5,
