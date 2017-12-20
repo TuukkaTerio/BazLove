@@ -1,8 +1,6 @@
 export const Colors = {
   yellow:'#ffe236',
-  purple:'#331c48',
-  pinkDark:'#D04CC0',
-  pinkLight:'#FF62CA',
-  black: '#000',
+  turquoiseDark: '#22C6AE',
+  turquoiseLight: '#2DE2BF',
   white: '#fff',
 };

@@ -27,10 +27,10 @@ export default class ConfirmationScreen extends React.Component {
     const gifUrl = randomGif.images.fixed_height_downsampled.url;
     return (
       <View style={styles.ConfirmationScreen}>
-        <BackgroundGradient/>
-        <SvgCircles circleSize={200} circleColor={Colors['purple']} outputRange={['360deg', '0deg']} circleTop={0} circleRight={300}/>
-        <SvgCircles circleSize={500} circleColor={Colors['pinkLight']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={300}/>
-        <SvgCircles circleSize={450} circleColor={Colors['pinkDark']} outputRange={['0deg', '360deg']} circleTop={160} circleRight={430}/>
+        <BackgroundGradient gradientColor={Colors['yellow']}/>
+        <SvgCircles circleSize={200} circleColor={Colors['turquoiseDark']} outputRange={['360deg', '0deg']} circleTop={0} circleRight={300}/>
+        <SvgCircles circleSize={500} circleColor={Colors['turquoiseLight']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={300}/>
+        <SvgCircles circleSize={450} circleColor={Colors['turquoiseDark']} outputRange={['0deg', '360deg']} circleTop={150} circleRight={430}/>
         {RenderIf(gifUrl,
           <Image
             style={styles.Gif}
@@ -68,7 +68,7 @@ export default class ConfirmationScreen extends React.Component {
             <ButtonContent
               btnContent = {'SEND MORE'}
               btnColor = {Colors['white']}
-              btnTextColor = {Colors['pinkDark']}
+              btnTextColor = {Colors['turquoiseDark']}
             />
           </TouchableOpacity>
         </View>
@@ -101,11 +101,11 @@ const styles = StyleSheet.create({
   TextGiphy: {
     fontSize: 13,
     width: 200,
-    marginTop: 50,
-    marginBottom: 30,
+    marginTop: 60,
+    marginBottom: 20,
     textAlign: 'center',
     backgroundColor: 'transparent',
-    color: Colors['purple'],
+    color: Colors['turquoiseDark'],
   },
   ButtonContainer: {
     marginTop: 5,

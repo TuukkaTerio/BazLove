@@ -3,7 +3,7 @@ import { AppRegistry } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import HomeScreen from './src/components/screens/HomeScreen';
 import MessageScreen from './src/components/screens/MessageScreen';
-import ShowLoveScreen from './src/components/screens/ShowLoveScreen';
+import ReadMessagesScreen from './src/components/screens/ReadMessagesScreen';
 import ConfirmationScreen from './src/components/screens/ConfirmationScreen';
 import ButtonContent from './src/components/ButtonContent';
 
@@ -25,8 +25,8 @@ const RootNavigator = StackNavigator({
       },
     }
   },
-  ShowLove: {
-    screen: ShowLoveScreen,
+  ReadMessages: {
+    screen: ReadMessagesScreen,
     navigationOptions: {
       headerStyle: {
         display: 'none',

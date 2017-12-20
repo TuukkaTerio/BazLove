@@ -92,7 +92,7 @@ export default class MessageScreen extends React.Component {
   render() {
     return (
       <View style={styles.MessageScreen}>
-        <BackgroundGradient/>
+        <BackgroundGradient gradientColor={Colors['turquoiseDark']}/>
         <TextInput
           style={styles.TextInput}
           ref={input => { this.textInput = input }}
@@ -121,7 +121,7 @@ export default class MessageScreen extends React.Component {
             <ButtonContent
               btnContent = {'SEND'}
               btnColor = {Colors['white']}
-              btnTextColor = {Colors['pinkDark']}
+              btnTextColor = {Colors['turquoiseDark']}
               btnCustomWidth = {132}
             />
           </TouchableOpacity>
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: Colors['yellow'],
+    backgroundColor: Colors['turquoiseDark'],
   },
   TextInput: {
     backgroundColor: Colors['white'],

@@ -6,9 +6,9 @@ import ButtonContent from '../ButtonContent';
 import BackgroundGradient from '../BackgroundGradient';
 import { Colors } from '../Colors';
 import RenderIf from '../RenderIf';
-import Loader from '../Loader';
+import SvgHeart from '../SvgHeart';
 
-export default class ShowLoveScreen extends React.Component {
+export default class ReadMessagesScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -43,14 +43,14 @@ export default class ShowLoveScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.ShowLoveScreen} ref="flatListView">
+      <View style={styles.ReadMessagesScreen} ref="flatListView">
         {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === true),
-          <Loader textContent={'LOADING'}/>
+          <SvgHeart textContent={'LOADING'}/>
         )}
         {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === false),
-          <Loader textContent={'NO MESSAGES'}/>
+          <SvgHeart textContent={'NO MESSAGES'}/>
         )}
-        <BackgroundGradient/>
+        <BackgroundGradient gradientColor={Colors['turquoiseDark']}/>
         <FlatList
           style={styles.LoveList}
           data={this.state.messageList}
@@ -73,7 +73,7 @@ export default class ShowLoveScreen extends React.Component {
           <ButtonContent
             btnContent = {'CLOSE'}
             btnColor = {Colors['white']}
-            btnTextColor = {Colors['pinkLight']}
+            btnTextColor = {Colors['turquoiseDark']}
           />
         </TouchableOpacity>
       </View>
@@ -82,11 +82,11 @@ export default class ShowLoveScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  ShowLoveScreen: {
+  ReadMessagesScreen: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    backgroundColor: Colors['yellow'],
+    backgroundColor: Colors['turquoiseDark'],
     paddingBottom: 30,
   },
   LoveList: {

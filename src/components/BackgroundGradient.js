@@ -18,12 +18,12 @@ import Svg, { Circle,
     Stop } from 'react-native-svg';
 
 export default class BackgroundGradient extends React.Component {
-  render() {
+  render(props) {
     return (
       <Svg height={Dimensions.get("window").height} width={Dimensions.get("window").width} position="absolute" zIndex="-1">
         <Defs>
           <LinearGradient id="bcGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <Stop offset="70%" stopColor={Colors['yellow']} stopOpacity="1" />
+              <Stop offset="70%" stopColor={this.props.gradientColor} stopOpacity="1" />
               <Stop offset="100%" stopColor={Colors['white']} stopOpacity="1" />
           </LinearGradient>
         </Defs>

@@ -100,12 +100,12 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.HomeScreen}>
-        <BackgroundGradient/>
+        <BackgroundGradient gradientColor={Colors['yellow']}/>
         {RenderIf(this.state.screenContent === 'home',
           <View>
-            <SvgCircles circleSize={300} circleColor={Colors['purple']} outputRange={['0deg', '360deg']} circleTop={0} circleRight={215}/>
-            <SvgCircles circleSize={260} circleColor={Colors['pinkDark']} outputRange={['360deg', '0deg']} circleTop={50} circleRight={220}/>
-            <SvgCircles circleSize={160} circleColor={Colors['pinkLight']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={250}/>
+            <SvgCircles circleSize={300} circleColor={Colors['turquoiseLight']} outputRange={['0deg', '360deg']} circleTop={0} circleRight={215}/>
+            <SvgCircles circleSize={260} circleColor={Colors['turquoiseDark']} outputRange={['360deg', '0deg']} circleTop={50} circleRight={220}/>
+            <SvgCircles circleSize={160} circleColor={Colors['turquoiseDark']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={250}/>
             <Logo/>
             <View style={styles.ButtonContainer}>
               <TouchableOpacity
@@ -115,12 +115,12 @@ export default class HomeScreen extends React.Component {
                     return;
                   } else {
                     this.setState({ loading: true });
-                    this.state.navigation.navigate('ShowLove');
+                    this.state.navigation.navigate('ReadMessages');
                   }
                 }}
-                title='SHOW'>
+                title='READ'>
                 <ButtonContent
-                  btnContent = {'SHOW'}
+                  btnContent = {'READ'}
                   btnColor = {'transparent'}
                   btnTextColor = {Colors['white']}
                 />
@@ -132,7 +132,7 @@ export default class HomeScreen extends React.Component {
                 <ButtonContent
                   btnContent = {'SEND'}
                   btnColor = {Colors['white']}
-                  btnTextColor = {Colors['pinkLight']}
+                  btnTextColor = {Colors['turquoiseDark']}
                 />
               </TouchableOpacity>
             </View>
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
     backgroundColor: 'transparent',
-    color: Colors['purple'],
+    color: Colors['turquoiseDark'],
   },
   Logout: {
     marginBottom: 40,
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
   LogoutText: {
     textAlign: 'center',
     textDecorationLine: 'underline',
-    color: Colors['purple'],
+    color: Colors['turquoiseDark'],
     fontSize: 13,
   },
 });
