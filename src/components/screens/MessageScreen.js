@@ -92,7 +92,7 @@ export default class MessageScreen extends React.Component {
         <TextInput
           style={styles.TextInput}
           ref={input => { this.textInput = input }}
-          placeholder="Spread the love!"
+          placeholder='Spread the love!'
           onChangeText={(messageText) => this.setState({messageText})}
           multiline = {true}
           numberOfLines = {10}
