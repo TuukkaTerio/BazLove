@@ -63,7 +63,7 @@ export default class SvgCircles extends React.Component {
     }
     const circlesContainer = {
       position: 'absolute',
-      zIndex: -2,
+      zIndex: -1,
       top: this.props.circleTop,
       right: this.props.circleRight,
     }
@@ -90,7 +90,6 @@ export default class SvgCircles extends React.Component {
               cy="155"
               r="100"
               fill={circleColor}
-              // transform-origin: 145px 150px;
             />
           </Svg>
         </Animated.View>
@@ -101,7 +100,6 @@ export default class SvgCircles extends React.Component {
               cy="150"
               r="100"
               fill={circleColor}
-              // transform-origin: 145px 150px;
             />
           </Svg>
         </Animated.View>
@@ -112,7 +110,6 @@ export default class SvgCircles extends React.Component {
               cy="150"
               r="100"
               fill={circleColor}
-              // transform-origin: 145px 150px;
             />
           </Svg>
         </Animated.View>

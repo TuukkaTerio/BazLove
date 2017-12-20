@@ -3,7 +3,6 @@ import * as firebase from 'firebase';
 import Database from '../../firebaseConfig';
 import { Alert, StyleSheet, TouchableOpacity, View, TextInput, Keyboard } from 'react-native';
 import ButtonContent from '../ButtonContent';
-import SvgCircles from '../SvgCircles';
 import BackgroundGradient from '../BackgroundGradient';
 import { Colors } from '../Colors';
 
@@ -38,7 +37,7 @@ export default class MessageScreen extends React.Component {
       return;
     } else {
       this.setState({ loading: true });
-      if (messageText !== '') {
+      if ((messageText !== '') && (messageText.replace(/\s/g, '').length)) {
         const EmojiHeart = String.fromCodePoint(0x1F495);
         const EmojiNo = String.fromCodePoint(0x274C);
         const EmojiYes = String.fromCodePoint(0x1F389);
@@ -90,8 +89,6 @@ export default class MessageScreen extends React.Component {
     return (
       <View style={styles.MessageScreen}>
         <BackgroundGradient/>
-        <SvgCircles circleSize={500} circleColor={Colors['purple']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={500}/>
-        <SvgCircles circleSize={400} circleColor={Colors['pinkDark']} outputRange={['0deg', '360deg']} circleTop={200} circleRight={330}/>
         <TextInput
           style={styles.TextInput}
           ref={input => { this.textInput = input }}

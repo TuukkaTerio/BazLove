@@ -4,7 +4,6 @@ import Database from '../../firebaseConfig';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import ButtonContent from '../ButtonContent';
 import BackgroundGradient from '../BackgroundGradient';
-import SvgCircles from '../SvgCircles';
 import { Colors } from '../Colors';
 import RenderIf from '../RenderIf';
 import Loader from '../Loader';
@@ -42,12 +41,10 @@ export default class ShowLoveScreen extends React.Component {
   render() {
     return (
       <View style={styles.ShowLoveScreen} ref="flatListView">
-        <BackgroundGradient/>
-        <SvgCircles circleSize={500} circleColor={Colors['pinkDark']} outputRange={['0deg', '360deg']} circleTop={-50} circleRight={300}/>
-        <SvgCircles circleSize={300} circleColor={Colors['pinkLight']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={350}/>
         {RenderIf(this.state.messageList === '',
           <Loader/>
         )}
+        <BackgroundGradient/>
         <FlatList
           style={styles.LoveList}
           data={this.state.messageList}

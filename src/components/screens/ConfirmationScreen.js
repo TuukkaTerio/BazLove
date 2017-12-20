@@ -26,7 +26,7 @@ export default class ConfirmationScreen extends React.Component {
         <BackgroundGradient/>
         <SvgCircles circleSize={200} circleColor={Colors['purple']} outputRange={['360deg', '0deg']} circleTop={0} circleRight={300}/>
         <SvgCircles circleSize={500} circleColor={Colors['pinkLight']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={300}/>
-        <SvgCircles circleSize={450} circleColor={Colors['pinkDark']} outputRange={['0deg', '360deg']} circleTop={150} circleRight={430}/>
+        <SvgCircles circleSize={450} circleColor={Colors['pinkDark']} outputRange={['0deg', '360deg']} circleTop={160} circleRight={430}/>
         {RenderIf(gifUrl,
           <Image
             style={styles.Gif}
