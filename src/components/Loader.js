@@ -4,7 +4,7 @@ import Svg, { Path, Defs, Stop, LinearGradient } from 'react-native-svg';
 import { Colors } from './Colors';
 
 export default class Loader extends React.Component {
-  render() {
+  render(props) {
     return (
       <View style={styles.LoaderContainer}>
         <Svg
@@ -17,7 +17,7 @@ export default class Loader extends React.Component {
             fill={Colors['pinkDark']}
           />
         </Svg>
-        <Text style={styles.LoaderText}>LOADING</Text>
+        <Text style={styles.LoaderText}>{this.props.textContent}</Text>
       </View>
     );
   }
@@ -25,11 +25,14 @@ export default class Loader extends React.Component {
 
 const styles = StyleSheet.create({
   LoaderContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 150,
   },
   LoaderHeart: {
-    height: 150,
-    width: 150,
+    height: 100,
+    width: 100,
   },
   LoaderText: {
     backgroundColor: 'transparent',

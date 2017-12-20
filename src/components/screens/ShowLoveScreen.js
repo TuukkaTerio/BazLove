@@ -16,6 +16,7 @@ export default class ShowLoveScreen extends React.Component {
       messageList: '',
       navigation: this.props.navigation,
       loading: false,
+      loadingMessages: true,
     };
   }
 
@@ -32,6 +33,7 @@ export default class ShowLoveScreen extends React.Component {
         this.setState((prevState) => ({ messageList: [...prevState.messageList, newChild] }));
       }
     });
+    this.setState({ loadingMessages: false });
   };
 
   componentDidMount() {
@@ -41,8 +43,11 @@ export default class ShowLoveScreen extends React.Component {
   render() {
     return (
       <View style={styles.ShowLoveScreen} ref="flatListView">
-        {RenderIf(this.state.messageList === '',
-          <Loader/>
+        {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === true),
+          <Loader textContent={'LOADING'}/>
+        )}
+        {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === false),
+          <Loader textContent={'NO MESSAGES'}/>
         )}
         <BackgroundGradient/>
         <FlatList
