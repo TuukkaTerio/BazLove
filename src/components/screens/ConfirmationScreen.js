@@ -17,6 +17,10 @@ export default class ConfirmationScreen extends React.Component {
     };
   }
 
+  componentDidMount() {
+    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
+  }
+
   render() {
     // Gets a random gif from the array of gifs
     const randomGif = this.state.gifArray[Math.floor(Math.random() * this.state.gifArray.length)];

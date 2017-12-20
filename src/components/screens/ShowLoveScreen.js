@@ -37,6 +37,7 @@ export default class ShowLoveScreen extends React.Component {
   };
 
   componentDidMount() {
+    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
     this.makeRemoteRequest();
   }
 

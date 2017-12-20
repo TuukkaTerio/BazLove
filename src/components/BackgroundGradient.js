@@ -18,25 +18,9 @@ import Svg, { Circle,
     Stop } from 'react-native-svg';
 
 export default class BackgroundGradient extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      ScreenHeight: Dimensions.get("window").height,
-      ScreenWidth: Dimensions.get("window").width,
-    };
-  }
-
-  componentDidMount() {
-    Dimensions.addEventListener('change', (dimensions) => {
-      this.setState({ ScreenHeight: dimensions.window.height });
-      this.setState({ ScreenWidth: dimensions.window.width });
-    });
-  }
-
   render() {
     return (
-      <Svg height={this.state.ScreenHeight} width={this.state.ScreenWidth} position="absolute" zIndex="-1">
+      <Svg height={Dimensions.get("window").height} width={Dimensions.get("window").width} position="absolute" zIndex="-1">
         <Defs>
           <LinearGradient id="bcGradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <Stop offset="70%" stopColor={Colors['yellow']} stopOpacity="1" />

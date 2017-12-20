@@ -9,6 +9,7 @@ import ButtonContent from './src/components/ButtonContent';
 
 const RootNavigator = StackNavigator({
   Home: {
+    orientation: 'portrait',
     screen: HomeScreen,
     navigationOptions: {
       headerStyle: {

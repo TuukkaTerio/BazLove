@@ -18,6 +18,10 @@ export default class MessageScreen extends React.Component {
     };
   }
 
+  componentDidMount() {
+    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
+  }
+
   // Sends the message to Firebase, clears the input field and navigates to ConfirmationScreen
   sendMessage(messageText) {
     Database.ref('messages/').push({

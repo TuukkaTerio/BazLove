@@ -21,6 +21,17 @@ export default class HomeScreen extends React.Component {
     };
   }
 
+  componentDidMount() {
+    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ screenContent: 'home' });
+      } else {
+        this.setState({ screenContent: 'login' });
+      }
+    });
+  }
+
   // Gets an array of gifs and navigates to MessageScreen
   getGif() {
     if(this.state.loading) {
@@ -39,16 +50,6 @@ export default class HomeScreen extends React.Component {
         console.log(error);
       });
     }
-  }
-
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ screenContent: 'home' });
-      } else {
-        this.setState({ screenContent: 'login' });
-      }
-    });
   }
 
   // Handles the log in
