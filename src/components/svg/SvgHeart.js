@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import { Colors } from './Colors';
-import RenderIf from './RenderIf';
+import { Colors } from '../helpers/Colors';
+import RenderIf from '../helpers/RenderIf';
 import { Font } from 'expo';
 
 export default class SvgHeart extends React.Component {
 
-  componentDidMount() {
-    Font.loadAsync({
-      'league-gothic': require('../fonts/LeagueGothic-Regular.otf'),
+  constructor(props) {
+    super(props);
+    this.state = {
+      fontLoaded: false,
+    };
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'league-gothic': require('../../assets/fonts/LeagueGothic-Regular.otf'),
     });
+    this.setState({ fontLoaded: true });
   }
 
   render(props) {
@@ -27,7 +35,7 @@ export default class SvgHeart extends React.Component {
           />
         </Svg>
         {RenderIf(this.props.textContent,
-          <Text style={styles.HeartText}>{this.props.textContent}</Text>
+          <Text style={[styles.HeartText, {fontFamily: this.state.fontLoaded ? 'league-gothic' : null}]}>{this.props.textContent}</Text>
         )}
       </View>
     );
@@ -49,7 +57,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     paddingTop: 10,
     textAlign: 'center',
-    fontFamily: 'league-gothic',
     fontSize: 34,
     color: Colors['white'],
   },

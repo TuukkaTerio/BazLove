@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { SafeAreaView, StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native';
-import ButtonContent from '../ButtonContent';
-import RenderIf from '../RenderIf';
-import BackgroundGradient from '../BackgroundGradient';
-import SvgCircles from '../SvgCircles';
-import { Colors } from '../Colors';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Font } from 'expo';
+import ButtonContent from '../components/ButtonContent';
+import RenderIf from '../components/helpers/RenderIf';
+import { Colors } from '../components/helpers/Colors';
+import BackgroundGradient from '../components/svg/BackgroundGradient';
+import SvgCircles from '../components/svg/SvgCircles';
 
 export default class ConfirmationScreen extends React.Component {
 
@@ -15,16 +15,24 @@ export default class ConfirmationScreen extends React.Component {
       navigation: this.props.navigation,
       gifArray: this.props.navigation.state.params.gifArray,
       loading: false,
+      fontLoaded: false,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
-    Font.loadAsync({
-      'open-sans': require('../../fonts/OpenSans-Regular.ttf'),
-      'league-gothic': require('../../fonts/LeagueGothic-Regular.otf'),
+    await Font.loadAsync({
+      'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
+      'league-gothic': require('../assets/fonts/LeagueGothic-Regular.otf'),
     });
+    this.setState({ fontLoaded: true });
   }
+
+  static navigationOptions = {
+    headerStyle: {
+      display: 'none',
+    }
+  };
 
   render() {
     // Gets a random gif from the array of gifs
@@ -42,7 +50,7 @@ export default class ConfirmationScreen extends React.Component {
             source={{uri: gifUrl}}
           />
         )}
-        <Text style={styles.TextThanks}>THANKS!</Text>
+        <Text style={[styles.TextThanks, {fontFamily: this.state.fontLoaded ? 'league-gothic' : null}]}>THANKS!</Text>
         <View style={styles.ButtonContainer}>
           <TouchableOpacity
             onPress={() => {
@@ -77,7 +85,7 @@ export default class ConfirmationScreen extends React.Component {
             />
           </TouchableOpacity>
         </View>
-        <Text style={styles.TextGiphy}>Powered By GIPHY</Text>
+        <Text style={[styles.TextGiphy, {fontFamily: this.state.fontLoaded ? 'open-sans' : null}]}>Powered By GIPHY</Text>
       </SafeAreaView>
     );
   }
@@ -85,38 +93,36 @@ export default class ConfirmationScreen extends React.Component {
 
 const styles = StyleSheet.create({
   ConfirmationScreen: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-end',
     backgroundColor: Colors['primary'],
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   Gif: {
     height: 230,
-    width: 230,
     resizeMode: 'contain',
+    width: 230,
   },
   TextThanks: {
     backgroundColor: 'transparent',
+    color: Colors['white'],
+    fontSize: 34,
     paddingTop: 10,
     textAlign: 'center',
-    fontFamily: 'league-gothic',
-    fontSize: 34,
-    color: Colors['white'],
   },
   TextGiphy: {
-    fontSize: 13,
-    width: 200,
-    marginTop: 60,
-    marginBottom: 20,
-    textAlign: 'center',
     backgroundColor: 'transparent',
-    color: Colors['secondary'],
-    fontFamily: 'open-sans',
+    color: Colors['tertiary'],
+    fontSize: 13,
+    marginBottom: 40,
+    marginTop: 40,
+    textAlign: 'center',
+    width: 200,
   },
   ButtonContainer: {
-    marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 5,
     width: 215,
   },
 });

@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import Database from '../../firebaseConfig';
+import Database from '../firebaseConfig';
 import { SafeAreaView, Alert, StyleSheet, TouchableOpacity, View, TextInput, Keyboard } from 'react-native';
-import ButtonContent from '../ButtonContent';
-import BackgroundGradient from '../BackgroundGradient';
-import { Colors } from '../Colors';
+import ButtonContent from '../components/ButtonContent';
+import BackgroundGradient from '../components/svg/BackgroundGradient';
+import { Colors } from '../components/helpers/Colors';
 import { Font } from 'expo';
 
 export default class MessageScreen extends React.Component {
+
+  static navigationOptions = {
+    headerStyle: {
+      display: 'none',
+    }
+  };
 
   constructor(props) {
     super(props);
@@ -16,14 +22,16 @@ export default class MessageScreen extends React.Component {
       navigation: this.props.navigation,
       gifArray: this.props.navigation.state.params.gifArray,
       loading: false,
+      fontLoaded: false,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
-    Font.loadAsync({
-      'open-sans': require('../../fonts/OpenSans-Regular.ttf'),
+    await Font.loadAsync({
+      'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
     });
+    this.setState({ fontLoaded: true });
   }
 
   // Sends the message to Firebase, clears the input field and navigates to ConfirmationScreen
@@ -98,7 +106,7 @@ export default class MessageScreen extends React.Component {
       <SafeAreaView style={styles.MessageScreen}>
         <BackgroundGradient gradientColor={Colors['secondary']}/>
         <TextInput
-          style={styles.TextInput}
+          style={[styles.TextInput, {fontFamily: this.state.fontLoaded ? 'open-sans' : null}]}
           ref={input => { this.textInput = input }}
           placeholder='Spread the love!'
           onChangeText={(messageText) => this.setState({messageText})}
@@ -144,7 +152,6 @@ const styles = StyleSheet.create({
   },
   TextInput: {
     backgroundColor: Colors['white'],
-    fontFamily: 'open-sans',
     fontSize: 16,
     padding: 20,
     paddingTop: 20,

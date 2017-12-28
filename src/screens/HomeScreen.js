@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { SafeAreaView, Alert, TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native';
-import RenderIf from '../RenderIf';
-import ButtonContent from '../ButtonContent';
-import Logo from '../Logo';
-import SvgCircles from '../SvgCircles';
-import BackgroundGradient from '../BackgroundGradient';
-import { Colors } from '../Colors';
+import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Font } from 'expo';
+import ButtonContent from '../components/ButtonContent';
+import RenderIf from '../components/helpers/RenderIf';
+import { Colors } from '../components/helpers/Colors';
+import Logo from '../components/svg/Logo';
+import SvgCircles from '../components/svg/SvgCircles';
+import BackgroundGradient from '../components/svg/BackgroundGradient';
 
 export default class HomeScreen extends React.Component {
 
@@ -16,13 +16,14 @@ export default class HomeScreen extends React.Component {
     this.state = {
       userEmail: '',
       userPassword: '',
-      screenContent: 'loading',
+      screenContent: '',
       navigation: this.props.navigation,
       loading: false,
+      fontLoaded: false,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -31,11 +32,18 @@ export default class HomeScreen extends React.Component {
         this.setState({ screenContent: 'login' });
       }
     });
-    Font.loadAsync({
-      'open-sans': require('../../fonts/OpenSans-Regular.ttf'),
-      'league-gothic': require('../../fonts/LeagueGothic-Regular.otf'),
+    await Font.loadAsync({
+      'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
+      'league-gothic': require('../assets/fonts/LeagueGothic-Regular.otf'),
     });
+    this.setState({ fontLoaded: true });
   }
+
+  static navigationOptions = {
+    headerStyle: {
+      display: 'none',
+    }
+  };
 
   // Gets an array of gifs and navigates to MessageScreen
   getGif() {
@@ -143,19 +151,19 @@ export default class HomeScreen extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-            <Text style={styles.infoText}>Messages are deleted on Mondays at 11 a.m. (UTC +1)</Text>
+            <Text style={[styles.infoText, {fontFamily: this.state.fontLoaded ? 'open-sans' : null}]}>Messages are deleted on Mondays at 11 a.m. (UTC +1)</Text>
             <TouchableOpacity
               style={styles.Logout}
               onPress={() => {this.handleLogout()}}
               title='LOG OUT'>
-              <Text style={styles.LogoutText}>LOG OUT</Text>
+              <Text style={[styles.LogoutText, {fontFamily: this.state.fontLoaded ? 'league-gothic' : null}]}>LOG OUT</Text>
             </TouchableOpacity>
           </View>
         )}
         {RenderIf(this.state.screenContent === 'login',
           <View style={styles.LoginContainer}>
             <TextInput
-              style={styles.LoginInput}
+              style={[styles.LoginInput, {fontFamily: this.state.fontLoaded ? 'open-sans' : null}]}
               ref={input => { this.emailInput = input }}
               placeholder="Email"
               onChangeText={(userEmail) => this.setState({userEmail})}
@@ -167,7 +175,7 @@ export default class HomeScreen extends React.Component {
               autoCorrect = {false}
             />
             <TextInput
-              style={styles.LoginInput}
+              style={[styles.LoginInput, {fontFamily: this.state.fontLoaded ? 'open-sans' : null}]}
               ref={input => { this.passwordInput = input }}
               placeholder="Password"
               onChangeText={(userPassword) => this.setState({userPassword})}
@@ -188,10 +196,6 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
         )}
-        {RenderIf(this.state.screenContent === 'loading',
-          <View>
-          </View>
-        )}
       </SafeAreaView>
     )
   }
@@ -199,19 +203,18 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   HomeScreen: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: Colors['primary'],
+    flex: 1,
+    justifyContent: 'center',
   },
   LoginContainer: {
     marginTop: 25,
-    width: 280,
     flex: 1,
     alignItems: 'center',
+    width: 280,
   },
   LoginInput: {
-    fontFamily: 'open-sans',
     backgroundColor: Colors['white'],
     height: 65,
     fontSize: 16,
@@ -228,7 +231,6 @@ const styles = StyleSheet.create({
     width: 215,
   },
   infoText: {
-    fontFamily: 'open-sans',
     fontSize: 13,
     width: 200,
     marginTop: 30,
@@ -242,7 +244,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   LogoutText: {
-    fontFamily: 'league-gothic',
     textAlign: 'center',
     textDecorationLine: 'underline',
     color: Colors['secondary'],

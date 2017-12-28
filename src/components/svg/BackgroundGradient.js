@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { Colors } from './Colors';
+import { Colors } from '../helpers/Colors';
 import Svg, { Circle,
     Ellipse,
     G,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import Svg, { Path, Defs, Stop, LinearGradient } from 'react-native-svg';
-import { Colors } from './Colors';
+import { Colors } from '../helpers/Colors';
 
 export default class Logo extends React.Component {
   render() {

@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import Database from '../../firebaseConfig';
+import Database from '../firebaseConfig';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import ButtonContent from '../ButtonContent';
-import BackgroundGradient from '../BackgroundGradient';
-import { Colors } from '../Colors';
-import RenderIf from '../RenderIf';
-import SvgHeart from '../SvgHeart';
+import ButtonContent from '../components/ButtonContent';
+import BackgroundGradient from '../components/svg/BackgroundGradient';
+import { Colors } from '../components/helpers/Colors';
+import RenderIf from '../components/helpers/RenderIf';
+import SvgHeart from '../components/svg/SvgHeart';
 import { Font } from 'expo';
 
 export default class ReadMessagesScreen extends React.Component {
+
+  static navigationOptions = {
+    headerStyle: {
+      display: 'none',
+    }
+  };
 
   constructor(props) {
     super(props);
@@ -18,6 +24,7 @@ export default class ReadMessagesScreen extends React.Component {
       navigation: this.props.navigation,
       loading: false,
       loadingMessages: true,
+      fontLoaded: false,
     };
   }
 
@@ -37,33 +44,38 @@ export default class ReadMessagesScreen extends React.Component {
     this.setState({ loadingMessages: false });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
     this.makeRemoteRequest();
-    Font.loadAsync({
-      'open-sans': require('../../fonts/OpenSans-Regular.ttf'),
+    await Font.loadAsync({
+      'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
     });
+    this.setState({ fontLoaded: true });
   }
 
   render() {
     return (
       <SafeAreaView style={styles.ReadMessagesScreen} ref="flatListView">
-        {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === true),
+        <BackgroundGradient gradientColor={Colors['secondary']}/>
+        {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === true) || !this.state.fontLoaded,
           <SvgHeart textContent={'LOADING'}/>
         )}
         {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === false),
           <SvgHeart textContent={'NO MESSAGES'}/>
         )}
-        <BackgroundGradient gradientColor={Colors['secondary']}/>
-        <FlatList
-          style={styles.LoveList}
-          data={this.state.messageList}
-          renderItem={({item}) =>
-            <View style={styles.LoveListItem}>
-              <Text style={styles.LoveListItemText}>{item.message}</Text>
-            </View>
-          }
-        />
+        {RenderIf((this.state.fontLoaded === true),
+          <FlatList
+            style={styles.LoveList}
+            data={this.state.messageList}
+            renderItem={({item}) =>
+              <View style={styles.LoveListItem}>
+                <Text style={[styles.LoveListItemText, {fontFamily: 'open-sans'}]}>
+                  {item.message}
+                </Text>
+              </View>
+            }
+          />
+        )}
         <TouchableOpacity
           onPress={() => {
             if(this.state.loading) {
@@ -108,7 +120,6 @@ const styles = StyleSheet.create({
   },
   LoveListItemText: {
     fontSize: 16,
-    fontFamily: 'open-sans',
   },
   Button: {
     marginBottom: 40,

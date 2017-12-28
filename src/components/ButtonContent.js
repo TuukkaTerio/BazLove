@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
-import { Colors } from './Colors';
+import { Colors } from './helpers/Colors';
 import { Font } from 'expo';
 
 export default class ButtonContent extends Component {
 
-  componentDidMount() {
-    Font.loadAsync({
-      'league-gothic': require('../fonts/LeagueGothic-Regular.otf'),
+  constructor(props) {
+    super(props);
+    this.state = {
+      fontLoaded: false,
+    };
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'league-gothic': require('../assets/fonts/LeagueGothic-Regular.otf'),
     });
+    this.setState({ fontLoaded: true });
   }
 
   render(props) {
@@ -23,10 +31,10 @@ export default class ButtonContent extends Component {
       marginTop: 15,
       minWidth: btnWidth,
       textAlign: 'center',
-      fontFamily: 'league-gothic',
       fontSize: 19,
       borderWidth: 1.5,
       borderColor: Colors['white'],
+      fontFamily: this.state.fontLoaded ? 'league-gothic' : null,
     }
     return (
       <Text style={btnStyle}>{btnContent}</Text>
