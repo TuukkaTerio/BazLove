@@ -44,7 +44,9 @@ export default class HomeScreen extends React.Component {
     } else {
       this.setState({ loading: true });
       const that = this;
-      const apiUrl = 'http://api.giphy.com/v1/stickers/search?api_key=PZf7lIja3FGSHRiQZlhFBCbT3JGWeK1K&q=happy&limit=25';
+      const tagArray = ['happy', 'love', 'party'];
+      let tag = tagArray[Math.floor(Math.random() * tagArray.length)];
+      const apiUrl = 'http://api.giphy.com/v1/stickers/search?api_key=PZf7lIja3FGSHRiQZlhFBCbT3JGWeK1K&q=' + tag + '&limit=25';
       fetch(apiUrl)
       .then((resp) => resp.json())
       .then(function(jsonResp) {
