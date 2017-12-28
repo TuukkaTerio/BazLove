@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../../firebaseConfig';
-import { Alert, StyleSheet, TouchableOpacity, View, TextInput, Keyboard } from 'react-native';
+import { SafeAreaView, Alert, StyleSheet, TouchableOpacity, View, TextInput, Keyboard } from 'react-native';
 import ButtonContent from '../ButtonContent';
 import BackgroundGradient from '../BackgroundGradient';
 import { Colors } from '../Colors';
@@ -91,8 +91,8 @@ export default class MessageScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.MessageScreen}>
-        <BackgroundGradient gradientColor={Colors['turquoiseDark']}/>
+      <SafeAreaView style={styles.MessageScreen}>
+        <BackgroundGradient gradientColor={Colors['secondary']}/>
         <TextInput
           style={styles.TextInput}
           ref={input => { this.textInput = input }}
@@ -121,12 +121,12 @@ export default class MessageScreen extends React.Component {
             <ButtonContent
               btnContent = {'SEND'}
               btnColor = {Colors['white']}
-              btnTextColor = {Colors['turquoiseDark']}
+              btnTextColor = {Colors['secondary']}
               btnCustomWidth = {132}
             />
           </TouchableOpacity>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: Colors['turquoiseDark'],
+    backgroundColor: Colors['secondary'],
   },
   TextInput: {
     backgroundColor: Colors['white'],

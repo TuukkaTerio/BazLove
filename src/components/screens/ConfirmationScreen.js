@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native';
+import { SafeAreaView, StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native';
 import ButtonContent from '../ButtonContent';
 import RenderIf from '../RenderIf';
 import BackgroundGradient from '../BackgroundGradient';
@@ -26,11 +26,11 @@ export default class ConfirmationScreen extends React.Component {
     const randomGif = this.state.gifArray[Math.floor(Math.random() * this.state.gifArray.length)];
     const gifUrl = randomGif.images.fixed_height_downsampled.url;
     return (
-      <View style={styles.ConfirmationScreen}>
-        <BackgroundGradient gradientColor={Colors['yellow']}/>
-        <SvgCircles circleSize={200} circleColor={Colors['turquoiseDark']} outputRange={['360deg', '0deg']} circleTop={0} circleRight={300}/>
-        <SvgCircles circleSize={500} circleColor={Colors['turquoiseLight']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={300}/>
-        <SvgCircles circleSize={450} circleColor={Colors['turquoiseDark']} outputRange={['0deg', '360deg']} circleTop={150} circleRight={430}/>
+      <SafeAreaView style={styles.ConfirmationScreen}>
+        <BackgroundGradient gradientColor={Colors['primary']}/>
+        <SvgCircles circleSize={200} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={0} circleRight={300}/>
+        <SvgCircles circleSize={500} circleColor={Colors['tertiary']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={300}/>
+        <SvgCircles circleSize={450} circleColor={Colors['secondary']} outputRange={['0deg', '360deg']} circleTop={150} circleRight={430}/>
         {RenderIf(gifUrl,
           <Image
             style={styles.Gif}
@@ -68,12 +68,12 @@ export default class ConfirmationScreen extends React.Component {
             <ButtonContent
               btnContent = {'SEND MORE'}
               btnColor = {Colors['white']}
-              btnTextColor = {Colors['turquoiseDark']}
+              btnTextColor = {Colors['secondary']}
             />
           </TouchableOpacity>
         </View>
         <Text style={styles.TextGiphy}>Powered By GIPHY</Text>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    backgroundColor: Colors['yellow'],
+    backgroundColor: Colors['primary'],
   },
   Gif: {
     height: 230,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
     backgroundColor: 'transparent',
-    color: Colors['turquoiseDark'],
+    color: Colors['secondary'],
   },
   ButtonContainer: {
     marginTop: 5,

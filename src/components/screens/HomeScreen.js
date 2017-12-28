@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { Alert, TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native';
+import { SafeAreaView, Alert, TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native';
 import RenderIf from '../RenderIf';
 import ButtonContent from '../ButtonContent';
 import Logo from '../Logo';
@@ -99,13 +99,13 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.HomeScreen}>
-        <BackgroundGradient gradientColor={Colors['yellow']}/>
+      <SafeAreaView style={styles.HomeScreen}>
+        <BackgroundGradient gradientColor={Colors['primary']}/>
         {RenderIf(this.state.screenContent === 'home',
           <View>
-            <SvgCircles circleSize={300} circleColor={Colors['turquoiseLight']} outputRange={['0deg', '360deg']} circleTop={0} circleRight={215}/>
-            <SvgCircles circleSize={260} circleColor={Colors['turquoiseDark']} outputRange={['360deg', '0deg']} circleTop={50} circleRight={220}/>
-            <SvgCircles circleSize={160} circleColor={Colors['turquoiseDark']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={250}/>
+            <SvgCircles circleSize={300} circleColor={Colors['tertiary']} outputRange={['0deg', '360deg']} circleTop={0} circleRight={215}/>
+            <SvgCircles circleSize={260} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={50} circleRight={220}/>
+            <SvgCircles circleSize={160} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={250}/>
             <Logo/>
             <View style={styles.ButtonContainer}>
               <TouchableOpacity
@@ -132,7 +132,7 @@ export default class HomeScreen extends React.Component {
                 <ButtonContent
                   btnContent = {'SEND'}
                   btnColor = {Colors['white']}
-                  btnTextColor = {Colors['turquoiseDark']}
+                  btnTextColor = {Colors['secondary']}
                 />
               </TouchableOpacity>
             </View>
@@ -187,7 +187,7 @@ export default class HomeScreen extends React.Component {
           <View>
           </View>
         )}
-      </View>
+      </SafeAreaView>
     )
   }
 }
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors['yellow'],
+    backgroundColor: Colors['primary'],
   },
   LoginContainer: {
     marginTop: 25,
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
     backgroundColor: 'transparent',
-    color: Colors['turquoiseDark'],
+    color: Colors['secondary'],
   },
   Logout: {
     marginBottom: 40,
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
   LogoutText: {
     textAlign: 'center',
     textDecorationLine: 'underline',
-    color: Colors['turquoiseDark'],
+    color: Colors['secondary'],
     fontSize: 13,
   },
 });

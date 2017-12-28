@@ -1,6 +1,6 @@
 export const Colors = {
-  yellow:'#ffe236',
-  turquoiseDark: '#22C6AE',
-  turquoiseLight: '#2DE2BF',
+  primary:'#ffe236',
+  secondary: '#22C6AE',
+  tertiary: '#2DE2BF',
   white: '#fff',
 };

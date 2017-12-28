@@ -13,7 +13,7 @@ export default class Logo extends React.Component {
         <Defs>
           <LinearGradient id="love" x1="0%" y1="0%" x2="0%" y2="100%">
               <Stop offset="70%" stopColor={Colors['white']} stopOpacity="1" />
-              <Stop offset="100%" stopColor={Colors['turquoiseLight']} stopOpacity="1" />
+              <Stop offset="100%" stopColor={Colors['tertiary']} stopOpacity="1" />
           </LinearGradient>
         </Defs>
         <Path
@@ -34,7 +34,7 @@ export default class Logo extends React.Component {
 const styles = StyleSheet.create({
   Logo: {
     height: 240,
-    width: 200,
+    width: 210,
     marginTop: 75,
   },
 });

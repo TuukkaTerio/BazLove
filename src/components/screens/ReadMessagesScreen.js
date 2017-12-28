@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../../firebaseConfig';
-import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import ButtonContent from '../ButtonContent';
 import BackgroundGradient from '../BackgroundGradient';
 import { Colors } from '../Colors';
@@ -43,14 +43,14 @@ export default class ReadMessagesScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.ReadMessagesScreen} ref="flatListView">
+      <SafeAreaView style={styles.ReadMessagesScreen} ref="flatListView">
         {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === true),
           <SvgHeart textContent={'LOADING'}/>
         )}
         {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === false),
           <SvgHeart textContent={'NO MESSAGES'}/>
         )}
-        <BackgroundGradient gradientColor={Colors['turquoiseDark']}/>
+        <BackgroundGradient gradientColor={Colors['secondary']}/>
         <FlatList
           style={styles.LoveList}
           data={this.state.messageList}
@@ -69,14 +69,15 @@ export default class ReadMessagesScreen extends React.Component {
               this.state.navigation.navigate('Home');
             }
           }}
+          style={styles.Button}
           title='CLOSE'>
           <ButtonContent
             btnContent = {'CLOSE'}
-            btnColor = {Colors['white']}
-            btnTextColor = {Colors['turquoiseDark']}
+            btnColor = {'transparent'}
+            btnTextColor = {Colors['white']}
           />
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -86,8 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    backgroundColor: Colors['turquoiseDark'],
-    paddingBottom: 30,
+    backgroundColor: Colors['secondary'],
   },
   LoveList: {
     width: 280,
@@ -104,5 +104,8 @@ const styles = StyleSheet.create({
   },
   LoveListItemText: {
     fontSize: 16,
+  },
+  Button: {
+    marginBottom: 40,
   },
 });
