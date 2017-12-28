@@ -7,6 +7,7 @@ import Logo from '../Logo';
 import SvgCircles from '../SvgCircles';
 import BackgroundGradient from '../BackgroundGradient';
 import { Colors } from '../Colors';
+import { Font } from 'expo';
 
 export default class HomeScreen extends React.Component {
 
@@ -29,6 +30,10 @@ export default class HomeScreen extends React.Component {
       } else {
         this.setState({ screenContent: 'login' });
       }
+    });
+    Font.loadAsync({
+      'open-sans': require('../../fonts/OpenSans-Regular.ttf'),
+      'league-gothic': require('../../fonts/LeagueGothic-Regular.otf'),
     });
   }
 
@@ -140,47 +145,45 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity
               style={styles.Logout}
               onPress={() => {this.handleLogout()}}
-              title='Logout'>
-              <Text style={styles.LogoutText}>Logout</Text>
+              title='LOG OUT'>
+              <Text style={styles.LogoutText}>LOG OUT</Text>
             </TouchableOpacity>
           </View>
         )}
         {RenderIf(this.state.screenContent === 'login',
-          <View style={styles.LoginScreen}>
-            <View style={styles.LoginContainer}>
-              <TextInput
-                style={styles.LoginInput}
-                ref={input => { this.emailInput = input }}
-                placeholder="Email"
-                onChangeText={(userEmail) => this.setState({userEmail})}
-                autoFocus = {true}
-                keyboardType = {'email-address'}
-                // Limits the maximum number of characters that can be entered.
-                maxLength = {300}
-                autoCapitalize = {'none'}
-                autoCorrect = {false}
+          <View style={styles.LoginContainer}>
+            <TextInput
+              style={styles.LoginInput}
+              ref={input => { this.emailInput = input }}
+              placeholder="Email"
+              onChangeText={(userEmail) => this.setState({userEmail})}
+              autoFocus = {true}
+              keyboardType = {'email-address'}
+              // Limits the maximum number of characters that can be entered.
+              maxLength = {300}
+              autoCapitalize = {'none'}
+              autoCorrect = {false}
+            />
+            <TextInput
+              style={styles.LoginInput}
+              ref={input => { this.passwordInput = input }}
+              placeholder="Password"
+              onChangeText={(userPassword) => this.setState({userPassword})}
+              // Limits the maximum number of characters that can be entered.
+              maxLength = {300}
+              autoCapitalize = {'none'}
+              autoCorrect = {false}
+              secureTextEntry = {true}
+            />
+            <TouchableOpacity
+              onPress={() => {this.handleLogin(this.state.userEmail, this.state.userPassword)}}
+              title='LOG IN'>
+              <ButtonContent
+                btnContent = {'LOG IN'}
+                btnColor = {'transparent'}
+                btnTextColor = {Colors['white']}
               />
-              <TextInput
-                style={styles.LoginInput}
-                ref={input => { this.passwordInput = input }}
-                placeholder="Password"
-                onChangeText={(userPassword) => this.setState({userPassword})}
-                // Limits the maximum number of characters that can be entered.
-                maxLength = {300}
-                autoCapitalize = {'none'}
-                autoCorrect = {false}
-                secureTextEntry = {true}
-              />
-              <TouchableOpacity
-                onPress={() => {this.handleLogin(this.state.userEmail, this.state.userPassword)}}
-                title='LOGIN'>
-                <ButtonContent
-                  btnContent = {'LOGIN'}
-                  btnColor = {'transparent'}
-                  btnTextColor = {Colors['white']}
-                />
-              </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
           </View>
         )}
         {RenderIf(this.state.screenContent === 'loading',
@@ -206,6 +209,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   LoginInput: {
+    fontFamily: 'open-sans',
     backgroundColor: Colors['white'],
     height: 65,
     fontSize: 16,
@@ -222,6 +226,7 @@ const styles = StyleSheet.create({
     width: 215,
   },
   infoText: {
+    fontFamily: 'open-sans',
     fontSize: 13,
     width: 200,
     marginTop: 30,
@@ -235,9 +240,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   LogoutText: {
+    fontFamily: 'league-gothic',
     textAlign: 'center',
     textDecorationLine: 'underline',
     color: Colors['secondary'],
-    fontSize: 13,
+    fontSize: 14,
   },
 });

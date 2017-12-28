@@ -7,6 +7,7 @@ import BackgroundGradient from '../BackgroundGradient';
 import { Colors } from '../Colors';
 import RenderIf from '../RenderIf';
 import SvgHeart from '../SvgHeart';
+import { Font } from 'expo';
 
 export default class ReadMessagesScreen extends React.Component {
 
@@ -39,6 +40,9 @@ export default class ReadMessagesScreen extends React.Component {
   componentDidMount() {
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
     this.makeRemoteRequest();
+    Font.loadAsync({
+      'open-sans': require('../../fonts/OpenSans-Regular.ttf'),
+    });
   }
 
   render() {
@@ -104,6 +108,7 @@ const styles = StyleSheet.create({
   },
   LoveListItemText: {
     fontSize: 16,
+    fontFamily: 'open-sans',
   },
   Button: {
     marginBottom: 40,

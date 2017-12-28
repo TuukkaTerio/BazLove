@@ -5,6 +5,7 @@ import { SafeAreaView, Alert, StyleSheet, TouchableOpacity, View, TextInput, Key
 import ButtonContent from '../ButtonContent';
 import BackgroundGradient from '../BackgroundGradient';
 import { Colors } from '../Colors';
+import { Font } from 'expo';
 
 export default class MessageScreen extends React.Component {
 
@@ -20,6 +21,9 @@ export default class MessageScreen extends React.Component {
 
   componentDidMount() {
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
+    Font.loadAsync({
+      'open-sans': require('../../fonts/OpenSans-Regular.ttf'),
+    });
   }
 
   // Sends the message to Firebase, clears the input field and navigates to ConfirmationScreen
@@ -140,6 +144,7 @@ const styles = StyleSheet.create({
   },
   TextInput: {
     backgroundColor: Colors['white'],
+    fontFamily: 'open-sans',
     fontSize: 16,
     padding: 20,
     paddingTop: 20,

@@ -5,6 +5,7 @@ import RenderIf from '../RenderIf';
 import BackgroundGradient from '../BackgroundGradient';
 import SvgCircles from '../SvgCircles';
 import { Colors } from '../Colors';
+import { Font } from 'expo';
 
 export default class ConfirmationScreen extends React.Component {
 
@@ -19,6 +20,10 @@ export default class ConfirmationScreen extends React.Component {
 
   componentDidMount() {
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
+    Font.loadAsync({
+      'open-sans': require('../../fonts/OpenSans-Regular.ttf'),
+      'league-gothic': require('../../fonts/LeagueGothic-Regular.otf'),
+    });
   }
 
   render() {
@@ -94,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     paddingTop: 10,
     textAlign: 'center',
-    fontFamily: 'HelveticaNeue-CondensedBold',
+    fontFamily: 'league-gothic',
     fontSize: 34,
     color: Colors['white'],
   },
@@ -106,11 +111,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'transparent',
     color: Colors['secondary'],
+    fontFamily: 'open-sans',
   },
   ButtonContainer: {
     marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 230,
+    width: 215,
   },
 });
