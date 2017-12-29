@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Font } from 'expo';
 import ButtonContent from '../components/ButtonContent';
 import RenderIf from '../components/helpers/RenderIf';
 import { Colors } from '../components/helpers/Colors';
@@ -14,43 +13,31 @@ export default class ConfirmationScreen extends React.Component {
     this.state = {
       navigation: this.props.navigation,
       gifArray: this.props.navigation.state.params.gifArray,
+      gifUrl: '',
       loading: false,
-      fontLoaded: false,
     };
   }
 
-  async componentDidMount() {
-    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
-    await Font.loadAsync({
-      'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
-      'league-gothic': require('../assets/fonts/LeagueGothic-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
+  componentWillMount() {
+    // Gets a random gif from the array of gifs
+    const randomUrl = this.state.gifArray[Math.floor(Math.random() * this.state.gifArray.length)].images.fixed_height_downsampled.url;
+    this.setState({ gifUrl: randomUrl });
   }
 
-  static navigationOptions = {
-    headerStyle: {
-      display: 'none',
-    }
-  };
-
   render() {
-    // Gets a random gif from the array of gifs
-    const randomGif = this.state.gifArray[Math.floor(Math.random() * this.state.gifArray.length)];
-    const gifUrl = randomGif.images.fixed_height_downsampled.url;
     return (
       <SafeAreaView style={styles.ConfirmationScreen}>
         <BackgroundGradient gradientColor={Colors['primary']}/>
         <SvgCircles circleSize={200} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={0} circleRight={300}/>
         <SvgCircles circleSize={500} circleColor={Colors['tertiary']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={300}/>
         <SvgCircles circleSize={450} circleColor={Colors['secondary']} outputRange={['0deg', '360deg']} circleTop={150} circleRight={430}/>
-        {RenderIf(gifUrl,
+        {RenderIf(this.state.gifUrl,
           <Image
             style={styles.Gif}
-            source={{uri: gifUrl}}
+            source={{uri: this.state.gifUrl}}
           />
         )}
-        <Text style={[styles.TextThanks, {fontFamily: this.state.fontLoaded ? 'league-gothic' : null}]}>THANKS!</Text>
+        <Text style={styles.TextThanks}>THANKS!</Text>
         <View style={styles.ButtonContainer}>
           <TouchableOpacity
             onPress={() => {
@@ -66,7 +53,6 @@ export default class ConfirmationScreen extends React.Component {
               btnContent = {'CLOSE'}
               btnColor = {'transparent'}
               btnTextColor = {Colors['white']}
-              btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -83,11 +69,10 @@ export default class ConfirmationScreen extends React.Component {
               btnContent = {'SEND MORE'}
               btnColor = {Colors['white']}
               btnTextColor = {Colors['secondary']}
-              btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
             />
           </TouchableOpacity>
         </View>
-        <Text style={[styles.TextGiphy, {fontFamily: this.state.fontLoaded ? 'open-sans' : null}]}>Powered By GIPHY</Text>
+        <Text style={styles.TextGiphy}>Powered By GIPHY</Text>
       </SafeAreaView>
     );
   }
@@ -108,6 +93,7 @@ const styles = StyleSheet.create({
   TextThanks: {
     backgroundColor: 'transparent',
     color: Colors['white'],
+    fontFamily: 'league-gothic',
     fontSize: 34,
     paddingTop: 10,
     textAlign: 'center',
@@ -115,6 +101,7 @@ const styles = StyleSheet.create({
   TextGiphy: {
     backgroundColor: 'transparent',
     color: Colors['tertiary'],
+    fontFamily: 'open-sans',
     fontSize: 13,
     marginBottom: 30,
     marginTop: 50,

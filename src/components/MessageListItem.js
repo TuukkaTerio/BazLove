@@ -12,7 +12,7 @@ export default class MessageListItem extends React.PureComponent {
       padding: 20,
     }
     const ListItemTextStyle = {
-      fontFamily: this.props.font,
+      fontFamily: 'open-sans',
       fontSize: 16,
     }
     return (

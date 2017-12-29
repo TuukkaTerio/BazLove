@@ -18,7 +18,7 @@ export default class SvgHeart extends React.PureComponent {
     const textStyle = {
       backgroundColor: 'transparent',
       color: '#fff',
-      fontFamily: this.props.font,
+      fontFamily: 'league-gothic',
       fontSize: 30,
       paddingTop: 10,
       textAlign: 'center',

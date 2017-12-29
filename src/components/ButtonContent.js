@@ -8,7 +8,7 @@ export default class ButtonContent extends React.PureComponent {
       borderWidth: 1.5,
       borderColor: '#fff',
       color: this.props.btnTextColor,
-      fontFamily: this.props.btnFont,
+      fontFamily: 'league-gothic',
       fontSize: 19,
       marginTop: 15,
       minWidth: (this.props.btnCustomWidth ? this.props.btnCustomWidth : 100),

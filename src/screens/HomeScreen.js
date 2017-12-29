@@ -39,12 +39,6 @@ export default class HomeScreen extends React.Component {
     this.setState({ fontLoaded: true });
   }
 
-  static navigationOptions = {
-    headerStyle: {
-      display: 'none',
-    }
-  };
-
   // Handles the log in
   handleLogin(email, password) {
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -102,13 +96,12 @@ export default class HomeScreen extends React.Component {
             <Logo/>
             <View style={styles.ButtonContainer}>
               <TouchableOpacity
-                style={styles.Buttons}
                 onPress={() => {
                   if(this.state.loading) {
                     return;
                   } else {
                     this.setState({ loading: true });
-                    this.state.navigation.navigate('ReadMessages');
+                    this.state.navigation.navigate('ReadMessages', { gifArray: [], gifArray2: [] });
                   }
                 }}
                 title='READ'>
@@ -120,7 +113,6 @@ export default class HomeScreen extends React.Component {
                 />
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.Buttons}
                 onPress={() => {
                   if(this.state.loading) {
                     return;

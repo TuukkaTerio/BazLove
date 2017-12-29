@@ -5,11 +5,20 @@ import MessageScreen from './src/screens/MessageScreen';
 import ReadMessagesScreen from './src/screens/ReadMessagesScreen';
 import ConfirmationScreen from './src/screens/ConfirmationScreen';
 
-const RootNavigator = StackNavigator({
-  Home: { screen: HomeScreen },
-  Message: { screen: MessageScreen },
-  ReadMessages: { screen: ReadMessagesScreen },
-  Confirmation: { screen: ConfirmationScreen },
-});
+const RootNavigator = StackNavigator(
+  {
+    Home: { screen: HomeScreen },
+    Message: { screen: MessageScreen },
+    ReadMessages: { screen: ReadMessagesScreen },
+    Confirmation: { screen: ConfirmationScreen },
+  },
+  {
+   navigationOptions: {
+     headerStyle: {
+       display: 'none',
+     }
+   }
+  }
+);
 
 export default RootNavigator;

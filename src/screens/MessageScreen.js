@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
 import { Alert, Dimensions, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Keyboard, View } from 'react-native';
-import { Font } from 'expo';
 import ButtonContent from '../components/ButtonContent';
 import { Colors } from '../components/helpers/Colors';
 import BackgroundGradient from '../components/svg/BackgroundGradient';
@@ -16,24 +15,12 @@ export default class MessageScreen extends React.Component {
       navigation: this.props.navigation,
       gifArray: this.props.navigation.state.params.gifArray,
       loading: false,
-      fontLoaded: false,
     };
   }
 
-  async componentDidMount() {
-    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
-    await Font.loadAsync({
-      'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
-    });
-    this.setState({ fontLoaded: true });
+  componentDidMount() {
     this.getGif();
   }
-
-  static navigationOptions = {
-    headerStyle: {
-      display: 'none',
-    }
-  };
 
   // Gets an array of gifs
   getGif() {
@@ -127,7 +114,7 @@ export default class MessageScreen extends React.Component {
       <SafeAreaView style={styles.MessageScreen}>
         <BackgroundGradient gradientColor={Colors['secondary']}/>
         <TextInput
-          style={[styles.TextInput, {fontFamily: this.state.fontLoaded ? 'open-sans' : null}]}
+          style={styles.TextInput}
           ref={input => { this.textInput = input }}
           placeholder='Spread the love!'
           onChangeText={(messageText) => this.setState({messageText})}
@@ -145,7 +132,6 @@ export default class MessageScreen extends React.Component {
               btnContent = {'CLOSE'}
               btnColor = {'transparent'}
               btnTextColor = {Colors['white']}
-              btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
               btnCustomWidth = {((Dimensions.get("window").width-45)/2)}
             />
           </TouchableOpacity>
@@ -156,7 +142,6 @@ export default class MessageScreen extends React.Component {
               btnContent = {'SEND'}
               btnColor = {Colors['white']}
               btnTextColor = {Colors['secondary']}
-              btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
               btnCustomWidth = {((Dimensions.get("window").width-45)/2)}
             />
           </TouchableOpacity>
@@ -174,7 +159,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   TextInput: {
-    backgroundColor: Colors['white'],
+    backgroundColor: '#fff',
+    fontFamily: 'open-sans',
     fontSize: 16,
     height: 180,
     lineHeight: 1.5,

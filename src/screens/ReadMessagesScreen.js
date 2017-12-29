@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
 import { Dimensions, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Font } from 'expo';
 import MessageListItem from '../components/MessageListItem';
 import ButtonContent from '../components/ButtonContent';
 import { Colors } from '../components/helpers/Colors';
@@ -19,24 +18,12 @@ export default class ReadMessagesScreen extends React.Component {
       navigation: this.props.navigation,
       loading: false,
       loadingMessages: true,
-      fontLoaded: false,
     };
   }
 
-  async componentDidMount() {
-    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
+  componentDidMount() {
     this.makeRemoteRequest();
-    await Font.loadAsync({
-      'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
-    });
-    this.setState({ fontLoaded: true });
   }
-
-  static navigationOptions = {
-    headerStyle: {
-      display: 'none',
-    }
-  };
 
   makeRemoteRequest = () => {
     const keyParent = firebase.database().ref('messages');
@@ -55,7 +42,7 @@ export default class ReadMessagesScreen extends React.Component {
   };
 
   renderListItem = ({item}) => (
-    <MessageListItem message={item.message} font={'open-sans'}/>
+    <MessageListItem message={item.message}/>
   );
 
   render() {
@@ -63,15 +50,13 @@ export default class ReadMessagesScreen extends React.Component {
       <SafeAreaView style={styles.ReadMessagesScreen} ref="flatListView">
         <BackgroundGradient gradientColor={Colors['secondary']}/>
         {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === false),
-          <SvgHeart textContent={'WAITING FOR MESSAGES'} font={this.state.fontLoaded ? 'league-gothic' : null}/>
+          <SvgHeart textContent={'WAITING FOR MESSAGES'}/>
         )}
-        {RenderIf((this.state.fontLoaded === true),
-          <FlatList
-            data={this.state.messageList}
-            style={styles.LoveList}
-            renderItem={this.renderListItem}
-          />
-        )}
+        <FlatList
+          data={this.state.messageList}
+          style={styles.LoveList}
+          renderItem={this.renderListItem}
+        />
         <TouchableOpacity
           onPress={() => {
             if(this.state.loading) {
@@ -87,7 +72,6 @@ export default class ReadMessagesScreen extends React.Component {
             btnContent = {'CLOSE'}
             btnColor = {'transparent'}
             btnTextColor = {Colors['white']}
-            btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
           />
         </TouchableOpacity>
       </SafeAreaView>
