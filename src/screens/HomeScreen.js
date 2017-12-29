@@ -45,28 +45,6 @@ export default class HomeScreen extends React.Component {
     }
   };
 
-  // Gets an array of gifs and navigates to MessageScreen
-  getGif() {
-    if(this.state.loading) {
-      return;
-    } else {
-      this.setState({ loading: true });
-      const that = this;
-      const tagArray = ['happy', 'love', 'party'];
-      let tag = tagArray[Math.floor(Math.random() * tagArray.length)];
-      const apiUrl = 'http://api.giphy.com/v1/stickers/search?api_key=PZf7lIja3FGSHRiQZlhFBCbT3JGWeK1K&q=' + tag + '&limit=25';
-      fetch(apiUrl)
-      .then((resp) => resp.json())
-      .then(function(jsonResp) {
-        var respArray = jsonResp.data;
-        that.state.navigation.navigate('Message', { gifArray: respArray });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-    }
-  }
-
   // Handles the log in
   handleLogin(email, password) {
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -143,7 +121,14 @@ export default class HomeScreen extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.Buttons}
-                onPress={() => {this.getGif();}}
+                onPress={() => {
+                  if(this.state.loading) {
+                    return;
+                  } else {
+                    this.setState({ loading: true });
+                    this.state.navigation.navigate('Message', { gifArray: [] });
+                  }
+                }}
                 title='SEND'>
                 <ButtonContent
                   btnContent = {'SEND'}

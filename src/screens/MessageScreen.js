@@ -26,6 +26,7 @@ export default class MessageScreen extends React.Component {
       'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
     });
     this.setState({ fontLoaded: true });
+    this.getGif();
   }
 
   static navigationOptions = {
@@ -33,6 +34,27 @@ export default class MessageScreen extends React.Component {
       display: 'none',
     }
   };
+
+  // Gets an array of gifs
+  getGif() {
+    if (this.state.gifArray.length != 0) {
+      return;
+    } else {
+      const that = this;
+      const tagArray = ['happy', 'love', 'party'];
+      let tag = tagArray[Math.floor(Math.random() * tagArray.length)];
+      const apiUrl = 'http://api.giphy.com/v1/stickers/search?api_key=PZf7lIja3FGSHRiQZlhFBCbT3JGWeK1K&q=' + tag + '&limit=25';
+      fetch(apiUrl)
+      .then((resp) => resp.json())
+      .then(function(jsonResp) {
+        let respArray = jsonResp.data;
+        that.setState({ gifArray: respArray });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    }
+  }
 
   // Sends the message to Firebase, clears the input field and navigates to ConfirmationScreen
   sendMessage(messageText) {
@@ -44,7 +66,6 @@ export default class MessageScreen extends React.Component {
     this.textInput.clear();
     this.state.navigation.navigate('Confirmation', { gifArray: this.state.gifArray });
     Keyboard.dismiss;
-    this.setState({ loading: false });
   }
 
   // Handles the message alerts & validation
