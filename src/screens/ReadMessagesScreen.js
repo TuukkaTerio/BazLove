@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
 import { Dimensions, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Font } from 'expo';
+import MessageListItem from '../components/MessageListItem';
 import ButtonContent from '../components/ButtonContent';
 import { Colors } from '../components/helpers/Colors';
 import RenderIf from '../components/helpers/RenderIf';
@@ -47,30 +48,28 @@ export default class ReadMessagesScreen extends React.Component {
       };
       // Checks if the component is mounted before updating it.
       if (this.refs.flatListView) {
-        this.setState((prevState) => ({ messageList: [...prevState.messageList, newChild] }));
+        this.setState((prevState) => ({ messageList: [newChild, ...prevState.messageList] }));
       }
     });
     this.setState({ loadingMessages: false });
   };
+
+  renderListItem = ({item}) => (
+    <MessageListItem message={item.message} font={'open-sans'}/>
+  );
 
   render() {
     return (
       <SafeAreaView style={styles.ReadMessagesScreen} ref="flatListView">
         <BackgroundGradient gradientColor={Colors['secondary']}/>
         {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === false),
-          <SvgHeart textContent={'WAITING FOR MESSAGES'}/>
+          <SvgHeart textContent={'WAITING FOR MESSAGES'} font={this.state.fontLoaded ? 'league-gothic' : null}/>
         )}
         {RenderIf((this.state.fontLoaded === true),
           <FlatList
-            style={styles.LoveList}
             data={this.state.messageList}
-            renderItem={({item}) =>
-              <View style={styles.LoveListItem}>
-                <Text style={[styles.LoveListItemText, {fontFamily: 'open-sans'}]}>
-                  {item.message}
-                </Text>
-              </View>
-            }
+            style={styles.LoveList}
+            renderItem={this.renderListItem}
           />
         )}
         <TouchableOpacity
@@ -88,6 +87,7 @@ export default class ReadMessagesScreen extends React.Component {
             btnContent = {'CLOSE'}
             btnColor = {'transparent'}
             btnTextColor = {Colors['white']}
+            btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
           />
         </TouchableOpacity>
       </SafeAreaView>
@@ -105,17 +105,6 @@ const styles = StyleSheet.create({
   LoveList: {
     marginTop: 30,
     width: Dimensions.get("window").width,
-  },
-  LoveListItem: {
-    backgroundColor: Colors['white'],
-    borderRadius: 5,
-    marginBottom: 10,
-    marginLeft: 15,
-    marginRight: 15,
-    padding: 20,
-  },
-  LoveListItemText: {
-    fontSize: 16,
   },
   Button: {
     marginBottom: 30,

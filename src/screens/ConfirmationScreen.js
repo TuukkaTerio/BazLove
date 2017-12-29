@@ -66,6 +66,7 @@ export default class ConfirmationScreen extends React.Component {
               btnContent = {'CLOSE'}
               btnColor = {'transparent'}
               btnTextColor = {Colors['white']}
+              btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -82,6 +83,7 @@ export default class ConfirmationScreen extends React.Component {
               btnContent = {'SEND MORE'}
               btnColor = {Colors['white']}
               btnTextColor = {Colors['secondary']}
+              btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
             />
           </TouchableOpacity>
         </View>
@@ -114,8 +116,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: Colors['tertiary'],
     fontSize: 13,
-    marginBottom: 40,
-    marginTop: 40,
+    marginBottom: 30,
+    marginTop: 50,
     textAlign: 'center',
     width: 200,
   },

@@ -124,6 +124,7 @@ export default class MessageScreen extends React.Component {
               btnContent = {'CLOSE'}
               btnColor = {'transparent'}
               btnTextColor = {Colors['white']}
+              btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
               btnCustomWidth = {((Dimensions.get("window").width-45)/2)}
             />
           </TouchableOpacity>
@@ -134,6 +135,7 @@ export default class MessageScreen extends React.Component {
               btnContent = {'SEND'}
               btnColor = {Colors['white']}
               btnTextColor = {Colors['secondary']}
+              btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
               btnCustomWidth = {((Dimensions.get("window").width-45)/2)}
             />
           </TouchableOpacity>

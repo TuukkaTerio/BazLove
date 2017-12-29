@@ -138,6 +138,7 @@ export default class HomeScreen extends React.Component {
                   btnContent = {'READ'}
                   btnColor = {'transparent'}
                   btnTextColor = {Colors['white']}
+                  btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
                 />
               </TouchableOpacity>
               <TouchableOpacity
@@ -148,6 +149,7 @@ export default class HomeScreen extends React.Component {
                   btnContent = {'SEND'}
                   btnColor = {Colors['white']}
                   btnTextColor = {Colors['secondary']}
+                  btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
                 />
               </TouchableOpacity>
             </View>
@@ -192,6 +194,7 @@ export default class HomeScreen extends React.Component {
                 btnContent = {'LOG IN'}
                 btnColor = {'transparent'}
                 btnTextColor = {Colors['white']}
+                btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
               />
             </TouchableOpacity>
           </View>

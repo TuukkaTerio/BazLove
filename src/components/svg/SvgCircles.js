@@ -55,9 +55,9 @@ export default class SvgCircles extends React.Component {
         <Animated.View style={rotatingContainer}>
           <Svg viewBox={'0 0 300 300'} style={circleStyle}>
             <Circle
-              cx="145"
-              cy="145"
-              r="100"
+              cx='145'
+              cy='145'
+              r='100'
               fill={circleColor}
             />
           </Svg>
@@ -65,9 +65,9 @@ export default class SvgCircles extends React.Component {
         <Animated.View style={rotatingContainer}>
           <Svg viewBox={'0 0 300 300'} style={circleStyle}>
             <Circle
-              cx="150"
-              cy="155"
-              r="100"
+              cx='150'
+              cy='155'
+              r='100'
               fill={circleColor}
             />
           </Svg>
@@ -75,9 +75,9 @@ export default class SvgCircles extends React.Component {
         <Animated.View style={rotatingContainer}>
           <Svg viewBox={'0 0 300 300'} style={circleStyle}>
             <Circle
-              cx="145"
-              cy="150"
-              r="100"
+              cx='145'
+              cy='150'
+              r='100'
               fill={circleColor}
             />
           </Svg>
@@ -85,9 +85,9 @@ export default class SvgCircles extends React.Component {
         <Animated.View style={rotatingContainer}>
           <Svg viewBox={'0 0 300 300'} style={circleStyle}>
             <Circle
-              cx="155"
-              cy="150"
-              r="100"
+              cx='155'
+              cy='150'
+              r='100'
               fill={circleColor}
             />
           </Svg>
