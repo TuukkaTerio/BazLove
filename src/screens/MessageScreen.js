@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
-import { SafeAreaView, Alert, StyleSheet, TouchableOpacity, View, TextInput, Keyboard } from 'react-native';
-import ButtonContent from '../components/ButtonContent';
-import BackgroundGradient from '../components/svg/BackgroundGradient';
-import { Colors } from '../components/helpers/Colors';
+import { Alert, Dimensions, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Keyboard, View } from 'react-native';
 import { Font } from 'expo';
+import ButtonContent from '../components/ButtonContent';
+import { Colors } from '../components/helpers/Colors';
+import BackgroundGradient from '../components/svg/BackgroundGradient';
 
 export default class MessageScreen extends React.Component {
-
-  static navigationOptions = {
-    headerStyle: {
-      display: 'none',
-    }
-  };
 
   constructor(props) {
     super(props);
@@ -33,6 +27,12 @@ export default class MessageScreen extends React.Component {
     });
     this.setState({ fontLoaded: true });
   }
+
+  static navigationOptions = {
+    headerStyle: {
+      display: 'none',
+    }
+  };
 
   // Sends the message to Firebase, clears the input field and navigates to ConfirmationScreen
   sendMessage(messageText) {
@@ -124,7 +124,7 @@ export default class MessageScreen extends React.Component {
               btnContent = {'CLOSE'}
               btnColor = {'transparent'}
               btnTextColor = {Colors['white']}
-              btnCustomWidth = {132}
+              btnCustomWidth = {((Dimensions.get("window").width-45)/2)}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -134,7 +134,7 @@ export default class MessageScreen extends React.Component {
               btnContent = {'SEND'}
               btnColor = {Colors['white']}
               btnTextColor = {Colors['secondary']}
-              btnCustomWidth = {132}
+              btnCustomWidth = {((Dimensions.get("window").width-45)/2)}
             />
           </TouchableOpacity>
         </View>
@@ -145,26 +145,27 @@ export default class MessageScreen extends React.Component {
 
 const styles = StyleSheet.create({
   MessageScreen: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
     backgroundColor: Colors['secondary'],
+    flex: 1,
+    justifyContent: 'flex-start',
   },
   TextInput: {
     backgroundColor: Colors['white'],
     fontSize: 16,
+    height: 180,
+    lineHeight: 1.5,
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 30,
+    maxHeight: 180,
     padding: 20,
     paddingTop: 20,
-    width: 280,
-    marginTop: 40,
-    height: 180,
-    maxHeight: 180,
-    lineHeight: 1.5,
+    width: (Dimensions.get("window").width-30),
   },
   ButtonContainer: {
-    marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 280,
+    width: (Dimensions.get("window").width-30),
   },
 });

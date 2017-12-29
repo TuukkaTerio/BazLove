@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Dimensions, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Font } from 'expo';
 import ButtonContent from '../components/ButtonContent';
-import BackgroundGradient from '../components/svg/BackgroundGradient';
 import { Colors } from '../components/helpers/Colors';
 import RenderIf from '../components/helpers/RenderIf';
+import BackgroundGradient from '../components/svg/BackgroundGradient';
 import SvgHeart from '../components/svg/SvgHeart';
-import { Font } from 'expo';
 
 export default class ReadMessagesScreen extends React.Component {
-
-  static navigationOptions = {
-    headerStyle: {
-      display: 'none',
-    }
-  };
 
   constructor(props) {
     super(props);
@@ -27,6 +21,21 @@ export default class ReadMessagesScreen extends React.Component {
       fontLoaded: false,
     };
   }
+
+  async componentDidMount() {
+    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
+    this.makeRemoteRequest();
+    await Font.loadAsync({
+      'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
+    });
+    this.setState({ fontLoaded: true });
+  }
+
+  static navigationOptions = {
+    headerStyle: {
+      display: 'none',
+    }
+  };
 
   makeRemoteRequest = () => {
     const keyParent = firebase.database().ref('messages');
@@ -44,24 +53,12 @@ export default class ReadMessagesScreen extends React.Component {
     this.setState({ loadingMessages: false });
   };
 
-  async componentDidMount() {
-    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
-    this.makeRemoteRequest();
-    await Font.loadAsync({
-      'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
-    });
-    this.setState({ fontLoaded: true });
-  }
-
   render() {
     return (
       <SafeAreaView style={styles.ReadMessagesScreen} ref="flatListView">
         <BackgroundGradient gradientColor={Colors['secondary']}/>
-        {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === true) || !this.state.fontLoaded,
-          <SvgHeart textContent={'LOADING'}/>
-        )}
         {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === false),
-          <SvgHeart textContent={'NO MESSAGES'}/>
+          <SvgHeart textContent={'WAITING FOR MESSAGES'}/>
         )}
         {RenderIf((this.state.fontLoaded === true),
           <FlatList
@@ -100,28 +97,27 @@ export default class ReadMessagesScreen extends React.Component {
 
 const styles = StyleSheet.create({
   ReadMessagesScreen: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-end',
     backgroundColor: Colors['secondary'],
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   LoveList: {
-    width: 280,
-    marginTop: 40,
-    height: 420,
-    maxHeight: 420,
+    marginTop: 30,
+    width: Dimensions.get("window").width,
   },
   LoveListItem: {
-    marginBottom: 10,
-    padding: 20,
     backgroundColor: Colors['white'],
-    width: 280,
     borderRadius: 5,
+    marginBottom: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    padding: 20,
   },
   LoveListItemText: {
     fontSize: 16,
   },
   Button: {
-    marginBottom: 40,
+    marginBottom: 30,
   },
 });

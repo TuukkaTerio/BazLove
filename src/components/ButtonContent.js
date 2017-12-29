@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
-import { Colors } from './helpers/Colors';
 import { Font } from 'expo';
+import { Colors } from './helpers/Colors';
 
 export default class ButtonContent extends Component {
 
@@ -26,15 +26,15 @@ export default class ButtonContent extends Component {
     const btnWidth = this.props.btnCustomWidth ? this.props.btnCustomWidth : 100;
     const btnStyle = {
       backgroundColor: btnColor,
-      padding: 20,
-      color: btnTextColor,
-      marginTop: 15,
-      minWidth: btnWidth,
-      textAlign: 'center',
-      fontSize: 19,
       borderWidth: 1.5,
       borderColor: Colors['white'],
+      color: btnTextColor,
       fontFamily: this.state.fontLoaded ? 'league-gothic' : null,
+      fontSize: 19,
+      marginTop: 15,
+      minWidth: btnWidth,
+      padding: 20,
+      textAlign: 'center',
     }
     return (
       <Text style={btnStyle}>{btnContent}</Text>

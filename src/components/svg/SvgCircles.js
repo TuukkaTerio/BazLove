@@ -1,27 +1,6 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  View,
-  Animated,
-  Image,
-  Easing
-} from 'react-native';
-import Svg, { Circle,
-    Ellipse,
-    G,
-    LinearGradient,
-    RadialGradient,
-    Line,
-    Path,
-    Polygon,
-    Polyline,
-    Rect,
-    Symbol,
-    Text,
-    Use,
-    Defs,
-    Stop } from 'react-native-svg';
+import { Animated, Easing, View } from 'react-native';
+import Svg, { Circle } from 'react-native-svg';
 
 export default class SvgCircles extends React.Component {
 

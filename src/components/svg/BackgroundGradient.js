@@ -1,21 +1,7 @@
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
 import { Colors } from '../helpers/Colors';
-import Svg, { Circle,
-    Ellipse,
-    G,
-    LinearGradient,
-    RadialGradient,
-    Line,
-    Path,
-    Polygon,
-    Polyline,
-    Rect,
-    Symbol,
-    Text,
-    Use,
-    Defs,
-    Stop } from 'react-native-svg';
+import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 
 export default class BackgroundGradient extends React.Component {
   render(props) {

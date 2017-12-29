@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { Font } from 'expo';
 import Svg, { Path } from 'react-native-svg';
 import { Colors } from '../helpers/Colors';
 import RenderIf from '../helpers/RenderIf';
-import { Font } from 'expo';
 
 export default class SvgHeart extends React.Component {
 
@@ -44,8 +44,8 @@ export default class SvgHeart extends React.Component {
 
 const styles = StyleSheet.create({
   HeartContainer: {
-    flex: 1,
     alignItems: 'center',
+    flex: 1,
     justifyContent: 'center',
     marginTop: 150,
   },
@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
   },
   HeartText: {
     backgroundColor: 'transparent',
+    color: Colors['white'],
+    fontSize: 30,
     paddingTop: 10,
     textAlign: 'center',
-    fontSize: 34,
-    color: Colors['white'],
   },
 });

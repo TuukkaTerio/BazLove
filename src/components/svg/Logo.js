@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import Svg, { Path, Defs, Stop, LinearGradient } from 'react-native-svg';
+import Svg, { Defs, LinearGradient, Path, Stop } from 'react-native-svg';
 import { Colors } from '../helpers/Colors';
 
 export default class Logo extends React.Component {
   render() {
     return (
       <Svg
-        style={styles.Logo}
+        style={{ height: 240, marginTop: 75, width: 210 }}
         viewBox={'0 0 1558 2000'}
       >
         <Defs>
@@ -30,11 +29,3 @@ export default class Logo extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  Logo: {
-    height: 240,
-    width: 210,
-    marginTop: 75,
-  },
-});
