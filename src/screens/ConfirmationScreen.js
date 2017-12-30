@@ -31,7 +31,6 @@ export default class ConfirmationScreen extends React.Component {
         <SvgCircles circleSize={200} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={0} circleRight={300}/>
         <SvgCircles circleSize={500} circleColor={Colors['tertiary']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={300}/>
         <SvgCircles circleSize={450} circleColor={Colors['secondary']} outputRange={['0deg', '360deg']} circleTop={150} circleRight={430}/>
-        // Renders the image only if there is an URL
         {RenderIf(this.state.gifUrl,
           <Image
             style={styles.Gif}
