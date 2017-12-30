@@ -19,7 +19,7 @@
     },
     "android": {
       "package": "BazLove",
-      "versionCode": "1",
+      "versionCode": 1,
     },
   }
 }
