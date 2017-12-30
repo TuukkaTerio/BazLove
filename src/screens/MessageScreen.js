@@ -22,13 +22,15 @@ export default class MessageScreen extends React.Component {
     this.getGif();
   }
 
-  // Gets an array of gifs
+  // Gets an array of gifs from Giphy
   getGif() {
+    // Checks if there already is an array of gifs
     if (this.state.gifArray.length != 0) {
       return;
     } else {
       const that = this;
       const tagArray = ['happy', 'love', 'party'];
+      // Gets a random tag from the tagArray
       let tag = tagArray[Math.floor(Math.random() * tagArray.length)];
       const apiUrl = 'http://api.giphy.com/v1/stickers/search?api_key=PZf7lIja3FGSHRiQZlhFBCbT3JGWeK1K&q=' + tag + '&limit=25';
       fetch(apiUrl)
@@ -47,10 +49,12 @@ export default class MessageScreen extends React.Component {
   sendMessage(messageText) {
     Database.ref('messages/').push({
       message: messageText,
+      // Saves the current timestamp
       timestamp: firebase.database.ServerValue.TIMESTAMP,
     });
     this.setState({messageText: ''});
     this.textInput.clear();
+    // Navigates to the ConfirmationScreen
     this.state.navigation.navigate('Confirmation', { gifArray: this.state.gifArray });
     Keyboard.dismiss;
   }
@@ -61,6 +65,7 @@ export default class MessageScreen extends React.Component {
       return;
     } else {
       this.setState({ loading: true });
+      // Checks that the message is not empty and does not contain only spaces
       if ((messageText !== '') && (messageText.replace(/\s/g, '').length)) {
         const EmojiHeart = String.fromCodePoint(0x1F495);
         const EmojiNo = String.fromCodePoint(0x274C);
@@ -88,6 +93,7 @@ export default class MessageScreen extends React.Component {
       return;
     } else {
       this.setState({ loading: true });
+      // Checks if the message field is empty
       if (this.state.messageText !== '') {
         const EmojiTrash = String.fromCodePoint(0x1F5D1);
         const EmojiNo = String.fromCodePoint(0x274C);
@@ -121,7 +127,6 @@ export default class MessageScreen extends React.Component {
           multiline = {true}
           numberOfLines = {10}
           autoFocus = {true}
-          // Limits the maximum number of characters that can be entered.
           maxLength = {1000}
         />
         <View style={styles.ButtonContainer}>

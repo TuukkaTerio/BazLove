@@ -24,7 +24,9 @@ export default class HomeScreen extends React.Component {
   }
 
   async componentDidMount() {
+    // Locks the orientation to portrait
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
+    // Checks if the user is logged in
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ screenContent: 'home' });
@@ -32,6 +34,7 @@ export default class HomeScreen extends React.Component {
         this.setState({ screenContent: 'login' });
       }
     });
+    // Loads the custom fonts
     await Font.loadAsync({
       'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
       'league-gothic': require('../assets/fonts/LeagueGothic-Regular.otf'),
@@ -148,7 +151,6 @@ export default class HomeScreen extends React.Component {
               onChangeText={(userEmail) => this.setState({userEmail})}
               autoFocus = {true}
               keyboardType = {'email-address'}
-              // Limits the maximum number of characters that can be entered.
               maxLength = {300}
               autoCapitalize = {'none'}
               autoCorrect = {false}
@@ -158,7 +160,6 @@ export default class HomeScreen extends React.Component {
               ref={input => { this.passwordInput = input }}
               placeholder="Password"
               onChangeText={(userPassword) => this.setState({userPassword})}
-              // Limits the maximum number of characters that can be entered.
               maxLength = {300}
               autoCapitalize = {'none'}
               autoCorrect = {false}

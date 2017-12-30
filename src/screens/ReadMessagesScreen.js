@@ -25,6 +25,7 @@ export default class ReadMessagesScreen extends React.Component {
     this.makeRemoteRequest();
   }
 
+  // Gets the messages from Firebase, checks if there is a new child
   makeRemoteRequest = () => {
     const keyParent = firebase.database().ref('messages');
     keyParent.on(('child_added'), snapshot => {
@@ -41,6 +42,7 @@ export default class ReadMessagesScreen extends React.Component {
     this.setState({ loadingMessages: false });
   };
 
+  // Renders a single message
   renderListItem = ({item}) => (
     <MessageListItem message={item.message}/>
   );

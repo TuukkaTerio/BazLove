@@ -14,9 +14,13 @@ const RootNavigator = StackNavigator(
   },
   {
    navigationOptions: {
+     // Disables swipe navigation to previous screen
+     gesturesEnabled: false,
+     // Hides the header
+     headerMode: 'none',
      headerStyle: {
        display: 'none',
-     }
+     },
    }
   }
 );
