@@ -105,9 +105,9 @@ export default class HomeScreen extends React.Component {
         {RenderIf(this.state.screenContent === 'home',
           <View style={styles.HomeScreen}>
             <View style={styles.CirclesContainer}>
-              <SvgCircles circleSize={300} circleColor={Colors['tertiary']} outputRange={['0deg', '360deg']} circleTop={0} circleRight={215}/>
-              <SvgCircles circleSize={260} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={50} circleRight={220}/>
-              <SvgCircles circleSize={160} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={250}/>
+              <SvgCircles circleSize={(windowWidth*1.1)} circleColor={Colors['tertiary']} outputRange={['0deg', '360deg']} circleTop={-(windowWidth*0.1)} circleRight={(windowWidth*0.99)}/>
+              <SvgCircles circleSize={(windowWidth*0.9)} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={(windowWidth*0.1)} circleRight={windowWidth}/>
+              <SvgCircles circleSize={(windowWidth*0.6)} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={(windowWidth*0.82)} circleRight={windowWidth}/>
             </View>
             <View style={styles.MainContentContainer}>
               <Logo size={windowWidth}/>
@@ -246,10 +246,10 @@ const styles = StyleSheet.create({
   infoText: {
     backgroundColor: 'transparent',
     color: Colors['secondary'],
-    fontSize: 16,
-    marginTop: 20,
+    fontSize: 14,
+    marginTop: 30,
     textAlign: 'center',
-    width: 250,
+    width: 200,
   },
   Logout: {
     backgroundColor: 'transparent',

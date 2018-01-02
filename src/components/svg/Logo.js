@@ -6,7 +6,7 @@ export default class Logo extends React.PureComponent {
   render(props) {
     return (
       <Svg
-        style={{ height: (this.props.size*0.8), marginTop: (this.props.size*0.1), width: (this.props.size*0.7) }}
+        style={{ height: (this.props.size*0.75), marginTop: (this.props.size*0.15), width: (this.props.size*0.65) }}
         viewBox={'0 0 1558 2000'}
       >
         <Defs>
