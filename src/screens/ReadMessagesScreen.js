@@ -52,7 +52,7 @@ export default class ReadMessagesScreen extends React.Component {
       <SafeAreaView style={styles.ReadMessagesScreen} ref="flatListView">
         <BackgroundGradient gradientColor={Colors['secondary']}/>
         {RenderIf((this.state.messageList === '') && (this.state.loadingMessages === false),
-          <SvgHeart textContent={'WAITING FOR MESSAGES'}/>
+          <SvgHeart textContent={'WAITING FOR MESSAGES'} size={windowWidth}/>
         )}
         <FlatList
           data={this.state.messageList}
@@ -81,6 +81,8 @@ export default class ReadMessagesScreen extends React.Component {
   }
 }
 
+const windowWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   ReadMessagesScreen: {
     alignItems: 'center',
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
   },
   LoveList: {
     marginTop: 30,
-    width: Dimensions.get("window").width,
+    width: windowWidth,
   },
   Button: {
     marginBottom: 30,

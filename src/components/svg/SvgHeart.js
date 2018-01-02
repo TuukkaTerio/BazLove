@@ -12,15 +12,15 @@ export default class SvgHeart extends React.PureComponent {
       marginTop: 150,
     };
     const svgHeartStyle = {
-      height: 100,
-      width: 100,
+      height: (this.props.size*0.3),
+      width: (this.props.size*0.3),
     };
     const textStyle = {
       backgroundColor: 'transparent',
       color: '#fff',
       fontFamily: 'league-gothic',
       fontSize: 30,
-      paddingTop: 10,
+      marginTop: 20,
       textAlign: 'center',
     };
     return (

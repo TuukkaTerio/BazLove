@@ -100,51 +100,55 @@ export default class HomeScreen extends React.Component {
       );
     }
     return (
-      <SafeAreaView style={styles.HomeScreen}>
+      <SafeAreaView style={styles.BaseStyle}>
         <BackgroundGradient gradientColor={Colors['primary']}/>
         {RenderIf(this.state.screenContent === 'home',
-          <View>
-            <SvgCircles circleSize={300} circleColor={Colors['tertiary']} outputRange={['0deg', '360deg']} circleTop={0} circleRight={215}/>
-            <SvgCircles circleSize={260} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={50} circleRight={220}/>
-            <SvgCircles circleSize={160} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={250}/>
-            <Logo/>
-            <View style={styles.ButtonContainer}>
-              <TouchableOpacity
-                onPress={() => {
-                  if(this.state.loading) {
-                    return;
-                  } else {
-                    this.setState({ loading: true });
-                    this.state.navigation.navigate('ReadMessages', { gifArray: [], gifArray2: [] });
-                  }
-                }}
-                title='READ'>
-                <ButtonContent
-                  btnContent = {'READ'}
-                  btnColor = {'transparent'}
-                  btnTextColor = {Colors['white']}
-                  btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  if(this.state.loading) {
-                    return;
-                  } else {
-                    this.setState({ loading: true });
-                    this.state.navigation.navigate('Message', { gifArray: [] });
-                  }
-                }}
-                title='SEND'>
-                <ButtonContent
-                  btnContent = {'SEND'}
-                  btnColor = {Colors['white']}
-                  btnTextColor = {Colors['secondary']}
-                  btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
-                />
-              </TouchableOpacity>
+          <View style={styles.HomeScreen}>
+            <View style={styles.CirclesContainer}>
+              <SvgCircles circleSize={300} circleColor={Colors['tertiary']} outputRange={['0deg', '360deg']} circleTop={0} circleRight={215}/>
+              <SvgCircles circleSize={260} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={50} circleRight={220}/>
+              <SvgCircles circleSize={160} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={300} circleRight={250}/>
             </View>
-            <Text style={[styles.infoText, {fontFamily: this.state.fontLoaded ? 'open-sans' : null}]}>Messages are deleted on Mondays at 11 a.m. (UTC +1)</Text>
+            <View style={styles.MainContentContainer}>
+              <Logo size={windowWidth}/>
+              <View style={styles.ButtonContainer}>
+                <TouchableOpacity
+                  onPress={() => {
+                    if(this.state.loading) {
+                      return;
+                    } else {
+                      this.setState({ loading: true });
+                      this.state.navigation.navigate('ReadMessages', { gifArray: [], gifArray2: [] });
+                    }
+                  }}
+                  title='READ'>
+                  <ButtonContent
+                    btnContent = {'READ'}
+                    btnColor = {'transparent'}
+                    btnTextColor = {Colors['white']}
+                    btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    if(this.state.loading) {
+                      return;
+                    } else {
+                      this.setState({ loading: true });
+                      this.state.navigation.navigate('Message', { gifArray: [] });
+                    }
+                  }}
+                  title='SEND'>
+                  <ButtonContent
+                    btnContent = {'SEND'}
+                    btnColor = {Colors['white']}
+                    btnTextColor = {Colors['secondary']}
+                    btnFont = {this.state.fontLoaded ? 'league-gothic' : null}
+                  />
+                </TouchableOpacity>
+              </View>
+              <Text style={[styles.infoText, {fontFamily: this.state.fontLoaded ? 'open-sans' : null}]}>Messages are deleted on Mondays at 11 a.m. (UTC +1)</Text>
+            </View>
             <TouchableOpacity
               style={styles.Logout}
               onPress={() => {this.handleLogout()}}
@@ -194,13 +198,29 @@ export default class HomeScreen extends React.Component {
 }
 
 const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
-  HomeScreen: {
+  BaseStyle: {
     alignItems: 'center',
     backgroundColor: Colors['primary'],
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+  },
+  HomeScreen: {
+    alignItems: 'center',
+
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  CirclesContainer: {
+    left: 0,
+    top: (windowWidth*0.05),
+    zIndex: -1,
+    width: (windowWidth),
+  },
+  MainContentContainer: {
+    alignItems: 'center',
   },
   LoginContainer: {
     alignItems: 'center',
@@ -220,17 +240,16 @@ const styles = StyleSheet.create({
   ButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 30,
+    marginTop: 20,
     width: 215,
   },
   infoText: {
     backgroundColor: 'transparent',
     color: Colors['secondary'],
-    fontSize: 13,
-    marginBottom: 20,
-    marginTop: 30,
+    fontSize: 16,
+    marginTop: 20,
     textAlign: 'center',
-    width: 200,
+    width: 250,
   },
   Logout: {
     backgroundColor: 'transparent',
@@ -238,7 +257,7 @@ const styles = StyleSheet.create({
   },
   LogoutText: {
     color: Colors['secondary'],
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center',
     textDecorationLine: 'underline',
   },

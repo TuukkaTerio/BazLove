@@ -3,10 +3,10 @@ import Svg, { Defs, LinearGradient, Path, Stop } from 'react-native-svg';
 import { Colors } from '../helpers/Colors';
 
 export default class Logo extends React.PureComponent {
-  render() {
+  render(props) {
     return (
       <Svg
-        style={{ height: 240, marginTop: 75, width: 210 }}
+        style={{ height: (this.props.size*0.8), marginTop: (this.props.size*0.1), width: (this.props.size*0.7) }}
         viewBox={'0 0 1558 2000'}
       >
         <Defs>
