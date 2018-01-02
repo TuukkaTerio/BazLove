@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Font } from 'expo';
+import { Font, AppLoading } from 'expo';
 import ButtonContent from '../components/ButtonContent';
 import RenderIf from '../components/helpers/RenderIf';
 import { Colors } from '../components/helpers/Colors';
@@ -34,12 +34,14 @@ export default class HomeScreen extends React.Component {
         this.setState({ screenContent: 'login' });
       }
     });
-    // Loads the custom fonts
+  }
+
+  // Loads the custom fonts
+  async cacheResourcesAsync() {
     await Font.loadAsync({
       'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
       'league-gothic': require('../assets/fonts/LeagueGothic-Regular.otf'),
     });
-    this.setState({ fontLoaded: true });
   }
 
   // Handles the log in
@@ -88,6 +90,15 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
+    if (!this.state.fontLoaded) {
+      return (
+        <AppLoading
+          startAsync={this.cacheResourcesAsync}
+          onFinish={() => this.setState({ fontLoaded: true })}
+          onError={console.warn}
+        />
+      );
+    }
     return (
       <SafeAreaView style={styles.HomeScreen}>
         <BackgroundGradient gradientColor={Colors['primary']}/>
