@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ButtonContent from '../components/ButtonContent';
 import RenderIf from '../components/helpers/RenderIf';
 import { Colors } from '../components/helpers/Colors';
@@ -28,49 +28,53 @@ export default class ConfirmationScreen extends React.Component {
     return (
       <SafeAreaView style={styles.ConfirmationScreen}>
         <BackgroundGradient gradientColor={Colors['primary']}/>
-        <SvgCircles circleSize={200} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={0} circleRight={300}/>
-        <SvgCircles circleSize={500} circleColor={Colors['tertiary']} outputRange={['360deg', '0deg']} circleTop={-50} circleRight={300}/>
-        <SvgCircles circleSize={450} circleColor={Colors['secondary']} outputRange={['0deg', '360deg']} circleTop={150} circleRight={430}/>
-        {RenderIf(this.state.gifUrl,
-          <Image
-            style={styles.Gif}
-            source={{uri: this.state.gifUrl}}
-          />
-        )}
-        <Text style={styles.TextThanks}>THANKS!</Text>
-        <View style={styles.ButtonContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              if(this.state.loading) {
-                return;
-              } else {
-                this.setState({ loading: true });
-                this.state.navigation.navigate('Home');
-              }
-            }}
-            title='CLOSE'>
-            <ButtonContent
-              btnContent = {'CLOSE'}
-              btnColor = {'transparent'}
-              btnTextColor = {Colors['white']}
+        <View style={styles.CirclesContainer}>
+          <SvgCircles circleSize={(windowWidth)} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={-(windowWidth*0.1)} circleRight={(windowWidth*0.9)}/>
+          <SvgCircles circleSize={(windowWidth*1.5)} circleColor={Colors['tertiary']} outputRange={['360deg', '0deg']} circleTop={(windowWidth*0.1)} circleRight={(windowWidth)}/>
+          <SvgCircles circleSize={(windowWidth*1.25)} circleColor={Colors['secondary']} outputRange={['0deg', '360deg']} circleTop={(windowWidth*0.5)} circleRight={(windowWidth*1.25)}/>
+        </View>
+        <View style={styles.MainContentContainer}>
+          {RenderIf(this.state.gifUrl,
+            <Image
+              style={styles.Gif}
+              source={{uri: this.state.gifUrl}}
             />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if(this.state.loading) {
-                return;
-              } else {
-                this.setState({ loading: true });
-                this.state.navigation.navigate('Message', { gifArray: this.state.gifArray });
-              }
-            }}
-            title='SEND MORE'>
-            <ButtonContent
-              btnContent = {'SEND MORE'}
-              btnColor = {Colors['white']}
-              btnTextColor = {Colors['secondary']}
-            />
-          </TouchableOpacity>
+          )}
+          <Text style={styles.TextThanks}>THANKS!</Text>
+          <View style={styles.ButtonContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                if(this.state.loading) {
+                  return;
+                } else {
+                  this.setState({ loading: true });
+                  this.state.navigation.navigate('Home');
+                }
+              }}
+              title='CLOSE'>
+              <ButtonContent
+                btnContent = {'CLOSE'}
+                btnColor = {'transparent'}
+                btnTextColor = {Colors['white']}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                if(this.state.loading) {
+                  return;
+                } else {
+                  this.setState({ loading: true });
+                  this.state.navigation.navigate('Message', { gifArray: this.state.gifArray });
+                }
+              }}
+              title='SEND MORE'>
+              <ButtonContent
+                btnContent = {'SEND MORE'}
+                btnColor = {Colors['white']}
+                btnTextColor = {Colors['secondary']}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
         <Text style={styles.TextGiphy}>Powered By GIPHY</Text>
       </SafeAreaView>
@@ -78,17 +82,29 @@ export default class ConfirmationScreen extends React.Component {
   }
 }
 
+const windowWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   ConfirmationScreen: {
     alignItems: 'center',
     backgroundColor: Colors['primary'],
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
+  },
+  CirclesContainer: {
+    left: 0,
+    top: (windowWidth*0.05),
+    zIndex: -1,
+    width: (windowWidth),
+  },
+  MainContentContainer: {
+    alignItems: 'center',
   },
   Gif: {
-    height: 230,
+    height: (windowWidth*0.8),
+    marginTop: (windowWidth*0.1),
     resizeMode: 'contain',
-    width: 230,
+    width: (windowWidth*0.8),
   },
   TextThanks: {
     backgroundColor: 'transparent',
@@ -104,7 +120,6 @@ const styles = StyleSheet.create({
     fontFamily: 'open-sans',
     fontSize: 13,
     marginBottom: 30,
-    marginTop: 50,
     textAlign: 'center',
     width: 200,
   },

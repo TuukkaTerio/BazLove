@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Dimensions, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Font, AppLoading } from 'expo';
 import ButtonContent from '../components/ButtonContent';
 import RenderIf from '../components/helpers/RenderIf';
@@ -193,6 +193,8 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+const windowWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   HomeScreen: {
     alignItems: 'center',
@@ -213,7 +215,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     padding: 20,
     paddingTop: 20,
-    width: 280,
+    width: (windowWidth-30),
   },
   ButtonContainer: {
     flexDirection: 'row',

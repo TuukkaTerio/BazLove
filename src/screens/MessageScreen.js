@@ -137,7 +137,7 @@ export default class MessageScreen extends React.Component {
               btnContent = {'CLOSE'}
               btnColor = {'transparent'}
               btnTextColor = {Colors['white']}
-              btnCustomWidth = {((Dimensions.get("window").width-45)/2)}
+              btnCustomWidth = {((windowWidth-45)/2)}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -147,7 +147,7 @@ export default class MessageScreen extends React.Component {
               btnContent = {'SEND'}
               btnColor = {Colors['white']}
               btnTextColor = {Colors['secondary']}
-              btnCustomWidth = {((Dimensions.get("window").width-45)/2)}
+              btnCustomWidth = {((windowWidth-45)/2)}
             />
           </TouchableOpacity>
         </View>
@@ -155,6 +155,8 @@ export default class MessageScreen extends React.Component {
     );
   }
 }
+
+const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   MessageScreen: {
@@ -167,19 +169,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     fontFamily: 'open-sans',
     fontSize: 16,
-    height: 180,
+    height: (windowWidth-130),
     lineHeight: 1.5,
     marginLeft: 15,
     marginRight: 15,
     marginTop: 30,
-    maxHeight: 180,
+    maxHeight: (windowWidth-130),
     padding: 20,
     paddingTop: 20,
-    width: (Dimensions.get("window").width-30),
+    width: (windowWidth-30),
   },
   ButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: (Dimensions.get("window").width-30),
+    width: (windowWidth-30),
   },
 });
