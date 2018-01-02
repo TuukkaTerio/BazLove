@@ -11,15 +11,23 @@
     "primaryColor": "#ffe236",
     "icon": "src/assets/img/icon.png",
     "splash": {
-      "backgroundColor": "#ffe236",
+      "backgroundColor": "#ffe236"
     },
     "ios": {
       "bundleIdentifier": "BazLove",
       "buildNumber": "1.0.0",
+      "publishBundlePath": "ios/bazlove/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/bazlove/Supporting/shell-app-manifest.json"
     },
     "android": {
       "package": "BazLove",
-      "versionCode": 1,
+      "versionCode": 1
     },
+    "isDetached": true,
+    "detach": {
+      "scheme": "exp2f262bbe3dc44957993a8a22edcb540e",
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.1.4-sdk23.0.0-f67c5bc3-4a27-40f6-8686-91e8f868a145.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.1.2-sdk23.0.0-d47f172b-1ed3-4c8f-9e48-239052c678b6.tar.gz"
+    }
   }
 }
