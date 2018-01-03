@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "BazLove",
-    "description": "A nonprofit app for internal communication at Bazooka AB, a Stockholm-based digital agency. Created by Tuukka Teriö, a student at Medieinstitutet, as his degree project.",
+    "description": "A nonprofit app for internal communication at a Stockholm-based digital agency called Bazooka AB. Created by Tuukka Teriö as his degree project at Medieinstitutet.",
     "slug": "baz-love",
     "privacy": "public",
     "sdkVersion": "23.0.0",
-    "version": "1.0",
+    "version": "1.0.0",
     "orientation": "portrait",
     "githubUrl": "https://github.com/TuukkaTerio/BazLove",
     "primaryColor": "#ffe236",
@@ -14,13 +14,13 @@
       "backgroundColor": "#ffe236"
     },
     "ios": {
-      "bundleIdentifier": "BazLove",
+      "bundleIdentifier": "Bazooka.BazLove",
       "buildNumber": "1.0.0",
       "publishBundlePath": "ios/bazlove/Supporting/shell-app.bundle",
       "publishManifestPath": "ios/bazlove/Supporting/shell-app-manifest.json"
     },
     "android": {
-      "package": "BazLove",
+      "package": "Bazooka.BazLove",
       "versionCode": 1
     },
     "isDetached": true,

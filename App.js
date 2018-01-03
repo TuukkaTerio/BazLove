@@ -10,7 +10,7 @@ const RootNavigator = StackNavigator(
     Home: { screen: HomeScreen },
     Message: { screen: MessageScreen },
     ReadMessages: { screen: ReadMessagesScreen },
-    Confirmation: { screen: ConfirmationScreen },
+    Confirmation: { screen: ConfirmationScreen }
   },
   {
    navigationOptions: {
@@ -19,7 +19,7 @@ const RootNavigator = StackNavigator(
      // Hides the header
      headerMode: 'none',
      headerStyle: {
-       display: 'none',
+       display: 'none'
      },
    }
   }

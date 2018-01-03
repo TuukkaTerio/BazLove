@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   CirclesContainer: {
     left: 0,
     top: (windowWidth*0.05),
-    zIndex: -1,
+    zIndex: (-1),
     width: (windowWidth),
   },
   MainContentContainer: {
