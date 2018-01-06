@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "BazLove",
-    "description": "A nonprofit app for internal communication at a Stockholm-based digital agency called Bazooka AB. Created by Tuukka Teriö as his degree project at Medieinstitutet.",
+    "description": "A nonprofit app for internal communication at Bazooka AB, a Stockholm-based digital agency. Created by Tuukka Teriö as his degree project at Medieinstitutet.",
     "slug": "baz-love",
     "privacy": "public",
     "sdkVersion": "23.0.0",

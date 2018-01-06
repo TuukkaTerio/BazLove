@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
-import { Dimensions, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, FlatList, Keyboard, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MessageListItem from '../components/MessageListItem';
 import ButtonContent from '../components/ButtonContent';
 import { Colors } from '../components/helpers/Colors';
@@ -23,6 +23,7 @@ export default class ReadMessagesScreen extends React.Component {
 
   componentDidMount() {
     this.makeRemoteRequest();
+    Keyboard.dismiss();
   }
 
   // Gets the messages from Firebase, checks if there is a new child

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 export default class ButtonContent extends React.PureComponent {
   render(props) {
@@ -16,7 +16,9 @@ export default class ButtonContent extends React.PureComponent {
       textAlign: 'center',
     }
     return (
-      <Text style={btnStyle}>{this.props.btnContent}</Text>
+      <View pointerEvents='none'>
+        <Text style={btnStyle}>{this.props.btnContent}</Text>
+      </View>
     );
   }
 }

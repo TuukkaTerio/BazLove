@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { Alert, Dimensions, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Dimensions, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Font, AppLoading } from 'expo';
 import ButtonContent from '../components/ButtonContent';
 import RenderIf from '../components/helpers/RenderIf';
@@ -23,7 +23,7 @@ export default class HomeScreen extends React.Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     // Locks the orientation to portrait
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP );
     // Checks if the user is logged in
@@ -34,6 +34,7 @@ export default class HomeScreen extends React.Component {
         this.setState({ screenContent: 'login' });
       }
     });
+    Keyboard.dismiss();
   }
 
   // Loads the custom fonts
@@ -169,6 +170,7 @@ export default class HomeScreen extends React.Component {
               maxLength = {300}
               autoCapitalize = {'none'}
               autoCorrect = {false}
+              underlineColorAndroid = 'rgba(0,0,0,0)'
             />
             <TextInput
               style={[styles.LoginInput, {fontFamily: this.state.fontLoaded ? 'open-sans' : null}]}
@@ -179,6 +181,7 @@ export default class HomeScreen extends React.Component {
               autoCapitalize = {'none'}
               autoCorrect = {false}
               secureTextEntry = {true}
+              underlineColorAndroid = 'rgba(0,0,0,0)'
             />
             <TouchableOpacity
               onPress={() => {this.handleLogin(this.state.userEmail, this.state.userPassword)}}
@@ -235,6 +238,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     padding: 20,
     paddingTop: 20,
+    paddingBottom: 0,
     width: (windowWidth-30),
   },
   ButtonContainer: {

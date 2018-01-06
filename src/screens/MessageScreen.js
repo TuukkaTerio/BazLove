@@ -93,6 +93,7 @@ export default class MessageScreen extends React.Component {
       return;
     } else {
       this.setState({ loading: true });
+      Keyboard.dismiss;
       // Checks if the message field is empty
       if (this.state.messageText !== '') {
         const EmojiTrash = String.fromCodePoint(0x1F5D1);
@@ -102,8 +103,8 @@ export default class MessageScreen extends React.Component {
           'Discard?  ' + EmojiTrash,
           '',
           [
-            {text: 'No  ' + EmojiNo, onPress: () => {this.setState({ loading: false })}},
-            {text: 'Yes  ' + EmojiYes, onPress: () => {this.state.navigation.navigate('Home'); this.setState({ loading: false });}},
+            {text: 'No  ' + EmojiNo, onPress: () => {this.setState({ loading: false });}},
+            {text: 'Yes  ' + EmojiYes, onPress: () => {this.state.navigation.navigate('Home'); this.setState({ loading: false }); Keyboard.dismiss;}},
           ],
           { cancelable: false }
         )
@@ -128,10 +129,11 @@ export default class MessageScreen extends React.Component {
           numberOfLines = {10}
           autoFocus = {true}
           maxLength = {1000}
+          underlineColorAndroid = 'rgba(0,0,0,0)'
         />
         <View style={styles.ButtonContainer}>
           <TouchableOpacity
-            onPress={() => {this.handleClose()}}
+            onPress={() => {this.handleClose();}}
             title='CLOSE'>
             <ButtonContent
               btnContent = {'CLOSE'}
@@ -169,14 +171,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     fontFamily: 'open-sans',
     fontSize: 16,
-    height: (windowWidth-130),
+    height: (windowWidth-150),
     lineHeight: 1.5,
     marginLeft: 15,
     marginRight: 15,
     marginTop: 30,
-    maxHeight: (windowWidth-130),
+    maxHeight: (windowWidth-150),
     padding: 20,
     paddingTop: 20,
+    paddingBottom: 0,
+    textAlignVertical: 'top',
     width: (windowWidth-30),
   },
   ButtonContainer: {

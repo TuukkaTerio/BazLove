@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, Keyboard, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ButtonContent from '../components/ButtonContent';
 import RenderIf from '../components/helpers/RenderIf';
 import { Colors } from '../components/helpers/Colors';
@@ -22,6 +22,7 @@ export default class ConfirmationScreen extends React.Component {
     // Gets a random gif from the array of gifs
     const randomUrl = this.state.gifArray[Math.floor(Math.random() * this.state.gifArray.length)].images.fixed_height_downsampled.url;
     this.setState({ gifUrl: randomUrl });
+    Keyboard.dismiss();
   }
 
   render() {
