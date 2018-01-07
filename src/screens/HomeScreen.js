@@ -75,9 +75,9 @@ export default class HomeScreen extends React.Component {
       return;
     } else {
       this.setState({ loading: true });
-      const EmojiBye = String.fromCodePoint(0x1F44B);
-      const EmojiNo = String.fromCodePoint(0x274C);
-      const EmojiYes = String.fromCodePoint(0x2705);
+      const EmojiBye = '\uD83D\uDC4B';
+      const EmojiNo = '\u274C';
+      const EmojiYes = '\u2705';
       Alert.alert(
         'Log out?  ' + EmojiBye,
         '',
@@ -212,7 +212,6 @@ const styles = StyleSheet.create({
   },
   HomeScreen: {
     alignItems: 'center',
-
     flex: 1,
     justifyContent: 'space-between',
   },
@@ -238,7 +237,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     padding: 20,
     paddingTop: 20,
-    paddingBottom: 0,
+    paddingBottom: 20,
     width: (windowWidth-30),
   },
   ButtonContainer: {

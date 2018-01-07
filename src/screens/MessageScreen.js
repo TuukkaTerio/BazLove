@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
-import { Alert, Dimensions, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Keyboard, View } from 'react-native';
+import { Alert, Dimensions, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import ButtonContent from '../components/ButtonContent';
 import { Colors } from '../components/helpers/Colors';
 import BackgroundGradient from '../components/svg/BackgroundGradient';
@@ -56,33 +56,34 @@ export default class MessageScreen extends React.Component {
     this.textInput.clear();
     // Navigates to the ConfirmationScreen
     this.state.navigation.navigate('Confirmation', { gifArray: this.state.gifArray });
-    Keyboard.dismiss;
   }
 
   // Handles the message alerts & validation
-  handleMessage(messageText) {
+  handleMessage() {
     if(this.state.loading) {
       return;
     } else {
       this.setState({ loading: true });
+      const messageText = this.state.messageText;
+      const that = this;
       // Checks that the message is not empty and does not contain only spaces
       if ((messageText !== '') && (messageText.replace(/\s/g, '').length)) {
-        const EmojiHeart = String.fromCodePoint(0x1F495);
-        const EmojiNo = String.fromCodePoint(0x274C);
-        const EmojiYes = String.fromCodePoint(0x1F389);
+        const EmojiHeart = '\uD83D\uDC95';
+        const EmojiNo = '\u274C';
+        const EmojiYes = '\uD83C\uDF89';
         Alert.alert(
           'Send it?  ' + EmojiHeart,
           '',
           [
-            {text: 'No  ' + EmojiNo, onPress: () => {this.setState({ loading: false });}},
-            {text: 'Yes  ' + EmojiYes, onPress: () => {this.sendMessage(messageText); this.setState({ loading: false });}},
+            {text: 'No  ' + EmojiNo, onPress: () => {that.setState({ loading: false });}},
+            {text: 'Yes  ' + EmojiYes, onPress: () => {that.sendMessage(messageText); that.setState({ loading: false });}},
           ],
           { cancelable: false }
-        )
+        );
       } else {
-        const EmojiPen = String.fromCodePoint(0x270F);
+        const EmojiPen = '\u270F\uFE0F';
         Alert.alert('Message is empty  ' + EmojiPen);
-        this.setState({ loading: false });
+        that.setState({ loading: false });
       }
     }
   }
@@ -93,25 +94,25 @@ export default class MessageScreen extends React.Component {
       return;
     } else {
       this.setState({ loading: true });
-      Keyboard.dismiss;
+      const messageText = this.state.messageText;
+      const that = this;
       // Checks if the message field is empty
-      if (this.state.messageText !== '') {
-        const EmojiTrash = String.fromCodePoint(0x1F5D1);
-        const EmojiNo = String.fromCodePoint(0x274C);
-        const EmojiYes = String.fromCodePoint(0x2705);
+      if (messageText !== '') {
+        const EmojiTrash = '\uD83D\uDDD1';
+        const EmojiNo = '\u274C';
+        const EmojiYes = '\u2705';
         Alert.alert(
           'Discard?  ' + EmojiTrash,
           '',
           [
-            {text: 'No  ' + EmojiNo, onPress: () => {this.setState({ loading: false });}},
-            {text: 'Yes  ' + EmojiYes, onPress: () => {this.state.navigation.navigate('Home'); this.setState({ loading: false }); Keyboard.dismiss;}},
+            {text: 'No  ' + EmojiNo, onPress: () => {that.setState({ loading: false });}},
+            {text: 'Yes  ' + EmojiYes, onPress: () => {that.state.navigation.navigate('Home'); that.setState({ loading: false });}},
           ],
           { cancelable: false }
-        )
+        );
       } else {
-        this.setState({ loading: true });
-        this.state.navigation.navigate('Home');
-        Keyboard.dismiss;
+        that.setState({ loading: true });
+        that.state.navigation.navigate('Home');
       }
     }
   }
@@ -143,7 +144,7 @@ export default class MessageScreen extends React.Component {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {this.handleMessage(this.state.messageText)}}
+            onPress={() => {this.handleMessage();}}
             title='SEND'>
             <ButtonContent
               btnContent = {'SEND'}

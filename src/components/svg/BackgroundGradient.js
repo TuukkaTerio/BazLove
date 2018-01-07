@@ -7,7 +7,7 @@ export default class BackgroundGradient extends React.PureComponent {
     const gradientContainerStyle = {
       bottom: 0,
       position: 'absolute',
-      zIndex: -1
+      zIndex: -2
     };
     const gradientStyle = {
       height: Dimensions.get('window').height * 0.3,
