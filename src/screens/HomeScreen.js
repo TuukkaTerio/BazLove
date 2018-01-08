@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { Alert, Dimensions, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Dimensions, Keyboard, Platform, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Font, AppLoading } from 'expo';
 import ButtonContent from '../components/ButtonContent';
 import RenderIf from '../components/helpers/RenderIf';
 import { Colors } from '../components/helpers/Colors';
 import Logo from '../components/svg/Logo';
 import SvgCircles from '../components/svg/SvgCircles';
+import BcImgHome from '../components/svg/android/BcImgHome';
 import BackgroundGradient from '../components/svg/BackgroundGradient';
 
 export default class HomeScreen extends React.Component {
@@ -105,11 +106,16 @@ export default class HomeScreen extends React.Component {
         <BackgroundGradient gradientColor={Colors['primary']}/>
         {RenderIf(this.state.screenContent === 'home',
           <View style={styles.HomeScreen}>
-            <View style={styles.CirclesContainer}>
-              <SvgCircles circleSize={(windowWidth*1.1)} circleColor={Colors['tertiary']} outputRange={['0deg', '360deg']} circleTop={-(windowWidth*0.1)} circleRight={(windowWidth*0.99)}/>
-              <SvgCircles circleSize={(windowWidth*0.9)} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={(windowWidth*0.1)} circleRight={windowWidth}/>
-              <SvgCircles circleSize={(windowWidth*0.6)} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={(windowWidth*0.82)} circleRight={windowWidth}/>
-            </View>
+            {RenderIf(Platform.OS === 'ios',
+              <View style={styles.CirclesContainer}>
+                <SvgCircles circleSize={(windowWidth*1.1)} circleColor={Colors['tertiary']} outputRange={['0deg', '360deg']} circleTop={-(windowWidth*0.1)} circleRight={(windowWidth*0.99)}/>
+                <SvgCircles circleSize={(windowWidth*0.9)} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={(windowWidth*0.1)} circleRight={windowWidth}/>
+                <SvgCircles circleSize={(windowWidth*0.6)} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={(windowWidth*0.82)} circleRight={windowWidth}/>
+              </View>
+            )}
+            {RenderIf(Platform.OS === 'android',
+              <BcImgHome/>
+            )}
             <View style={styles.MainContentContainer}>
               <Logo size={windowWidth}/>
               <View style={styles.ButtonContainer}>
@@ -209,6 +215,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors['primary'],
     flex: 1,
     justifyContent: 'flex-start',
+    ...Platform.select({
+      android: {
+        paddingTop: 20,
+      },
+    }),
   },
   HomeScreen: {
     alignItems: 'center',

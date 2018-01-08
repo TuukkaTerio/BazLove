@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Dimensions, Image, Keyboard, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, Keyboard, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ButtonContent from '../components/ButtonContent';
 import RenderIf from '../components/helpers/RenderIf';
 import { Colors } from '../components/helpers/Colors';
 import BackgroundGradient from '../components/svg/BackgroundGradient';
 import SvgCircles from '../components/svg/SvgCircles';
+import BcImgConfirmation from '../components/svg/android/BcImgConfirmation';
 
 export default class ConfirmationScreen extends React.Component {
 
@@ -29,11 +30,16 @@ export default class ConfirmationScreen extends React.Component {
     return (
       <SafeAreaView style={styles.ConfirmationScreen}>
         <BackgroundGradient gradientColor={Colors['primary']}/>
-        <View style={styles.CirclesContainer}>
-          <SvgCircles circleSize={(windowWidth)} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={-(windowWidth*0.1)} circleRight={(windowWidth*0.9)}/>
-          <SvgCircles circleSize={(windowWidth*1.5)} circleColor={Colors['tertiary']} outputRange={['360deg', '0deg']} circleTop={(windowWidth*0.1)} circleRight={(windowWidth)}/>
-          <SvgCircles circleSize={(windowWidth*1.25)} circleColor={Colors['secondary']} outputRange={['0deg', '360deg']} circleTop={(windowWidth*0.5)} circleRight={(windowWidth*1.25)}/>
-        </View>
+        {RenderIf(Platform.OS === 'ios',
+          <View style={styles.CirclesContainer}>
+            <SvgCircles circleSize={(windowWidth)} circleColor={Colors['secondary']} outputRange={['360deg', '0deg']} circleTop={-(windowWidth*0.1)} circleRight={(windowWidth*0.9)}/>
+            <SvgCircles circleSize={(windowWidth*1.5)} circleColor={Colors['tertiary']} outputRange={['360deg', '0deg']} circleTop={(windowWidth*0.1)} circleRight={(windowWidth)}/>
+            <SvgCircles circleSize={(windowWidth*1.25)} circleColor={Colors['secondary']} outputRange={['0deg', '360deg']} circleTop={(windowWidth*0.5)} circleRight={(windowWidth*1.25)}/>
+          </View>
+        )}
+        {RenderIf(Platform.OS === 'android',
+          <BcImgConfirmation/>
+        )}
         <View style={styles.MainContentContainer}>
           {RenderIf(this.state.gifUrl,
             <Image
@@ -91,6 +97,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors['primary'],
     flex: 1,
     justifyContent: 'space-between',
+    ...Platform.select({
+      android: {
+        paddingTop: 20,
+      },
+    }),
   },
   CirclesContainer: {
     left: 0,
