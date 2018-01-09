@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
-import { Dimensions, FlatList, Keyboard, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, FlatList, Keyboard, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MessageListItem from '../components/MessageListItem';
 import ButtonContent from '../components/ButtonContent';
 import { Colors } from '../components/helpers/Colors';
@@ -92,8 +92,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   LoveList: {
-    marginTop: 30,
+    marginTop: 15,
     width: windowWidth,
+    ...Platform.select({
+      android: {
+        marginTop: 35,
+      },
+    }),
   },
   Button: {
     marginBottom: 30,

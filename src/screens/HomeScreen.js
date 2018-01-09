@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     ...Platform.select({
       android: {
-        paddingTop: 20,
+        paddingTop: windowHeight * 0.05,
       },
     }),
   },
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   LoginContainer: {
     alignItems: 'center',
     flex: 1,
-    marginTop: 25,
+    marginTop: 15,
   },
   LoginInput: {
     backgroundColor: Colors['white'],

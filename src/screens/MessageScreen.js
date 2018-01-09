@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import Database from '../firebaseConfig';
-import { Alert, Dimensions, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Dimensions, Platform, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import ButtonContent from '../components/ButtonContent';
 import { Colors } from '../components/helpers/Colors';
 import BackgroundGradient from '../components/svg/BackgroundGradient';
@@ -47,8 +47,10 @@ export default class MessageScreen extends React.Component {
 
   // Sends the message to Firebase, clears the input field and navigates to ConfirmationScreen
   sendMessage(messageText) {
+    // Removes whitespace from both ends of the string.
+    trimmedMessageText = messageText.trim();
     Database.ref('messages/').push({
-      message: messageText,
+      message: trimmedMessageText,
       // Saves the current timestamp
       timestamp: firebase.database.ServerValue.TIMESTAMP,
     });
@@ -176,13 +178,18 @@ const styles = StyleSheet.create({
     lineHeight: 1.5,
     marginLeft: 15,
     marginRight: 15,
-    marginTop: 30,
+    marginTop: 15,
     maxHeight: (windowWidth-150),
     padding: 20,
     paddingTop: 20,
     paddingBottom: 0,
-    textAlignVertical: 'top',
     width: (windowWidth-30),
+    ...Platform.select({
+      android: {
+        marginTop: 35,
+        textAlignVertical: 'top',
+      },
+    }),
   },
   ButtonContainer: {
     flexDirection: 'row',

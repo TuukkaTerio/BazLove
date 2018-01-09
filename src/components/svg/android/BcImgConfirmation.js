@@ -6,9 +6,10 @@ import { Colors } from '../../helpers/Colors';
 export default class BcImgConfirmation extends React.PureComponent {
   render(props) {
     const size = Dimensions.get("window").width;
+    const topPosition = Dimensions.get("window").height * (-0.05);
     return (
       <Svg
-        style={{ height: size * 1.67, position: 'absolute', top: -30, width: size, zIndex: -1}}
+        style={{ height: size * 1.67, position: 'absolute', top: topPosition, width: size, zIndex: -1}}
         viewBox={'0 0 643 1076'}
       >
         <Path
