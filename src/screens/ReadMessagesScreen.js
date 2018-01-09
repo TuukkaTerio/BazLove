@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   LoveList: {
-    marginTop: 15,
+    marginTop: 25,
     width: windowWidth,
     ...Platform.select({
       android: {

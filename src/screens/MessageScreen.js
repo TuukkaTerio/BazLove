@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.5,
     marginLeft: 15,
     marginRight: 15,
-    marginTop: 15,
+    marginTop: 25,
     maxHeight: (windowWidth-150),
     padding: 20,
     paddingTop: 20,
