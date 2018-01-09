@@ -17,7 +17,7 @@ export default class MessageListItem extends React.PureComponent {
     }
     return (
       <View style={ListItemStyle}>
-        <Text style={ListItemTextStyle}>
+        <Text style={ListItemTextStyle} selectable={true}>
           {this.props.message}
         </Text>
       </View>

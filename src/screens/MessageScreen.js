@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     maxHeight: (windowWidth-150),
     padding: 20,
     paddingTop: 20,
-    paddingBottom: 0,
+    paddingBottom: 20,
     width: (windowWidth-30),
     ...Platform.select({
       android: {
