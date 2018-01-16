@@ -154,7 +154,7 @@
 				TargetAttributes = {
 					B56386401DB9693800A0598C = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 984EQ28L4R;
+						DevelopmentTeam = W3V2DGDZ4L;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -397,10 +397,10 @@
 			baseConfigurationReference = 2C1548D9E4CB1AEFA5CCAE6D /* Pods-bazlove.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 984EQ28L4R;
+				DEVELOPMENT_TEAM = W3V2DGDZ4L;
 				INFOPLIST_FILE = "$(SRCROOT)/bazlove/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = BazLove;
+				PRODUCT_BUNDLE_IDENTIFIER = se.bazooka.BazLove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -410,10 +410,10 @@
 			baseConfigurationReference = A47FE4D7F70906B7DC8CE39B /* Pods-bazlove.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 984EQ28L4R;
+				DEVELOPMENT_TEAM = W3V2DGDZ4L;
 				INFOPLIST_FILE = "$(SRCROOT)/bazlove/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = BazLove;
+				PRODUCT_BUNDLE_IDENTIFIER = se.bazooka.BazLove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

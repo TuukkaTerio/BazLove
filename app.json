@@ -14,14 +14,15 @@
       "backgroundColor": "#ffe236"
     },
     "ios": {
-      "bundleIdentifier": "Bazooka.BazLove",
+      "bundleIdentifier": "se.bazooka.BazLove",
       "buildNumber": "1.0.0",
       "publishBundlePath": "ios/bazlove/Supporting/shell-app.bundle",
       "publishManifestPath": "ios/bazlove/Supporting/shell-app-manifest.json"
     },
     "android": {
-      "package": "Bazooka.BazLove",
-      "versionCode": 1
+      "package": "se.bazooka.BazLove",
+      "versionCode": 1,
+      "permissions": []
     },
     "isDetached": true,
     "detach": {

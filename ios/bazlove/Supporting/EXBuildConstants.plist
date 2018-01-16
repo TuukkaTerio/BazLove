@@ -5,6 +5,6 @@
 	<key>EXPO_RUNTIME_VERSION</key>
 	<string>2.1.4</string>
 	<key>developmentUrl</key>
-	<string>exp2f262bbe3dc44957993a8a22edcb540e://4t-44m.tuukkat.bazlove.exp.direct:80</string>
+	<string>exp2f262bbe3dc44957993a8a22edcb540e://localhost:80</string>
 </dict>
 </plist>
